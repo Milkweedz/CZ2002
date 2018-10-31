@@ -5,7 +5,7 @@ import java.util.Scanner;
 import Extra.tutorialLabs;
 
 public class Course {
-	private long CourseID;
+	private String CourseID;
 	private int NoOfVacancies, NoOfSeats, NoOfComp, NoOfTutGroups, NoOfSubCom;
 	private String CourseName, Professor;
 	private boolean HaveTutorials, HaveLabs, isSubComp;
@@ -19,7 +19,7 @@ public class Course {
 		String dummychar;
 		if (check == 1 || check == 0) {
 			System.out.println("Enter Course ID : ");
-			CourseID = input.nextLong();
+			CourseID = input.next();
 			dummychar = input.nextLine();
 		}
 		if (check == 2 || check == 0) {
@@ -128,7 +128,7 @@ public class Course {
 
 	}
 
-	public boolean isCourse(long course_id) {
+	public boolean isCourse(String course_id) {
 		if (course_id == CourseID)
 			return true;
 		return false;
@@ -157,6 +157,18 @@ public class Course {
 	public double retCourseWorkPerc(double marks) {
 		return marks * courseWorkWeightage;
 
+	}
+	public String retCourseID()
+	{
+		return CourseID;
+	}
+	public String retProf()
+	{
+		return Professor;
+	}
+	public String CourseName()
+	{
+		return CourseName;
 	}
 
 }

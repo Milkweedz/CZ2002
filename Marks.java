@@ -2,18 +2,36 @@ package Entity_Class;
 
 import java.util.Scanner;
 
+import Extra.tutorialLabs;
+
 public class Marks {
-	private long StudentID, CourseID;
+	private long StudentID;
+	private String CourseID;
 	private int NoOfComp;
 	private double ExamMark;
-	private double[] courseWorkMarks;
+	private double courseWorkMarks;
 	private boolean courseWorkMarkSet, examMarkSet;
 
-	public boolean isStudMarks(int StdID, int CrseID) {
+	public boolean isStudMarks(int StdID, String CrseID) {
 		if (StudentID == StdID && CourseID == CrseID)
 			return true;
 		else
 			return false;
+	}
+
+	public void inputMarkDet(int check, int noOfComp) {
+		Scanner input = new Scanner(System.in);
+		if (check == 1 || check == 0) {
+			System.out.println("Enter Course ID : ");
+			CourseID = input.next();
+		}
+		if (check == 2 || check == 0) {
+			System.out.println("Enter Student ID : ");
+			StudentID = input.nextLong();
+		}
+
+		NoOfComp = noOfComp;
+
 	}
 
 	public boolean retExamMarkSet() {
@@ -30,11 +48,13 @@ public class Marks {
 
 	public void enterCourseWorkMark(String[] subCompWeightageNames, double[] subCompWeightage) {
 		Scanner input = new Scanner(System.in);
-		double marks;
+		double marks, Tmarks;
 		for (int i = 0; i < NoOfComp; i++) {
 			System.out.println("Enter Marks obtained for " + subCompWeightageNames[i] + ": ");
 			marks = input.nextDouble();
-			courseWorkMarks[i] = marks * subCompWeightage[i];
+			System.out.println("Enter Total Marks obtained for " + subCompWeightageNames[i] + ": ");
+			Tmarks = input.nextDouble();
+			courseWorkMarks += (marks / Tmarks) * subCompWeightage[i];
 		}
 		input.close();
 	}
@@ -43,7 +63,7 @@ public class Marks {
 		return ExamMark;
 	}
 
-	public double[] retCourseWorkMark() {
+	public double retSubCourseWorkMarkPer() {
 		return courseWorkMarks;
 	}
 
