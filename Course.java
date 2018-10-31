@@ -6,13 +6,14 @@ import Extra.tutorialLabs;
 
 public class Course {
 	private String CourseID;
-	private int NoOfVacancies, NoOfSeats, NoOfComp, NoOfTutGroups, NoOfSubCom;
+	private int NoOfSeatsTaken, NoOfSeats, NoOfComp, NoOfTutGroups, NoOfSubCom;
 	private String CourseName, Professor;
 	private boolean HaveTutorials, HaveLabs, isSubComp;
 	private double examWeightage, courseWorkWeightage;
 	private double[] subCompWeightage;
 	private String[] subCompWeightageNames;
 	private tutorialLabs[] Tutorials_Labs;
+	private int[] studentId;
 
 	public int enterCourseInformation(int check) {
 		Scanner input = new Scanner(System.in);
@@ -47,11 +48,13 @@ public class Course {
 				Tutorials_Labs[i].inputTLData(0, maxNoStud);
 			}
 			NoOfSeats = maxNoStud * NoOfTutGroups;
-			NoOfVacancies = NoOfSeats;
+			NoOfSeatsTaken = 0;
+			studentId = new int[NoOfSeats];
 		} else if ((check == 5 | check == 0)) {
-			System.out.println("Enter Maximum number of students per tutorial group :");
+			System.out.println("Enter Maximum number of students \:");
 			NoOfSeats = input.nextInt();
-			NoOfVacancies = NoOfSeats;
+			NoOfSeatsTaken = 0;;
+			studentId = new int[NoOfSeats];
 		}
 
 		if (check == 6 || check == 0) {
@@ -106,12 +109,13 @@ public class Course {
 		}
 	}
 
-	public boolean addStudent(long stdId, String tutLab_Group) {
-		if (NoOfVacancies > 0)
+	public boolean addStudent(long stdId) {
+		if (NoOfSeatsTaken> NoOfSeats)
+			if(HaveTutorials) {
 			for (int i = 0; i < NoOfTutGroups; i++) {
 				if (Tutorials_Labs[i].retTutGrp() == tutLab_Group)
 					if (Tutorials_Labs[i].addStudent(stdId)) {
-						NoOfVacancies--;
+						studentId[NoOfSeatsTake++]=stdId;
 						return true;
 					} else {
 						System.out.println("Error: No Vacancies in Groups !");
@@ -119,6 +123,10 @@ public class Course {
 					}
 				System.out.println("Error: Tutorial Group Not Found !");
 				return false;
+			}
+			else
+			{NoOfVacancies--;
+			studentId[NoOfSeatsTake++]=stdId;
 			}
 		else {
 			System.out.println("Error: No Vacancies in course ! ");
@@ -158,16 +166,16 @@ public class Course {
 		return marks * courseWorkWeightage;
 
 	}
-	public String retCourseID()
-	{
+
+	public String retCourseID() {
 		return CourseID;
 	}
-	public String retProf()
-	{
+
+	public String retProf() {
 		return Professor;
 	}
-	public String CourseName()
-	{
+
+	public String CourseName() {
 		return CourseName;
 	}
 
