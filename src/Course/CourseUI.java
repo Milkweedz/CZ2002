@@ -8,7 +8,7 @@ public class CourseUI {
     public int courseCtrlChoice(){
         Scanner scan = new Scanner (System.in);
         System.out.println("\nWhat would you like to do?");
-        System.out.println("0: View Course Details, 1: Create Course, 2: Edit Course, 3: Delete Course, 4: Change Mark Weights, 5: Quit");
+        System.out.println("0: View Course Details, 1: Create Course, 2: Edit Course, 3: Delete Course, 4: View Mark Weights, 5: Change Mark Weights, 6: Quit");
 
         return scan.nextInt();
     }
@@ -73,7 +73,7 @@ public class CourseUI {
 
         //input coursework component grades
         while(true) {
-            System.out.print("\nHow many components in coursework? ");
+            System.out.print("\nHow many components in coursework: ");
             numComponents = scan.nextInt();
             int totalWeight=0;
 
@@ -81,9 +81,9 @@ public class CourseUI {
             courseworks = new String[numComponents];
             courseworkWeights = new int[numComponents];
             for (int i = 0; i < numComponents; i++) {
-                System.out.printf("\nEnter name of component %d", i);
+                System.out.printf("\nEnter name of component %d: ", i+1);
                 courseworks[i] = scan.next();
-                System.out.printf("\nEnter weight of %s", courseworks[i]);
+                System.out.printf("\nEnter weight of %s: ", courseworks[i]);
                 courseworkWeights[i] = scan.nextInt();
                 totalWeight+=courseworkWeights[i];
             }
@@ -93,6 +93,7 @@ public class CourseUI {
             else break;
         }
 
+        markWeights.put("exam", Integer.toString(examWeight));
         //store to hashmap object
         for (int i=0; i<numComponents; i++){
             markWeights.put(courseworks[i], Integer.toString(courseworkWeights[i]));
@@ -103,12 +104,16 @@ public class CourseUI {
 
 
     //error messages
-    public static void courseIdTaken(){
+    public void courseIdTaken(){
         System.out.println("\nCourse ID already exists! Try again.");
     }
 
-    public static void courseIdNonexist(){
+    public void courseIdNonexist(){
         System.out.println("\nCourse ID doesn't exist! Try again.");
+    }
+
+    public void hashmapEmpty(){
+        System.out.println("\nNo mark weightages found for this course!");
     }
     //!error messages
 

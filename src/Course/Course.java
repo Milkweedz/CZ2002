@@ -2,6 +2,9 @@ package Course;
 
 import java.io.*;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.json.simple.*;
 import org.json.simple.parser.JSONParser;
@@ -16,7 +19,7 @@ public class Course {
     private COURSETYPE type;
     private int capacity;
 
-    private HashMap<String, String> markWeightage;
+    //private HashMap<String, String> markWeights;
 
     public Course(){
         courseID = -1;
@@ -138,6 +141,47 @@ public class Course {
         return course;
     }
 
+    public static HashMap<String, String> getMarkWeights(int courseID){
+        String courseFile = "src\\Course\\courses.json";
+        JSONObject file = readJSON(courseFile);
+
+        JSONObject obj = (JSONObject) file.get(Integer.toString(courseID));
+
+        if (obj.containsKey("markweights")){
+            JSONObject markObj = (JSONObject) obj.get("markweights");
+            HashMap<String, String> markWeights = new HashMap<>();
+
+            markObj.forEach((key, value) -> markWeights.put(key.toString(), value.toString()));
+
+            return markWeights;
+        } else return null;
+    }
+
+    public static void setMarkWeights(int courseID, HashMap<String, String> markWeights){
+        String courseFile = "src\\Course\\courses.json";
+        JSONObject file = readJSON(courseFile);
+
+        JSONObject obj = (JSONObject) file.get(Integer.toString(courseID));
+        JSONObject markObj;
+
+        if (obj.containsKey("markweights")){
+            markObj = (JSONObject) obj.get("markweights");
+            obj.remove("markweights");
+        } else {
+            markObj = new JSONObject();
+        }
+
+        //markWeights.forEach((key, value) -> markObj.put(key, value));
+        markObj.putAll(markWeights);
+        System.out.println(markObj.toJSONString());
+        obj.put("markweights", markObj);
+        System.out.println(obj.toJSONString());
+        file.replace(Integer.toString(courseID), obj);
+
+        writeJSON(file, courseFile);
+    }
+
+
     //either returns JSON file object or null.
     private static JSONObject readJSON(String fileName){
         try {
@@ -230,13 +274,13 @@ public class Course {
     }
 
 
-    public HashMap<String, String> getMarkWeightage() {
-        return markWeightage;
-    }
-
-    public void setMarkWeightage(HashMap<String, String> markWeightage) {
-        this.markWeightage = markWeightage;
-    }
+//    public HashMap<String, String> getMarkWeightage() {
+//        return markWeightage;
+//    }
+//
+//    public void setMarkWeightage(HashMap<String, String> markWeightage) {
+//        this.markWeightage = markWeightage;
+//    }
     //!getters and setters
 
 }

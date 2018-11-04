@@ -1,5 +1,8 @@
 package Course;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class CourseCtrl {
     public void init(){
         CourseUI courseUI = new CourseUI();
@@ -22,10 +25,13 @@ public class CourseCtrl {
                     deleteCourse();
                     break;
                 case 4:
-                    courseWeight();
+                    getCourseWeight();
+                    break;
+                case 5:
+                    setCourseWeight();
                     break;
             }
-        } while (choice!=5);    //look at courseUI, 5 happens to be the option to quit
+        } while (choice!=6);    //look at courseUI, 5 happens to be the option to quit
     }
 
     public void viewCourse(){
@@ -34,22 +40,20 @@ public class CourseCtrl {
 
         courseID = courseUI.readCourseID();
         if (!Course.existsCourse(courseID)) {
-            CourseUI.courseIdNonexist();
+            courseUI.courseIdNonexist();
         }
         else{
             Course course = Course.readInFile(courseID);
 
             String[] data = new String[5];
-            data[0] = "Course.Course ID : " + Integer.toString(course.getCourseID());
-            data[1] = "Course.Course Name : " + course.getCourseName();
-            data[2] = "Course.Course Coordinator : " + course.getCoordinator();
-            data[3] = "Course.Course Type : " + translateType(course.getType());
-            data[4] = "Course.Course Capacity : " + Integer.toString(course.getCapacity());
+            data[0] = "Course ID : " + Integer.toString(course.getCourseID());
+            data[1] = "Course Name : " + course.getCourseName();
+            data[2] = "Course Coordinator : " + course.getCoordinator();
+            data[3] = "Course Type : " + translateType(course.getType());
+            data[4] = "Course Capacity : " + Integer.toString(course.getCapacity());
 
             courseUI.displayCourseData(data);
         }
-
-
     }
 
     public void createCourse(){
@@ -57,7 +61,7 @@ public class CourseCtrl {
         CourseUI courseUI = new CourseUI();
 
         courseID = courseUI.readCourseID();
-        if (Course.existsCourse(courseID)) CourseUI.courseIdTaken();  //print error if courseID already exists
+        if (Course.existsCourse(courseID)) courseUI.courseIdTaken();  //print error if courseID already exists
 
         else {
             String[] data = courseUI.readCourseData();
@@ -77,7 +81,7 @@ public class CourseCtrl {
             Course.deleteInFile(courseID);
             Course.saveToFile(course);
         }
-        else CourseUI.courseIdNonexist(); //error message
+        else courseUI.courseIdNonexist(); //error message
     }
 
     public void deleteCourse(){
@@ -86,19 +90,47 @@ public class CourseCtrl {
         if (Course.existsCourse(courseID)) {
             Course.deleteInFile(courseID);
         }
-        else CourseUI.courseIdNonexist();
+        else courseUI.courseIdNonexist();
     }
 
-    public void courseWeight(){
+    public void getCourseWeight(){
         CourseUI courseUI = new CourseUI();
         int courseID = courseUI.readCourseID();
 
         if (!Course.existsCourse(courseID)) {
-            CourseUI.courseIdNonexist();
+            courseUI.courseIdNonexist();
             return;
         }
 
+        HashMap<String, String> markWeights = Course.getMarkWeights(courseID);
+        String[] data;
+        if (markWeights == null) courseUI.hashmapEmpty();
+        else {
+            data = new String[markWeights.size()];
 
+            int i = 0;
+            for (Map.Entry<String, String> entry : markWeights.entrySet()) {        //somewhat of a poor implementation here
+                String key = entry.getKey();
+                String value = entry.getValue();
+                data[i] = key + ": " + value + "%";
+                i++;
+            }
+            courseUI.displayCourseData(data);
+        }
+    }
+
+    //updates mark weights
+    public void setCourseWeight(){
+        CourseUI courseUI = new CourseUI();
+        int courseID = courseUI.readCourseID();
+
+        if (!Course.existsCourse(courseID)) {
+            courseUI.courseIdNonexist();
+            return;
+        }
+
+        HashMap<String, String> markWeights = courseUI.inputMarkWeights();
+        Course.setMarkWeights(courseID, markWeights);
     }
 
 
