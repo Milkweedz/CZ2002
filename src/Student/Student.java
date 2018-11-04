@@ -1,29 +1,177 @@
 package Student;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
+import java.io.*;
+
 public class Student {
-	private String studentFName, studentLName, department;
-	private int studentID, yearOfStudy, gender, NumOfAU;
-	private double CGPANum, CGPA;
-	private int graduate;
-	
+    private int studentID;
+    private String studentFName;
+    private String studentLName;
+	private int yearOfStudy;
+    private int gender;
+    private String department;
+    private String graduate;
+    private int NumOfAU;
+    private double totalGPA, CGPA;
+
 	public Student() {
 		studentID = -1;
 		studentFName = "";
 		studentLName = "";
 		yearOfStudy = -1;
-		NumOfAU = -1;
-		CGPANum = -1.0;
-		CGPA = -1.0;
 		gender = -1;
-		department = " ";
-		graduate = -1;
-	}
-
-    public static int saveToFile(Student student){
-
-
-	    return 0;
+        department = "";
+        graduate = "";
+        NumOfAU = -1;
+        totalGPA = -1.0;
+        CGPA = -1.0;
     }
+
+    public static boolean existsStudent(int studentID){
+        BufferedReader br = null;
+        try {
+            br = new BufferedReader(new FileReader("src\\Student\\studentlist.txt"));
+            String nextID = br.readLine();
+            while (nextID != null){
+                if (Integer.parseInt(nextID) == studentID){
+                    return true;
+                }
+                nextID = br.readLine();
+                System.out.println(nextID + "DEBUG");
+            }
+            return false;
+        } catch (IOException ex){
+            System.out.println("IOException! studentlist.txt not found?");
+            ex.printStackTrace();
+        } finally {
+            if (br != null) {
+                try { br.close(); }
+                catch (IOException ex) {ex.printStackTrace();}
+            }
+        }
+        return false;
+    }
+
+    public static void saveToFile(Student student){
+        String studentFile = "src\\Student\\students.json";
+        JSONObject file = readJSON(studentFile);
+        //JSONArray array = (JSONArray) file.get("data");
+
+        JSONObject obj = new JSONObject();
+        //obj.put("studentid", Integer.toString(student.getStudentID()));
+        obj.put("fname", student.getStudentFName());
+        obj.put("lname", student.getStudentLName());
+        obj.put("year", Integer.toString(student.getYearOfStudy()));
+        obj.put("gender", Integer.toString(student.getGender()));
+        obj.put("department", student.getDepartment());
+        obj.put("graduate", student.getGraduate());
+
+        file.put(Integer.toString(student.getStudentID()), obj);
+        //file.replace("data", array);
+
+        writeJSON(file, studentFile);
+
+        //add new student to studentid cache
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter("src\\Student\\studentlist.txt", true))){
+            bw.write(student.getStudentID()+"\n");
+        } catch (IOException ex){
+            System.out.println("IOException! studentlist.txt not found?");
+            ex.printStackTrace();
+        }
+
+    }
+
+    public static void deleteInFile(int studentID){
+        String studentFile = "src\\Student\\students.json";
+        JSONObject file = readJSON(studentFile);
+        file.remove(Integer.toString(studentID));
+
+        writeJSON(file, studentFile);
+
+
+        File readFile = null;
+        File tempFile = null;
+        BufferedReader br = null;
+        BufferedWriter bw = null;
+        try {
+            //remove entry from student list file
+            readFile = new File("src\\Student\\studentlist.txt");
+            tempFile = File.createTempFile("file",".txt", readFile.getParentFile());
+            br = new BufferedReader(new FileReader(readFile));
+            bw = new BufferedWriter(new FileWriter(tempFile));
+
+            for (String line=""; line != null; line = br.readLine()){
+                if (!line.equals(Integer.toString(studentID))){
+                    bw.write(line);
+                }
+            }
+            //System.out.println("Delete error. StudentID not found.");
+        } catch (IOException ex){
+            System.out.println("IOException! studentlist.txt not found?");
+            ex.printStackTrace();
+        } finally {
+            try {
+                if (readFile != null && tempFile != null && br != null && bw != null) {
+                    br.close();
+                    bw.close();
+                    readFile.delete();
+                    tempFile.renameTo(readFile);
+                }
+            } catch (IOException ex){
+                ex.printStackTrace();
+            }
+        }
+    }
+
+    public static Student readInFile(int studentID){
+        String studentFile = "src\\Student\\students.json";
+        JSONObject file = readJSON(studentFile);
+        JSONObject obj = (JSONObject) file.get(Integer.toString(studentID));
+
+        Student student = new Student();
+        student.setStudentID(studentID);
+        student.setStudentFName((String) obj.get("fname"));
+        student.setStudentLName((String) obj.get("lname"));
+        student.setYearOfStudy(Integer.parseInt((String) obj.get("year")));
+        student.setGender(Integer.parseInt((String) obj.get("gender")));
+        student.setDepartment((String) obj.get("department"));
+        student.setGraduate((String) obj.get("graduate"));
+
+        return student;
+    }
+
+    //either returns JSON file object or null.
+    private static JSONObject readJSON(String fileName){
+        try {
+            JSONParser parser = new JSONParser();
+            return (JSONObject) parser.parse(new FileReader(fileName));
+        } catch (IOException ex) {
+            System.out.println("IOException!");
+            ex.printStackTrace();
+        } catch (ParseException parsex) {
+            System.out.println("ParseException!");
+            //parsex.printStackTrace();
+        }
+        return new JSONObject();
+    }
+
+    private static void writeJSON(JSONObject file, String fileName){
+
+        try {
+            FileWriter writer = new FileWriter(fileName, false);
+            file.writeJSONString(writer);
+            writer.close();
+        } catch (IOException ex) {
+            System.out.println("IOException!");
+            ex.printStackTrace();
+        }
+    }
+
+
+
 
     //getters and setters below
     public int getStudentID() {
@@ -66,11 +214,11 @@ public class Student {
         this.department = department;
     }
 
-    public int getGraduate() {
+    public String getGraduate() {
         return graduate;
     }
 
-    public void setGraduate(int graduate) {
+    public void setGraduate(String graduate) {
         this.graduate = graduate;
     }
 
@@ -90,12 +238,12 @@ public class Student {
         NumOfAU = numOfAU;
     }
 
-    public double getCGPANum() {
-        return CGPANum;
+    public double getTotalGPA() {
+        return totalGPA;
     }
 
-    public void setCGPANum(double CGPANum) {
-        this.CGPANum = CGPANum;
+    public void setTotalGPA(double totalGPA) {
+        this.totalGPA = totalGPA;
     }
 
     public double getCGPA() {

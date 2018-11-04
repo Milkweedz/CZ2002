@@ -3,45 +3,69 @@ package Student;
 import java.util.Scanner;
 
 public class StudentUI {
+    public int studentCtrlChoice(){
+        Scanner scan = new Scanner (System.in);
+        System.out.println("\nWhat would you like to do?");
+        System.out.println("0: View Student Details, 1: Create Student, 2: Edit Student, 3: Delete Student, 4: Quit");
 
-    public static String[] inputStudDetails() {
+        return scan.nextInt();
+    }
+
+    public static String[] readStudentData() {
         String[] args;
-        int studentID;
-        String studentFName, studentLName, department;
-        int gender, yearOfStudy;
-        int graduate;
 
         Scanner scan = new Scanner(System.in);
-        args = new String[7];
+        args = new String[6];
 
-        args[0] = Integer.toString(readStudentID(scan));
-        args[1] = readFName(scan);
-        args[2] = readLName(scan);
-        args[3] = readDepartment(scan);
-        args[4] = Integer.toString(readGender(scan));
-        args[5] = Integer.toString(readYear(scan));
-        args[6] = Boolean.toString(readGraduate(scan));
+        args[0] = readFName(scan);
+        args[1] = readLName(scan);
+        args[2] = readDepartment(scan);
+        args[3] = Integer.toString(readGender(scan));
+        args[4] = Integer.toString(readYear(scan));
+        args[5] = readGraduate(scan);
 
         return args;
     }
 
-    private static int readStudentID(Scanner scan) {
-            System.out.println("Enter Student.Student ID : ");
+    public void displayStudentData(String[] data){
+        for(int i=0; i<data.length; i++){
+            System.out.println(data[i]);
+        }
+        System.out.println("\n");
+    }
+
+
+    //error messages
+    public static void studentIdTaken(){
+        System.out.println("\nStudent ID already exists! Try again.");
+    }
+
+    public static void studentIdNonexist(){
+        System.out.println("\nStudent ID doesn't exist! Try again.");
+    }
+    //!error messages
+
+
+
+
+
+    static int readStudentID(Scanner scan) {
+            System.out.println("Enter Student ID : ");
             return scan.nextInt();
     }
 
     private static String readFName(Scanner scan) {
-        System.out.println("Enter Student.Student's First Name : ");
+        System.out.println("Enter Student's First Name : ");
         return scan.next();
     }
 
     private static String readLName(Scanner scan) {
-        System.out.println("Enter Student.Student's First Name : ");
+        System.out.println("Enter Student's Last Name : ");
         return scan.next();
     }
 
     private static int readYear(Scanner scan){
-        System.out.println("Enter Student.Student's year of study : ");
+        System.out.println("Enter Student's year of study : ");
         return scan.nextInt();
     }
 
@@ -56,7 +80,7 @@ public class StudentUI {
     }
 
     private static int readGender(Scanner scan){
-        System.out.println("Enter Student.Student's Gender (Male: 1 /Female: 2 /Other: 3) : ");
+        System.out.println("Enter Student's Gender (Male: 1, Female: 2, Other: 3) : ");
         return scan.nextInt();
     }
 
@@ -65,8 +89,8 @@ public class StudentUI {
         return scan.nextLine();
     }
 
-    private static boolean readGraduate(Scanner scan) {
+    private static String readGraduate(Scanner scan) {
         System.out.println("Enter Level of Study (UG/PG) : ");
-        return scan.nextBoolean();
+        return scan.next();
     }
 }

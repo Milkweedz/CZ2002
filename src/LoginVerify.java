@@ -1,4 +1,5 @@
 import Course.CourseCtrl;
+import Student.StudentCtrl;
 
 import java.util.Scanner;
 
@@ -28,6 +29,10 @@ public class LoginVerify {
                     System.out.println("Initiating course controller...");
                     courseCtrl.init();
                     break;
+                case 2:
+                    StudentCtrl studentCtrl = new StudentCtrl();
+                    System.out.println("Initiating student controller...");
+                    studentCtrl.init();
             }
 
         } while(choice != 0);
