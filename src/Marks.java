@@ -1,8 +1,8 @@
-package Entity_Class;
+
 
 import java.util.Scanner;
 
-import Extra.tutorialLabs;
+
 
 public class Marks {
 	private long StudentID;
@@ -22,11 +22,11 @@ public class Marks {
 	public void inputMarkDet(int check, int noOfComp) {
 		Scanner input = new Scanner(System.in);
 		if (check == 1 || check == 0) {
-			System.out.println("Enter Course ID : ");
+			System.out.println("Enter Course.Course ID : ");
 			CourseID = input.next();
 		}
 		if (check == 2 || check == 0) {
-			System.out.println("Enter Student ID : ");
+			System.out.println("Enter Student.Student ID : ");
 			StudentID = input.nextLong();
 		}
 
