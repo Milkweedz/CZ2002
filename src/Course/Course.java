@@ -18,6 +18,7 @@ public class Course {
     public enum COURSETYPE {Lec, LecTut, LecTutLab, NULL};
     private COURSETYPE type;
     private int capacity;
+    private int noOfStudents;
 
     //private HashMap<String, String> markWeights;
 
@@ -27,6 +28,7 @@ public class Course {
         coordinator = "";
         type = COURSETYPE.NULL;
         capacity = -1;
+        noOfStudents = 0;
     }
 
     public static boolean existsCourse(int courseID){
@@ -271,6 +273,16 @@ public class Course {
 
     public void setCapacity(int capacity) {
         this.capacity = capacity;
+    }
+    
+    public boolean courseRegister()
+    {if(noOfStudents<capacity)
+    	{noOfStudents++;
+    	return true;}
+    	}
+    else
+    	System.out.println("Full Capacity! ");
+    	return false
     }
 
 
