@@ -112,7 +112,7 @@ public class CourseUI {
         System.out.println("\nCourse ID doesn't exist! Try again.");
     }
 
-    public void hashmapEmpty(){
+    public static void hashmapEmpty(){
         System.out.println("\nNo mark weightages found for this course!");
     }
     //!error messages

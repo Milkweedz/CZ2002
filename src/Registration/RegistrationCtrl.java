@@ -6,30 +6,37 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.Clock;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import Student.*;
+import Course.*;
+import org.json.simple.*;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
 
 public class RegistrationCtrl {
 	public static void registerStudentForCourse() {
-		Student student;
-		Course course;
+		Student student= new Student();
 		int StudentID = RegistrationUI.readStudentID(new Scanner(System.in));
 		if (!student.existsStudent(StudentID)) {
 			StudentUI.studentIdNonexist();
 		} else {
-			Student student = Student.readInFile(studentID);
+			student = Student.readInFile(StudentID);
 			String FName, LName;
 			FName = student.getStudentFName();
 			LName = student.getStudentLName();
 			int CourseID = RegistrationUI.readCourseID(new Scanner(System.in));
 			if (!Course.existsCourse(CourseID))
-				CourseUI.courseIdNonexist();
+				System.out.printf("Course Id Does Not Exist");
 			else {
-				Course course = Course.readInFile(courseID);
+				Course course = Course.readInFile(CourseID);
 				if (course.courseRegister() && isInFile(StudentID, CourseID)) {
 					String courseName, coordinator;
 					courseName = course.getCourseName();
-					coordinator = course.coordinator();
+					coordinator = course.getCoordinator();
 					saveToFile(StudentID, FName, LName, CourseID, courseName, coordinator);
 				}
 
@@ -95,7 +102,7 @@ public class RegistrationCtrl {
 	public static void deleteInFile(int studentID, int courseID) {
 		String courseFile = "src\\Registration\\Registration.json";
 		JSONObject file = readJSON(courseFile);
-		file.remove(Integer.toString(StudentID) + "." + Integer.toString(CourseID));
+		file.remove(Integer.toString(studentID) + "." + Integer.toString(courseID));
 
 		writeJSON(file, courseFile);
 
@@ -144,9 +151,9 @@ public class RegistrationCtrl {
 			return true;
 	}
 
-public List<Integer> studentCourses(int StudentID)
-{  
-	List<Integer> courses;
+public static List<Integer> studentCourses(int StudentID)
+{
+	List<Integer> courses = new ArrayList<Integer>();
 	File readFile = null;
 	BufferedReader br = null;
 	try {
@@ -173,7 +180,7 @@ public List<Integer> studentCourses(int StudentID)
 			ex.printStackTrace();
 		}
 	}
-	return courses;;
+	return courses;
 }
 
 }

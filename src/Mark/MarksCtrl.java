@@ -1,7 +1,11 @@
 package Mark;
 
+import Registration.RegistrationCtrl;
+
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+import Course.Course;
 
 public class MarksCtrl {
 
@@ -11,8 +15,8 @@ public class MarksCtrl {
 
 		studentID = marksUI.readStudentID(new Scanner(System.in));
 		courseID = marksUI.readCourseID(new Scanner(System.in));
-		if (!Marks.existsStudent(studentID,courseID)) {
-			MarksUI.studentMarksIdNonexist();
+		if (!Marks.existsMarks(studentID,courseID)) {
+			MarksUI.studentCourseIdNonexist();
 		} else {
 			Marks marks = Marks.readInFile(studentID,courseID);
 
@@ -22,25 +26,25 @@ public class MarksCtrl {
 	}
 	
 	public Marks retMarks(int studentID,int courseID) {
-
-		if (!Marks.existsStudent(studentID,courseID)) {
-			MarksUI.studentMarksIdNonexist();
+		Marks marks = new Marks(0);
+		if (!Marks.existsMarks(studentID,courseID)) {
+			MarksUI.studentCourseIdNonexist();
 		} else {
-			Marks marks = Marks.readInFile(studentID,courseID);
+			marks = Marks.readInFile(studentID,courseID);
 			return marks;}
-
-
+			return marks;
 	}
 
 	public void addMarks(){
-	        int studentID;
-	        int courseID;
-	        ArrayList<Integer> courses = RegistrationCtrl(MarksUI.readStudentID(new Scanner(System.in)));
-	        if(courses.contains(MarksUI.readCourseID(new Scanner(System.in))))
-
+	        int studentID=MarksUI.readStudentID(new Scanner(System.in));
+	        int courseID=MarksUI.readCourseID(new Scanner(System.in));
+	        List<Integer> courses = RegistrationCtrl.studentCourses(studentID);
+	        if(!courses.contains(MarksUI.readCourseID(new Scanner(System.in)))){
+				MarksUI.studentCourseIdNonexist();
+			}
 	        else {
-	            float[] data = MarksUI.readMarksData(new Scanner(System.in),Course.getMarkWeights(courseID));
-	            Marks marks = makeStudentObj(studentID, data);
+	            double[] data = MarksUI.readMarksData(new Scanner(System.in),Course.getMarkWeights(courseID));
+	            Marks marks = makeMarkObj(studentID,courseID,data);
 
 	            Marks.saveToFile(marks);
 	        }
@@ -48,34 +52,34 @@ public class MarksCtrl {
 
 	public void editMarks() {
 		MarksUI markUI = new MarksUI();
-		int studentID = markUI.readStudentID(new Scanner(System.in));
-		int courseID = markUI.readcourseID(new Scanner(System.in));
-		if (Marks.existsStudent(studentID, courseID)) {
-			float[] data = MarksUI.readMarksData(new Scanner(System.in), Course.getMarkWeights(courseID));
-			Marks marks = makeStudentObj(studentID, data);
+		int studentID = MarksUI.readStudentID(new Scanner(System.in));
+		int courseID = MarksUI.readCourseID(new Scanner(System.in));
+		if (Marks.existsMarks(studentID, courseID)) {
+			double[] data = MarksUI.readMarksData(new Scanner(System.in), Course.getMarkWeights(courseID));
+			Marks marks = makeMarkObj(studentID,courseID, data);
 			Marks.deleteInFile(studentID, courseID);
 			Marks.saveToFile(marks);
 		} else
-			marksUI.studentCourseIdNonexist(); // error message
+			MarksUI.studentCourseIdNonexist(); // error message
 	}
 
 	public void deleteMarks() {
 		MarksUI marksUI = new MarksUI();
 		int studentID = MarksUI.readStudentID(new Scanner(System.in));
 		int courseID = MarksUI.readCourseID(new Scanner(System.in));
-		if (Student.existsStudent(studentID,courseID)) {
-			Student.deleteInFile(studentID,courseID);
+		if (Marks.existsMarks(studentID,courseID)) {
+			Marks.deleteInFile(studentID,courseID);
 		} else
 			marksUI.studentCourseIdNonexist();
 	}
 
-	private Mark makeMarkObj(int studentID,int courseID, float[] args) {
+	private Marks makeMarkObj(int studentID,int courseID, double[] args) {
 		Marks marks = new Marks(Course.getMarkWeights(courseID).size());
 
 		marks.setStudentID(studentID);
-		marks.setCourseID(courseID)
-		marks.setStudentExamMarks(args[0]);
-		marks.setStudentCourseWorkMarks(&args[1]);
+		marks.setCourseID(courseID);
+		marks.setStudentExamMark(args[0]);
+		marks.setStudentCourseWorkMarks(args);
 
 		return marks;
 	}

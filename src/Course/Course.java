@@ -279,10 +279,9 @@ public class Course {
     {if(noOfStudents<capacity)
     	{noOfStudents++;
     	return true;}
-    	}
     else
-    	System.out.println("Full Capacity! ");
-    	return false
+    {System.out.println("Full Capacity! ");
+    	return false;}
     }
 
 
