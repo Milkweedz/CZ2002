@@ -18,6 +18,31 @@ import org.json.simple.parser.ParseException;
 
 
 public class RegistrationCtrl {
+	public void init(){
+		StudentUI studentUI = new StudentUI();
+
+		int choice;
+
+		do {
+			choice = RegistrationUI.registrationCtrlChoice();
+			switch(choice){
+				case 1:
+					registerStudentForCourse();
+					break;
+                case 2:
+                    deleteInFile(RegistrationUI.readStudentID(new Scanner(System.in)),RegistrationUI.readCourseID(new Scanner(System.in)));
+                    break;
+                case 3:
+                    List<Integer> courses = studentCourses(RegistrationUI.readStudentID(new Scanner(System.in)));
+                    RegistrationUI.printCourses(courses);
+                    break;
+                case 4:
+                    List<Integer> students = studentsInCourses(RegistrationUI.readCourseID(new Scanner(System.in)));
+                    RegistrationUI.printStudents(students);
+                    break;
+			}
+		} while (choice<5);    //look at studentUI, 5 happens to be the option to quit
+	}
 	public static void registerStudentForCourse() {
 		Student student= new Student();
 		int StudentID = RegistrationUI.readStudentID(new Scanner(System.in));
@@ -33,10 +58,11 @@ public class RegistrationCtrl {
 				System.out.printf("Course Id Does Not Exist");
 			else {
 				Course course = Course.readInFile(CourseID);
-				if (course.courseRegister() && isInFile(StudentID, CourseID)) {
+				if (course.courseRegister() && !isInFile(StudentID, CourseID)) {
 					String courseName, coordinator;
 					courseName = course.getCourseName();
 					coordinator = course.getCoordinator();
+					System.out.printf("HI");
 					saveToFile(StudentID, FName, LName, CourseID, courseName, coordinator);
 				}
 
@@ -50,7 +76,7 @@ public class RegistrationCtrl {
 		String regFile = "src\\Registration\\Registration.json";
 		JSONObject file = readJSON(regFile);
 		// JSONArray array = (JSONArray) file.get("data");
-
+        System.out.printf("Hi");
 		JSONObject obj = new JSONObject();
 		obj.put("firstname", FName);
 		obj.put("lastname", LName);
@@ -82,8 +108,9 @@ public class RegistrationCtrl {
 			ex.printStackTrace();
 		} catch (ParseException parsex) {
 			System.out.println("ParseException!");
-			// parsex.printStackTrace();
+			parsex.printStackTrace();
 		}
+		System.out.printf("Hi");
 		return new JSONObject();
 	}
 
@@ -159,11 +186,11 @@ public static List<Integer> studentCourses(int StudentID)
 	try {
 		readFile = new File("src\\Registration\\reglist.txt");
 		br = new BufferedReader(new FileReader(readFile));
-
-		for (String line = ""; line != null; line = br.readLine()) {
-			String array1[]= line.split(".");
-			if(Integer.getInteger(array1[0])==StudentID)
-				courses.add(Integer.getInteger(array1[1]));
+        String line = br.readLine();
+		for (; line != null; line = br.readLine()) {
+			String array1[]= line.split("\\.");
+			if(Integer.parseInt(array1[0])==StudentID)
+				courses.add(Integer.parseInt(array1[1]));
 		}
 		return courses;
 		// System.out.println("Delete error. CourseID not found.");
@@ -174,7 +201,6 @@ public static List<Integer> studentCourses(int StudentID)
 		try {
 			if (readFile != null && br != null ) {
 				br.close();
-				readFile.delete();
 			}
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -182,5 +208,36 @@ public static List<Integer> studentCourses(int StudentID)
 	}
 	return courses;
 }
+
+    public static List<Integer> studentsInCourses(int courseID)
+    {
+        List<Integer> students = new ArrayList<Integer>();
+        File readFile = null;
+        BufferedReader br = null;
+        try {
+            readFile = new File("src\\Registration\\reglist.txt");
+            br = new BufferedReader(new FileReader(readFile));
+            String line = br.readLine();
+            for (; line != null; line = br.readLine()) {
+                String array1[]= line.split("\\.");
+                if(Integer.parseInt(array1[1])==courseID)
+                    students.add(Integer.parseInt(array1[0]));
+            }
+            return students;
+            // System.out.println("Delete error. CourseID not found.");
+        } catch (IOException ex) {
+            System.out.println("IOException! reglist.txt not found?");
+            ex.printStackTrace();
+        } finally {
+            try {
+                if (readFile != null && br != null ) {
+                    br.close();
+                }
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
+        return students;
+    }
 
 }

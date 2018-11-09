@@ -1,5 +1,6 @@
 import Course.CourseCtrl;
 import Student.StudentCtrl;
+import Registration.RegistrationCtrl;
 
 import java.util.Scanner;
 
@@ -33,6 +34,10 @@ public class LoginVerify {
                     StudentCtrl studentCtrl = new StudentCtrl();
                     System.out.println("Initiating student controller...");
                     studentCtrl.init();
+                case 3:
+                    RegistrationCtrl regCtrl = new RegistrationCtrl();
+                    System.out.println("Initiating registration controller...");
+                    regCtrl.init();
             }
 
         } while(choice != 0);
