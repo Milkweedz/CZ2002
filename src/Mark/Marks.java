@@ -6,12 +6,15 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 import org.json.simple.*;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import Course.Course;
 
 
 public class Marks {
@@ -35,14 +38,15 @@ public class Marks {
 	public static boolean existsMarks(int studentID, int courseID) {
 		BufferedReader br = null;
 		try {
-			br = new BufferedReader(new FileReader("src\\Marks\\marklist.txt"));
+			br = new BufferedReader(new FileReader("src\\Mark\\marklist.txt"));
 			String nextID = br.readLine();
 			while (nextID != null) {
-				if (nextID == studentID + "." + courseID) {
+				String array1[]= nextID.split("\\.");
+				if (Integer.parseInt(array1[0])==studentID && Integer.parseInt(array1[1])==courseID) {
 					return true;
 				}
 				nextID = br.readLine();
-				System.out.println(nextID + "DEBUG");
+				//System.out.println(nextID + "DEBUG");
 			}
 			return false;
 		} catch (IOException ex) {
@@ -61,17 +65,17 @@ public class Marks {
 	}
 
 	public static void saveToFile(Marks marks) {
-		String MarkFile = "src\\Marks\\marks.json";
+		String MarkFile = "src\\Mark\\marks.json";
 		JSONObject file = readJSON(MarkFile);
 		// JSONArray array = (JSONArray) file.get("data");
 
 		JSONObject obj = new JSONObject();
 		// obj.put("studentid", Integer.toString(student.getStudentID()));
-		obj.put("exammark", String.valueOf(marks.retStudentExamMark()));
 		obj.put("numofcomp", String.valueOf(marks.retNumOfComp()));
-		for (int i = 0; i < marks.retNumOfComp(); i++) {
-			obj.put(Integer.toString(i), String.valueOf(marks.retStudentCourseWorkMarks(i)));
-		}
+		HashMap<String, String> markWeights = Course.getMarkWeights(marks.retCourseID());
+		int i=0;
+		for (Map.Entry<String, String> entry : markWeights.entrySet())         //somewhat of a poor implementation here
+			obj.put(entry.getKey(),String.valueOf(marks.retStudentCourseWorkMarks(i++)));
 
 		file.put(Integer.toString(marks.retStudentID()) + "." + Integer.toString(marks.retCourseID()), obj);
 		// file.replace("data", array);
@@ -80,7 +84,7 @@ public class Marks {
 
 		// add new student to studentid cache
 		try (BufferedWriter bw = new BufferedWriter(new FileWriter("src\\Mark\\marklist.txt", true))) {
-			bw.write(marks.retStudentID() + "," + marks.retStudentID() + "\n");
+			bw.write(marks.retStudentID() + "." + marks.retCourseID() + "\n");
 		} catch (IOException ex) {
 			System.out.println("IOException! marklist.txt not found?");
 			ex.printStackTrace();
@@ -89,7 +93,7 @@ public class Marks {
 	}
 
 	public static void deleteInFile(int studentID,int courseID) {
-		String markFile = "src\\Marks\\marks.json";
+		String markFile = "src\\Mark\\marks.json";
 		JSONObject file = readJSON(markFile);
 		file.remove(Integer.toString(studentID)+"."+Integer.toString(courseID));
 
@@ -130,7 +134,7 @@ public class Marks {
 	}
 
 	public static Marks readInFile(int studentID,int courseID) {
-		String markFile = "src\\Marks\\marks.json";
+		String markFile = "src\\Mark\\marks.json";
 		JSONObject file = readJSON(markFile);
 		JSONObject obj = (JSONObject) file.get(Integer.toString(studentID)+"."+Integer.toString(courseID));
 		int n = Integer.parseInt((String) obj.get("numofcomp"));
@@ -138,10 +142,11 @@ public class Marks {
 		double courseMarks[] = new double[n];
 		marks.setStudentID(studentID);
 		marks.setCourseID(courseID);
-		marks.setStudentExamMark(Integer.parseInt((String) obj.get("exammark")));
-		for (int i = 0; i < marks.retNumOfComp(); i++) {
-			courseMarks[i]= Integer.parseInt((String) obj.get(Integer.toString(i)));		}
-		marks.setStudentCourseWorkMarks(courseMarks);
+		HashMap<String, String> markWeights = Course.getMarkWeights(marks.retCourseID());
+		int i=0;
+		for (Map.Entry<String, String> entry : markWeights.entrySet())
+			courseMarks[i++]=Double.valueOf((String)obj.get(entry.getKey()));
+		marks.setStudentCourseMarks(courseMarks);
 		return marks;
 	}
 
@@ -188,10 +193,10 @@ public class Marks {
 		CourseID = courseID;
 	}
 
-	public void setStudentCourseWorkMarks(double courseWorkMarks[]) {
+	public void setStudentCourseMarks(double courseWorkMarks[]) {
 		courseWorkMarkSet = true;
-		for (int i = 1; i < NoOfComp; i++) {
-			this.courseWorkMark[i-1] = courseWorkMarks[i];
+		for (int i = 0; i < NoOfComp; i++) {
+			this.courseWorkMark[i] = courseWorkMarks[i];
 		}
 	}
 	public void setNoOfComp(int n)
@@ -199,18 +204,11 @@ public class Marks {
 		NoOfComp=n;
 	}
 
-	public boolean retExamMarkSet() {
-		return examMarkSet;
-	}
 
 	public boolean courseWorkMarkSet() {
 		return courseWorkMarkSet;
 	}
 
-	public void setStudentExamMark(double Exam_Mark) {
-		examMarkSet = true;
-		ExamMark = Exam_Mark;
-	}
 
 	public int retStudentID()
 	{
@@ -229,8 +227,6 @@ public class Marks {
 		return courseWorkMark[n];
 	}
 
-	public double retStudentExamMark() {
-		return ExamMark;
-	}
+
 
 }

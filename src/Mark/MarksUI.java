@@ -3,9 +3,18 @@ package Mark;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
+
+import Course.Course;
 import Course.CourseUI;
 
 public class MarksUI {
+	public static int marksCtrlChoice(){
+		Scanner scan = new Scanner (System.in);
+		System.out.println("\nWhat would you like to do?");
+		System.out.println("1: Add marks of a student for a course\n2: Edit Marks of a student for a course\n3: Remove a student's marks for a course\n4: Return a student's marks for a course  \n5: Quit");
+		System.out.print("Enter Your Choice: ");
+		return scan.nextInt();
+	}
 
 	public static int readStudentID(Scanner scan) {
 		System.out.println("Enter Student ID : ");
@@ -38,13 +47,28 @@ public class MarksUI {
 	public static void studentCourseIdNonexist() {
 		System.out.println("\nStudent or Course ID doesn't exist! Try again.");
 	}
-
+	public static void studentCourseIdexist() {
+		System.out.println("\nStudent or Course ID already exist! Try again.");
+	}
 	public static void displayMarksData(Marks marks) {
 		System.out.println("Student ID :" + marks.retStudentID());
 		System.out.println("Course ID :" + marks.retCourseID());
-		System.out.println("Exam Marks :" + marks.retStudentExamMark());
-		for (int i = 0; i < marks.retNumOfComp(); i++) {
-			System.out.println("Course mark " + (i + 1) + " : " + marks.retStudentCourseWorkMarks(i));
-		}
+		HashMap<String, String> markWeights = Course.getMarkWeights(marks.retCourseID());
+		int i=0;
+		for (Map.Entry<String, String> entry : markWeights.entrySet())         //somewhat of a poor implementation here
+			System.out.println(entry.getKey()+" : "+marks.retStudentCourseWorkMarks(i++));
+
 	}
+	public static void successAdd()
+	{
+		System.out.println("Marks Successfully Added !");
+	}
+    public static void successEdit()
+    {
+        System.out.println("Marks Successfully Edited !");
+    }
+    public static void successRemove()
+    {
+        System.out.println("Marks Successfully Removed !");
+    }
 }

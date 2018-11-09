@@ -30,5 +30,17 @@ public class RegistrationUI {
             for(int n=0;n<courses.size();n++)
                 System.out.println("Course "+(n+1)+" : "+courses.get(n));
     }
+    public static void successAdd()
+    {
+        System.out.println("Marks Successfully Added !");
+    }
+    public static void successEdit()
+    {
+        System.out.println("Marks Successfully Edited !");
+    }
+    public static void successRemove()
+    {
+        System.out.println("Marks Successfully Removed !");
+    }
 
 }

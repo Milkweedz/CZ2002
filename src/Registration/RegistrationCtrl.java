@@ -19,7 +19,6 @@ import org.json.simple.parser.ParseException;
 
 public class RegistrationCtrl {
 	public void init(){
-		StudentUI studentUI = new StudentUI();
 
 		int choice;
 
@@ -64,6 +63,7 @@ public class RegistrationCtrl {
 					coordinator = course.getCoordinator();
 					System.out.printf("HI");
 					saveToFile(StudentID, FName, LName, CourseID, courseName, coordinator);
+					RegistrationUI.successAdd();
 				}
 
 			}
@@ -149,6 +149,7 @@ public class RegistrationCtrl {
 					bw.write(line);
 				}
 			}
+			RegistrationUI.successRemove();
 			// System.out.println("Delete error. CourseID not found.");
 		} catch (IOException ex) {
 			System.out.println("IOException! reglist.txt not found?");

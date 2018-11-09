@@ -1,4 +1,5 @@
 import Course.CourseCtrl;
+import Mark.MarksCtrl;
 import Student.StudentCtrl;
 import Registration.RegistrationCtrl;
 
@@ -21,7 +22,7 @@ public class LoginVerify {
 
         do {
             System.out.print("\nWhat area to access? ");
-            System.out.println("1: Courses, 2: Students, 3: Registration, 0: Quit");
+            System.out.print("\n1: Courses, \n2: Students, \n3: Registration, \n4: Marks \n0: Quit\nChoice:");
             choice = scan.nextInt();
 
             switch(choice){
@@ -38,6 +39,10 @@ public class LoginVerify {
                     RegistrationCtrl regCtrl = new RegistrationCtrl();
                     System.out.println("Initiating registration controller...");
                     regCtrl.init();
+                case 4:
+                    MarksCtrl mrkCtrl = new MarksCtrl();
+                    System.out.println("Initiating Marks controller...");
+                    mrkCtrl.init();
             }
 
         } while(choice != 0);
