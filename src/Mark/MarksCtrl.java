@@ -2,10 +2,8 @@ package Mark;
 
 import Registration.RegistrationCtrl;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
+
 import Course.Course;
 import Registration.RegistrationUI;
 
@@ -48,16 +46,7 @@ public class MarksCtrl {
 		}
 
 	}
-	
-	public Marks retMarks(int studentID,int courseID) {
-		Marks marks = new Marks(0);
-		if (!Marks.existsMarks(studentID,courseID)) {
-			MarksUI.studentCourseIdNonexist();
-		} else {
-			marks = Marks.readInFile(studentID,courseID);
-			return marks;}
-			return marks;
-	}
+
 
 	public void addMarks(){
 	        int studentID=MarksUI.readStudentID(new Scanner(System.in));
@@ -111,6 +100,17 @@ public class MarksCtrl {
 		marks.setStudentCourseMarks(args);
 
 		return marks;
+	}
+
+	public static double retTotalPercentage(int studentID, int courseID)
+	{
+		Marks marks = Marks.readInFile(studentID,courseID);
+		double sumMarks = 0.0;
+		HashMap<String, String> markWeights = Course.getMarkWeights(marks.retCourseID());
+		int i=0;
+		for (Map.Entry<String, String> entry : markWeights.entrySet())         //somewhat of a poor implementation here
+			sumMarks+=Integer.parseInt(entry.getValue())*marks.retStudentCourseWorkMarks(i++)/100.0;
+		return sumMarks;
 	}
 
 }

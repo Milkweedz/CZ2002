@@ -1,8 +1,11 @@
-import Course.CourseCtrl;
+package Login;
+
+import Course.*;
 import Mark.MarksCtrl;
-import Student.StudentCtrl;
+import Student.*;
 import Registration.RegistrationCtrl;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class LoginVerify {
@@ -22,7 +25,7 @@ public class LoginVerify {
 
         do {
             System.out.print("\nWhat area to access? ");
-            System.out.print("\n1: Courses, \n2: Students, \n3: Registration, \n4: Marks \n0: Quit\nChoice:");
+            System.out.print("\n1: Courses, \n2: Students, \n3: Registration, \n4: Marks \n5: Print Transcripts\n0: Quit\nChoice:");
             choice = scan.nextInt();
 
             switch(choice){
@@ -43,8 +46,30 @@ public class LoginVerify {
                     MarksCtrl mrkCtrl = new MarksCtrl();
                     System.out.println("Initiating Marks controller...");
                     mrkCtrl.init();
+                case 5:
+                    printTranscripts(LoginUI.readStudentID(new Scanner(System.in)));
             }
 
         } while(choice != 0);
+    }
+    public static void printTranscripts(int studentID)
+    {
+        if(Student.existsStudent(studentID))
+        {Student student = Student.readInFile(studentID);
+        List<Integer> courses = RegistrationCtrl.studentCourses(studentID);
+        LoginUI.printStudentDetails(student);
+        for(int i=0;i<courses.size();i++)
+        {
+            LoginUI.printCourse(Course.readInFile(courses.get(i)));
+            System.out.print(String.format("\n%12s|%20s~ %-19s|"," ","Exam Component ","Marks"));
+            LoginUI.printMarks(student,Course.readInFile(courses.get(i)));
+            System.out.print(String.format("\n%12s|%20s: %-19.2f|"," ","Total Percentage ",MarksCtrl.retTotalPercentage(studentID,courses.get(i))));
+
+        }
+        LoginUI.printParaEnd();
+        }
+		else
+            StudentUI.studentIdNonexist();
+//	}
     }
 }

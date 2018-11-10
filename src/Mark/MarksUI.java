@@ -59,6 +59,13 @@ public class MarksUI {
 			System.out.println(entry.getKey()+" : "+marks.retStudentCourseWorkMarks(i++));
 
 	}
+	public static void displayTranscriptMarksData(Marks marks) {
+		HashMap<String, String> markWeights = Course.getMarkWeights(marks.retCourseID());
+		int i=0;
+		for (Map.Entry<String, String> entry : markWeights.entrySet())         //somewhat of a poor implementation here
+			System.out.print(String.format("\n%12s|%19s : %-19s|"," ",entry.getKey(),marks.retStudentCourseWorkMarks(i++)));
+
+	}
 	public static void successAdd()
 	{
 		System.out.println("Marks Successfully Added !");
