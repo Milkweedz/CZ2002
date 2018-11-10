@@ -69,16 +69,16 @@ public class MarksCtrl {
 
 	public void editMarks() {
 		MarksUI markUI = new MarksUI();
-		int studentID = MarksUI.readStudentID(new Scanner(System.in));
-		int courseID = MarksUI.readCourseID(new Scanner(System.in));
+		int studentID = markUI.readStudentID(new Scanner(System.in));
+		int courseID = markUI.readCourseID(new Scanner(System.in));
 		if (Marks.existsMarks(studentID, courseID)) {
-			double[] data = MarksUI.readMarksData(new Scanner(System.in), Course.getMarkWeights(courseID));
+			double[] data = markUI.readMarksData(new Scanner(System.in), Course.getMarkWeights(courseID));
 			Marks marks = makeMarkObj(studentID,courseID, data);
 			Marks.deleteInFile(studentID, courseID);
 			Marks.saveToFile(marks);
-			MarksUI.successEdit();
+			markUI.successEdit();
 		} else
-			MarksUI.studentCourseIdNonexist(); // error message
+			markUI.studentCourseIdNonexist(); // error message
 	}
 
 	public void deleteMarks() {

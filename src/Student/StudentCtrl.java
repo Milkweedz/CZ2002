@@ -80,8 +80,7 @@ public class StudentCtrl {
         if(Student.existsStudent(studentID)){
             String[] data = studentUI.readStudentData();
             Student student = makeStudentObj(studentID, data);
-            Student.deleteInFile(studentID);
-            Student.saveToFile(student);
+            Student.editFile(student);
         }
         else studentUI.studentIdNonexist(); //error message
     }

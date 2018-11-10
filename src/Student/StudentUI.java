@@ -19,9 +19,9 @@ public class StudentUI {
 
         args[0] = readFName(scan);
         args[1] = readLName(scan);
-        args[2] = readDepartment(scan);
-        args[3] = Integer.toString(readGender(scan));
-        args[4] = Integer.toString(readYear(scan));
+        args[2] = Integer.toString(readGender(scan));
+        args[3] = Integer.toString(readYear(scan));
+        args[4] = readDepartment(scan);
         args[5] = readGraduate(scan);
 
         return args;
@@ -86,6 +86,7 @@ public class StudentUI {
 
     private static String readDepartment(Scanner scan){
         System.out.println("Enter Department of Study : ");
+        scan.nextLine();        //gets rid of newline character
         return scan.nextLine();
     }
 

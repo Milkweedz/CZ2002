@@ -126,6 +126,27 @@ public class Student {
         }
     }
 
+    public static void editFile(Student student){
+        String studentFile = "src\\Student\\students.json";
+        JSONObject file = readJSON(studentFile);
+        file.remove(Integer.toString(student.studentID));
+        //JSONArray array = (JSONArray) file.get("data");
+
+        JSONObject obj = new JSONObject();
+        //obj.put("studentid", Integer.toString(student.getStudentID()));
+        obj.put("fname", student.getStudentFName());
+        obj.put("lname", student.getStudentLName());
+        obj.put("year", Integer.toString(student.getYearOfStudy()));
+        obj.put("gender", Integer.toString(student.getGender()));
+        obj.put("department", student.getDepartment());
+        obj.put("graduate", student.getGraduate());
+
+        file.put(Integer.toString(student.getStudentID()), obj);
+        //file.replace("data", array);
+
+        writeJSON(file, studentFile);
+    }
+
     public static Student readInFile(int studentID){
         String studentFile = "src\\Student\\students.json";
         JSONObject file = readJSON(studentFile);
