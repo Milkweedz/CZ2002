@@ -25,7 +25,7 @@ public class CourseCtrl {
                     deleteCourse();
                     break;
                 case 4:
-                    getCourseWeight();
+                    printCourseWeight();
                     break;
                 case 5:
                     setCourseWeight();
@@ -93,7 +93,7 @@ public class CourseCtrl {
         else courseUI.courseIdNonexist();
     }
 
-    public void getCourseWeight(){
+    public void printCourseWeight(){
         CourseUI courseUI = new CourseUI();
         int courseID = courseUI.readCourseID();
 
@@ -116,6 +116,20 @@ public class CourseCtrl {
                 i++;
             }
             courseUI.displayCourseData(data);
+        }
+    }
+
+    public HashMap<String, String> getCourseWeight(int courseID){
+
+        if (!Course.existsCourse(courseID)) {
+            return null;
+        }
+
+        HashMap<String, String> markWeights = Course.getMarkWeights(courseID);
+        String[] data;
+        if (markWeights == null) return null;
+        else {
+            return markWeights;
         }
     }
 
