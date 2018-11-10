@@ -65,9 +65,11 @@ public class CourseUI {
         while(true) {
             System.out.print("\nEnter exam weight in percentage: ");
             examWeight = scan.nextInt(); //change this to float possibly
+            System.out.printf("\nExam weight: %d, Coursework weight: %d", examWeight, 100-examWeight) ;
             System.out.print("\nEnter coursework weight in percentage: ");
-            if (scan.nextInt() != 100 - examWeight)
-                System.out.println("Exam and coursework weight don't add up to 100! Try again.");
+//            if (scan.nextInt() != 100 - examWeight)
+            if (scan.nextInt() != 100)      //coursework out of 100
+                System.out.println("Coursework weight doesn't add up to 100! Try again.");
             else break;
         }
 
@@ -88,7 +90,7 @@ public class CourseUI {
                 totalWeight+=courseworkWeights[i];
             }
 
-            if (totalWeight!=100-examWeight)
+            if (totalWeight!=100)
                 System.out.println("Coursework component weights don't add up to total weight! Try again.");
             else break;
         }
