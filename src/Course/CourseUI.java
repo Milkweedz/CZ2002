@@ -47,14 +47,17 @@ public class CourseUI {
         return data;
     }
 
-    public ArrayList<String> readTutorials(){
+    public ArrayList<String> readTutorials() {
         Scanner scan = new Scanner(System.in);
         ArrayList<String> tutorials = new ArrayList<>();
         System.out.print("\nEnter number of tutorials groups : ");
+        //String dummychar = "";
         int numberOfTutorialGroups = scan.nextInt();
-       for(int i=0;i<numberOfTutorialGroups;i++){
-        System.out.print("\nEnter tutorial "+i+" group name: ");
-         tutorials.add(scan.nextLine());}
+        for (int i = 0; i < numberOfTutorialGroups; i++) {
+            //scan.next(dummychar);
+            System.out.print("\nEnter tutorial " + i + " group name: ");
+            tutorials.add(scan.next());
+        }
         return tutorials;
     }
 

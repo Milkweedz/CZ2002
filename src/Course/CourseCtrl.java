@@ -93,9 +93,10 @@ public class CourseCtrl {
         else {
             String[] data = courseUI.readCourseData();
             Course course = makeCourseObj(courseID, data);
-            if(course.getType()== Course.COURSETYPE.Lec)
-            {ArrayList<String> tutorialGroups = courseUI.readTutorials();
-            course.addTutorialGroups(tutorialGroups);}
+            if(course.getType()!= Course.COURSETYPE.Lec){
+                ArrayList<String> tutorialGroups = courseUI.readTutorials();
+                course.addTutorialGroups(tutorialGroups);
+            }
             Course.saveToFile(course);
         }
     }
