@@ -9,7 +9,7 @@ public class CourseUI {
     public int courseCtrlChoice(){
         Scanner scan = new Scanner (System.in);
         System.out.println("\nWhat would you like to do?");
-        System.out.println("0: View Course Details, 1: Create Course, 2: Edit Course, 3: Delete Course, 4: View Mark Weights, 5: Change Mark Weights, 6: Quit");
+        System.out.println("0: View Course Details, 1: Create Course, 2: Edit Course, 3: Delete Course, 4: View Mark Weights, 5: Change Mark Weights, 6: List Courses, 7: Quit");
 
         return scan.nextInt();
     }
@@ -49,7 +49,7 @@ public class CourseUI {
 
     public void listCourses(ArrayList<String> courseList){
         System.out.print("\nStudent IDs: ");
-        courseList.forEach((student) -> System.out.print(student + ", "));
+        courseList.forEach((course) -> System.out.print(course + ", "));
         System.out.print("\n");
     }
 

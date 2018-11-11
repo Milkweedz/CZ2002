@@ -33,11 +33,14 @@ public class CourseCtrl {
                 case 5:
                     setCourseWeight();
                     break;
+                case 6:
+                    listCourses();
+                    break;
             }
-        } while (choice!=6);    //look at courseUI, 5 happens to be the option to quit
+        } while (choice!=7);    //look at courseUI, 7 happens to be the option to quit
     }
 
-    public void listStudents(){
+    public void listCourses(){
         ArrayList<String> courseList = Course.listCourses();
         CourseUI courseUI = new CourseUI();
         courseUI.listCourses(courseList);
