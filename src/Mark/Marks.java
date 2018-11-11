@@ -180,6 +180,14 @@ public class Marks {
 			ex.printStackTrace();
 		}
 	}
+	public static boolean isFileEmpty() {
+		String courseFile = "src\\Mark\\marks.json";
+		JSONObject file = readJSON(courseFile);
+		if (file.size() == 0)
+			return true;
+		else
+			return false;
+	}
 
 	public boolean isStudMarks(int StdID, int CrseID) {
 		if (StudentID == StdID && CourseID == CrseID)

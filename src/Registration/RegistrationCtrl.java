@@ -29,17 +29,33 @@ public class RegistrationCtrl {
 					registerStudentForCourse();
 					break;
                 case 2:
-                    deleteInFile(RegistrationUI.readStudentID(new Scanner(System.in)),RegistrationUI.readCourseID(new Scanner(System.in)));
+					if(!isFileEmpty()) deleteInFile(RegistrationUI.readStudentID(new Scanner(System.in)),RegistrationUI.readCourseID(new Scanner(System.in)));
+					else RegistrationUI.NoRecordsExistError();
                     break;
                 case 3:
+                	if(!isFileEmpty()){
                     List<Integer> courses = studentCourses(RegistrationUI.readStudentID(new Scanner(System.in)));
-                    RegistrationUI.printCourses(courses);
+                    RegistrationUI.printCourses(courses);}
+                    else
+                    	RegistrationUI.NoRecordsExistError();
                     break;
                 case 4:
-                    List<Integer> students = studentsInCourses(RegistrationUI.readCourseID(new Scanner(System.in)));
-                    RegistrationUI.printStudents(students);
+
+					if(!isFileEmpty()){
+						List<Integer> students = studentsInCourses(RegistrationUI.readCourseID(new Scanner(System.in)));
+						RegistrationUI.printStudents(students);}
+					else
+						RegistrationUI.NoRecordsExistError();
                     break;
 			}
+			if(choice!=5)
+			{System.out.print("Press any key to continue ...");
+				try
+				{
+					System.in.read();
+				}
+				catch(Exception e)
+				{} }
 		} while (choice<5);    //look at studentUI, 5 happens to be the option to quit
 	}
 	public static void registerStudentForCourse() {
@@ -179,6 +195,15 @@ public class RegistrationCtrl {
 			return true;
 	}
 
+	public static boolean isFileEmpty() {
+		String courseFile = "src\\Registration\\Registration.json";
+		JSONObject file = readJSON(courseFile);
+		if (file.size() == 0)
+			return true;
+		else
+			return false;
+	}
+
 public static List<Integer> studentCourses(int StudentID)
 {
 	List<Integer> courses = new ArrayList<Integer>();
@@ -222,9 +247,8 @@ public static List<Integer> studentCourses(int StudentID)
             for (; line != null; line = br.readLine()) {
                 String array1[]= line.split("\\.");
                 if(Integer.parseInt(array1[1])==courseID)
-                    students.add(Integer.parseInt(array1[0]));
-            }
-            return students;
+                    students.add(Integer.parseInt(array1[0]));}
+				return students;
             // System.out.println("Delete error. CourseID not found.");
         } catch (IOException ex) {
             System.out.println("IOException! reglist.txt not found?");

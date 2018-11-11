@@ -23,24 +23,42 @@ public class RegistrationUI {
 }
 
     public static void printStudents(List<Integer> students) {
-        for(int n=0;n<students.size();n++)
-            System.out.println((n+1)+" : "+students.get(n));
+        if(students.size()==0)
+        {for(int n=0;n<students.size();n++)
+            System.out.println((n+1)+" : "+students.get(n));}
+        else
+            noStudentError();
     }
     public static void printCourses(List<Integer> courses) {
-            for(int n=0;n<courses.size();n++)
-                System.out.println("Course "+(n+1)+" : "+courses.get(n));
+            if(courses.size()==0){
+                for(int n=0;n<courses.size();n++)
+                    System.out.println("Course "+(n+1)+" : "+courses.get(n));
+            }
+            else
+                noCoursesError();
     }
     public static void successAdd()
     {
-        System.out.println("Marks Successfully Added !");
+        System.out.println("Registered Successfully !");
     }
     public static void successEdit()
     {
-        System.out.println("Marks Successfully Edited !");
+        System.out.println("Registration Successfully Edited !");
     }
     public static void successRemove()
     {
-        System.out.println("Marks Successfully Removed !");
+        System.out.println("Registration Successfully Removed !");
     }
-
+    public static void noStudentError()
+    {
+        System.out.println("No Students Registered !");
+    }
+    public static void noCoursesError()
+    {
+        System.out.println("Not Registered for any courses!");
+    }
+    public static void NoRecordsExistError()
+    {
+        System.out.println("No Registrations are done yet");
+    }
 }

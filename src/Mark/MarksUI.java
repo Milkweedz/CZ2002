@@ -47,6 +47,9 @@ public class MarksUI {
 	public static void studentCourseIdNonexist() {
 		System.out.println("\nMarks for Student in this course doesn't exist! Try again.");
 	}
+	public static void NoDataExists() {
+		System.out.println("\nNo Marks data entered yet!");
+	}
 	public static void studentCourseIdexist() {
 		System.out.println("\nStudent or Course ID already exist! Try again.");
 	}

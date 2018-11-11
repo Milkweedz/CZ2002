@@ -66,11 +66,7 @@ public class CourseUI {
             System.out.print("\nEnter exam weight in percentage: ");
             examWeight = scan.nextInt(); //change this to float possibly
             System.out.printf("\nExam weight: %d, Coursework weight: %d", examWeight, 100-examWeight) ;
-            System.out.print("\nEnter coursework weight in percentage: ");
-//            if (scan.nextInt() != 100 - examWeight)
-            if (scan.nextInt() != 100)      //coursework out of 100
-                System.out.println("Coursework weight doesn't add up to 100! Try again.");
-            else break;
+            break;
         }
 
         //input coursework component grades
@@ -98,7 +94,7 @@ public class CourseUI {
         markWeights.put("exam", Integer.toString(examWeight));
         //store to hashmap object
         for (int i=0; i<numComponents; i++){
-            markWeights.put(courseworks[i], Integer.toString(courseworkWeights[i]));
+            markWeights.put(courseworks[i], Integer.toString(courseworkWeights[i]*(100-examWeight)/100));
         }
 
         return markWeights;

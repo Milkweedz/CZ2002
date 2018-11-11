@@ -9,7 +9,6 @@ import Registration.RegistrationUI;
 
 public class MarksCtrl {
 	public void init(){
-
 		int choice = MarksUI.marksCtrlChoice();
 
 		do {
@@ -19,18 +18,31 @@ public class MarksCtrl {
 					addMarks();
 					break;
 				case 2:
-					editMarks();
+					if (!Marks.isFileEmpty()) editMarks();
+					else MarksUI.NoDataExists();
 					break;
 				case 3:
-					deleteMarks();
+					if (!Marks.isFileEmpty()) deleteMarks();
+					else MarksUI.NoDataExists();
 					break;
 				case 4:
-					viewMarks();
+					if(!Marks.isFileEmpty()) viewMarks();
+					else MarksUI.NoDataExists();
 					break;
 				case 5:
-					retExamMarks();
+					if(!Marks.isFileEmpty()) retExamMarks();
+					else MarksUI.NoDataExists();
+					break;
 			}
-			choice = MarksUI.marksCtrlChoice();
+			if(choice!=5)
+			{System.out.print("Press any key to continue ...");
+			try
+			{
+				System.in.read();
+			}
+			catch(Exception e)
+			{}
+			choice = MarksUI.marksCtrlChoice();}
 		} while (choice<6);    //look at studentUI, 5 happens to be the option to quit
 	}
 
