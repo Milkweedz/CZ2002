@@ -11,7 +11,7 @@ public class MarksUI {
 	public static int marksCtrlChoice(){
 		Scanner scan = new Scanner (System.in);
 		System.out.println("\nWhat would you like to do?");
-		System.out.println("1: Add marks of a student for a course\n2: Edit Marks of a student for a course\n3: Remove a student's marks for a course\n4: Return a student's marks for a course  \n5: Quit");
+		System.out.println("1: Add marks of a student for a course\n2: Edit Marks of a student for a course\n3: Remove a student's marks for a course\n4: Return a student's marks for a course  \n5. Return Exam Mark \n6: Quit");
 		System.out.print("Enter Your Choice: ");
 		return scan.nextInt();
 	}
@@ -45,7 +45,7 @@ public class MarksUI {
 	}
 
 	public static void studentCourseIdNonexist() {
-		System.out.println("\nStudent or Course ID doesn't exist! Try again.");
+		System.out.println("\nMarks for Student in this course doesn't exist! Try again.");
 	}
 	public static void studentCourseIdexist() {
 		System.out.println("\nStudent or Course ID already exist! Try again.");

@@ -21,18 +21,18 @@ public class Marks {
 	private int StudentID;
 	private int CourseID;
 	private int NoOfComp;
-	private double ExamMark;
+	private double TotalPercentage;
+	private char Grade;
 	private double courseWorkMark[];
-	private boolean courseWorkMarkSet, examMarkSet;
+
 
 	public Marks(int n) {
 		StudentID = 0;
 		CourseID = 0;
 		NoOfComp = n;
-		ExamMark = 0.0;
 		courseWorkMark = new double[n];
-		courseWorkMarkSet = false;
-		examMarkSet = false;
+		TotalPercentage = 0;
+		Grade = 'F';
 	}
 
 	public static boolean existsMarks(int studentID, int courseID) {
@@ -72,6 +72,8 @@ public class Marks {
 		JSONObject obj = new JSONObject();
 		// obj.put("studentid", Integer.toString(student.getStudentID()));
 		obj.put("numofcomp", String.valueOf(marks.retNumOfComp()));
+		obj.put("tpercentage", String.valueOf(marks.retTotalPercentage()));
+		obj.put("grade", String.valueOf(marks.retGrade()));
 		HashMap<String, String> markWeights = Course.getMarkWeights(marks.retCourseID());
 		int i=0;
 		for (Map.Entry<String, String> entry : markWeights.entrySet())         //somewhat of a poor implementation here
@@ -142,6 +144,8 @@ public class Marks {
 		double courseMarks[] = new double[n];
 		marks.setStudentID(studentID);
 		marks.setCourseID(courseID);
+		marks.setGrade((String)obj.get("grade"));
+		marks.setTotalPercentage(Double.valueOf((String)obj.get("tpercentage")));
 		HashMap<String, String> markWeights = Course.getMarkWeights(marks.retCourseID());
 		int i=0;
 		for (Map.Entry<String, String> entry : markWeights.entrySet())
@@ -194,20 +198,21 @@ public class Marks {
 	}
 
 	public void setStudentCourseMarks(double courseWorkMarks[]) {
-		courseWorkMarkSet = true;
 		for (int i = 0; i < NoOfComp; i++) {
 			this.courseWorkMark[i] = courseWorkMarks[i];
 		}
 	}
-	public void setNoOfComp(int n)
+
+	public void setTotalPercentage(double totalPercentage)
 	{
-		NoOfComp=n;
+		TotalPercentage = totalPercentage;
+	}
+
+	public void setGrade(String grade) {
+		Grade = grade.charAt(0);
 	}
 
 
-	public boolean courseWorkMarkSet() {
-		return courseWorkMarkSet;
-	}
 
 
 	public int retStudentID()
@@ -222,11 +227,18 @@ public class Marks {
 	public int retCourseID() {
 		return CourseID;
 	}
+	public double retTotalPercentage() {
+		return TotalPercentage;
+	}
+	public char retGrade() {
+		return Grade;
+	}
 
 	public double retStudentCourseWorkMarks(int n) {
 		return courseWorkMark[n];
 	}
-
+	public double returnExamMark()
+	{return courseWorkMark[0];}
 
 
 }

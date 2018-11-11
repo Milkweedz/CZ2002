@@ -38,16 +38,20 @@ public class LoginVerify {
                     StudentCtrl studentCtrl = new StudentCtrl();
                     System.out.println("Initiating student controller...");
                     studentCtrl.init();
+                    break;
                 case 3:
                     RegistrationCtrl regCtrl = new RegistrationCtrl();
                     System.out.println("Initiating registration controller...");
                     regCtrl.init();
+                    break;
                 case 4:
                     MarksCtrl mrkCtrl = new MarksCtrl();
                     System.out.println("Initiating Marks controller...");
                     mrkCtrl.init();
+                    break;
                 case 5:
                     printTranscripts(LoginUI.readStudentID(new Scanner(System.in)));
+                    break;
             }
 
         } while(choice != 0);

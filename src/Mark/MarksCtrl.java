@@ -10,10 +10,10 @@ import Registration.RegistrationUI;
 public class MarksCtrl {
 	public void init(){
 
-		int choice;
+		int choice = MarksUI.marksCtrlChoice();
 
 		do {
-			choice = MarksUI.marksCtrlChoice();
+
 			switch(choice){
 				case 1:
 					addMarks();
@@ -27,8 +27,11 @@ public class MarksCtrl {
 				case 4:
 					viewMarks();
 					break;
+				case 5:
+					retExamMarks();
 			}
-		} while (choice<5);    //look at studentUI, 5 happens to be the option to quit
+			choice = MarksUI.marksCtrlChoice();
+		} while (choice<6);    //look at studentUI, 5 happens to be the option to quit
 	}
 
 	public void viewMarks() {
@@ -111,6 +114,19 @@ public class MarksCtrl {
 		for (Map.Entry<String, String> entry : markWeights.entrySet())         //somewhat of a poor implementation here
 			sumMarks+=Integer.parseInt(entry.getValue())*marks.retStudentCourseWorkMarks(i++)/100.0;
 		return sumMarks;
+	}
+
+	public void retExamMarks()
+	{int studentId=MarksUI.readStudentID(new Scanner(System.in));
+	int courseId=MarksUI.readCourseID(new Scanner(System.in));
+		if(Marks.existsMarks(studentId,courseId)){
+			Marks marks = Marks.readInFile(studentId, courseId);
+			System.out.println("Exam Marks :" + marks.returnExamMark());
+		}
+		else
+		MarksUI.studentCourseIdNonexist();
+
+
 	}
 
 }
