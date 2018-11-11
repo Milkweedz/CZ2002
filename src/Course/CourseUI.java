@@ -47,6 +47,17 @@ public class CourseUI {
         return data;
     }
 
+    public ArrayList<String> readTutorials(){
+        Scanner scan = new Scanner(System.in);
+        ArrayList<String> tutorials = new ArrayList<>();
+        System.out.print("\nEnter number of tutorials groups : ");
+        int numberOfTutorialGroups = scan.nextInt();
+       for(int i=0;i<numberOfTutorialGroups;i++){
+        System.out.print("\nEnter tutorial "+i+" group name: ");
+         tutorials.add(scan.nextLine());}
+        return tutorials;
+    }
+
     public void listCourses(ArrayList<String> courseList){
         System.out.print("\nCourse IDs: ");
         courseList.forEach((course) -> System.out.print(course + ", "));

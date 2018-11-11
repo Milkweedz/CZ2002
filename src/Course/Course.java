@@ -20,6 +20,7 @@ public class Course {
     private COURSETYPE type;
     private int capacity;
     private int noOfStudents;
+    private ArrayList<String> tutorials;
 
     //private HashMap<String, String> markWeights;
 
@@ -30,6 +31,7 @@ public class Course {
         type = COURSETYPE.NULL;
         capacity = -1;
         noOfStudents = 0;
+        tutorials = new ArrayList<>();
     }
 
     public static boolean existsCourse(int courseID){
@@ -94,7 +96,9 @@ public class Course {
         obj.put("coordinator", course.getCoordinator());
         obj.put("type", translateType(course.getType()));
         obj.put("capacity", Integer.toString(course.getCapacity()));
-
+        obj.put("nooftut",Integer.toString(course.getTutorialGroups().size()));
+        for(int i=0;i<course.getTutorialGroups().size();i++)
+            obj.put("tut"+Integer.toString(i),course.getTutorialGroups().get(i));
         file.put(Integer.toString(course.getCourseID()), obj);
         //file.replace("data", array);
 
@@ -109,6 +113,10 @@ public class Course {
         }
     }
 
+    public void addTutorialGroups(ArrayList<String> tutorialGroups)
+    {
+        tutorials = tutorialGroups;
+    }
     public static void deleteInFile(int courseID){
         String courseFile = "src\\Course\\courses.json";
         JSONObject file = readJSON(courseFile);
@@ -163,6 +171,9 @@ public class Course {
         obj.put("coordinator", course.getCoordinator());
         obj.put("type", translateType(course.getType()));
         obj.put("capacity", Integer.toString(course.getCapacity()));
+        obj.put("nooftut",Integer.toString(course.getTutorialGroups().size()));
+        for(int i=0;i<course.getTutorialGroups().size();i++)
+            obj.put("tut"+Integer.toString(i),course.getTutorialGroups().get(i));
 
         file.put(Integer.toString(course.getCourseID()), obj);
         //file.replace("data", array);
@@ -181,7 +192,11 @@ public class Course {
         course.setCoordinator((String) obj.get("coordinator"));
         course.setType(translateType((String) obj.get("type")));
         course.setCapacity(Integer.parseInt((String) obj.get("capacity")));
-
+        int noOfTut=Integer.parseInt((String)obj.get("nooftut"));
+        ArrayList<String> tutorialNames = new ArrayList<>();
+        for(int i=0;i<noOfTut;i++)
+            tutorialNames.add((String)obj.get("tut"+Integer.toString(i)));
+        course.addTutorialGroups(tutorialNames);
         return course;
     }
 
@@ -311,6 +326,10 @@ public class Course {
 
     public int getCapacity() {
         return capacity;
+    }
+
+    public ArrayList<String> getTutorialGroups() {
+        return tutorials;
     }
 
     public void setCapacity(int capacity) {

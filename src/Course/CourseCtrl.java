@@ -93,7 +93,9 @@ public class CourseCtrl {
         else {
             String[] data = courseUI.readCourseData();
             Course course = makeCourseObj(courseID, data);
-
+            if(course.getType()== Course.COURSETYPE.Lec)
+            {ArrayList<String> tutorialGroups = courseUI.readTutorials();
+            course.addTutorialGroups(tutorialGroups);}
             Course.saveToFile(course);
         }
     }
@@ -105,6 +107,9 @@ public class CourseCtrl {
         if(Course.existsCourse(courseID)){
             String[] data = courseUI.readCourseData();
             Course course = makeCourseObj(courseID, data);
+            if(course.getType()== Course.COURSETYPE.Lec)
+            {ArrayList<String> tutorialGroups = courseUI.readTutorials();
+                course.addTutorialGroups(tutorialGroups);}
             Course.editFile(course);
         }
         else courseUI.courseIdNonexist(); //error message

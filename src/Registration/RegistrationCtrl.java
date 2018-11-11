@@ -18,6 +18,8 @@ import org.json.simple.parser.ParseException;
 
 
 public class RegistrationCtrl {
+
+
     public void init() {
 
         int choice;
@@ -29,7 +31,7 @@ public class RegistrationCtrl {
                     registerStudentForCourse();
                     break;
                 case 2:
-                    deleteInFile(RegistrationUI.readStudentID(new Scanner(System.in)), RegistrationUI.readCourseID(new Scanner(System.in)));
+                    Registration.deleteInFile(RegistrationUI.readStudentID(new Scanner(System.in)), RegistrationUI.readCourseID(new Scanner(System.in)));
                     break;
                 case 3:
                     List<Integer> courses = studentCourses(RegistrationUI.readStudentID(new Scanner(System.in)));
@@ -51,130 +53,30 @@ public class RegistrationCtrl {
         } else {
             student = Student.readInFile(StudentID);
             String FName, LName;
-            FName = student.getStudentFName();
-            LName = student.getStudentLName();
+            Registration reg = new Registration();
+            reg.getFirstName(student.getStudentFName());
+            reg.getLastName(student.getStudentLName());
             int CourseID = RegistrationUI.readCourseID(new Scanner(System.in));
             if (!Course.existsCourse(CourseID))
                 System.out.printf("Course Id Does Not Exist");
             else {
                 Course course = Course.readInFile(CourseID);
-                if (course.courseRegister() && !isInFile(StudentID, CourseID)) {
+                if (course.courseRegister() && !Registration.isInFile(StudentID, CourseID)) {
                     String courseName, coordinator;
-                    courseName = course.getCourseName();
-                    coordinator = course.getCoordinator();
-                    System.out.printf("HI");
-                    saveToFile(StudentID, FName, LName, CourseID, courseName, coordinator);
+                    reg.getCourseName(course.getCourseName());
+                    reg.getCoordinator(course.getCoordinator());
+                    reg.getCourseID(CourseID);
+                    reg.getStudentID(StudentID);
+                    if(Course.readInFile(CourseID).getType()!= Course.COURSETYPE.Lec)
+                    reg.gettutgrp(RegistrationUI.readTutGroup(CourseID));
+                    Registration.saveToFile(reg);
                     RegistrationUI.successAdd();
                 }
 
             }
         }
-
-	public static void saveToFile(int StudentID, String FName, String LName, int CourseID, String courseName,
-			String coordinator) {
-		String regFile = "src\\Registration\\Registration.json";
-		JSONObject file = readJSON(regFile);
-		// JSONArray array = (JSONArray) file.get("data");
-		JSONObject obj = new JSONObject();
-		obj.put("firstname", FName);
-		obj.put("lastname", LName);
-		obj.put("courseid", Integer.toString(CourseID));
-		obj.put("coursename", courseName);
-		obj.put("coordinator", coordinator);
-
-        file.put(Integer.toString(StudentID) + "." + Integer.toString(CourseID), obj);
-        // file.replace("data", array);
-
-        writeJSON(file, regFile);
-
-        // add new course to courseid cache
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter("src\\Registration\\reglist.txt", true))) {
-            bw.write(StudentID + "." + CourseID + "\n");
-        } catch (IOException ex) {
-            System.out.println("IOException! reglist.txt not found?");
-            ex.printStackTrace();
-        }
     }
 
-// either returns JSON file object or null.
-	private static JSONObject readJSON(String fileName) {
-		try {
-			JSONParser parser = new JSONParser();
-			return (JSONObject) parser.parse(new FileReader(fileName));
-		} catch (IOException ex) {
-			System.out.println("IOException!");
-			ex.printStackTrace();
-		} catch (ParseException parsex) {
-			System.out.println("ParseException!");
-			parsex.printStackTrace();
-		}
-		return new JSONObject();
-	}
-
-    private static void writeJSON(JSONObject file, String fileName) {
-
-        try {
-            FileWriter writer = new FileWriter(fileName, false);
-            file.writeJSONString(writer);
-            writer.close();
-        } catch (IOException ex) {
-            System.out.println("IOException!");
-            ex.printStackTrace();
-        }
-    }
-
-    public static void deleteInFile(int studentID, int courseID) {
-        String courseFile = "src\\Registration\\Registration.json";
-        JSONObject file = readJSON(courseFile);
-        file.remove(Integer.toString(studentID) + "." + Integer.toString(courseID));
-
-        writeJSON(file, courseFile);
-
-        File readFile = null;
-        File tempFile = null;
-        BufferedReader br = null;
-        BufferedWriter bw = null;
-        try {
-            // remove entry from course list file
-            readFile = new File("src\\Registration\\reglist.txt");
-            tempFile = File.createTempFile("file", ".txt", readFile.getParentFile());
-            br = new BufferedReader(new FileReader(readFile));
-            bw = new BufferedWriter(new FileWriter(tempFile));
-
-            for (String line = ""; line != null; line = br.readLine()) {
-                if (!line.equals(Integer.toString(studentID) + "." + Integer.toString(courseID))) {
-                    bw.write(line);
-                }
-            }
-            RegistrationUI.successRemove();
-            // System.out.println("Delete error. CourseID not found.");
-        } catch (IOException ex) {
-            System.out.println("IOException! reglist.txt not found?");
-            ex.printStackTrace();
-        } finally {
-            try {
-                if (readFile != null && tempFile != null && br != null && bw != null) {
-                    br.close();
-                    bw.close();
-                    readFile.delete();
-                    tempFile.renameTo(readFile);
-                }
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-        }
-    }
-
-    public static boolean isInFile(int studentID, int courseID) {
-        String courseFile = "src\\Registration\\Registration.json";
-        JSONObject file = readJSON(courseFile);
-        JSONObject obj = (JSONObject) file.get(Integer.toString(studentID) + "." + Integer.toString(courseID));
-
-        if (obj == null)
-            return false;
-        else
-            return true;
-    }
 
 public static List<Integer> studentCourses(int StudentID)
 {

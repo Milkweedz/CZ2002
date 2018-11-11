@@ -1,7 +1,10 @@
 package Registration;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+import Course.*;
 
 public class RegistrationUI {
     public static int registrationCtrlChoice(){
@@ -16,7 +19,18 @@ public class RegistrationUI {
         System.out.println("Enter Student ID : ");
         return scan.nextInt();
 }
-
+    public static String readTutGroup(int crsID) {
+        Scanner scan = new Scanner(System.in);
+        ArrayList<String> tutGroups = Course.readInFile(crsID).getTutorialGroups();
+        String tutorial = "";
+        System.out.println("Choose A tutorial Group: \n");
+        for (int i = 0; i < tutGroups.size(); i++)
+            System.out.print(tutGroups.get(i) + "|");
+        do {
+            tutorial = scan.next();
+        } while (!tutGroups.contains(tutorial));
+        return tutorial;
+    }
     public static int readCourseID(Scanner scan) {
         System.out.println("Enter Course ID : ");
         return scan.nextInt();
