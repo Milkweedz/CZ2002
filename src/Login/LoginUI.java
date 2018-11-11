@@ -3,6 +3,7 @@ package Login;
 import Course.Course;
 import Mark.Marks;
 import Mark.MarksUI;
+import Registration.Registration;
 import Student.Student;
 
 import java.util.Scanner;
@@ -17,12 +18,12 @@ public class LoginUI {
         System.out.println("Enter Course ID : ");
         return scan.nextInt();
     }
-    public static void printStudentDetails(Student student)
-    {
+
+    public static void printStudentDetails(Student student) {
         System.out.print(String.format("|%-1d.%30s|", 1, " Student ID "));
         System.out.println(String.format(" %-30d|", student.getStudentID()));
         System.out.print(String.format("|%-1d.%30s|", 2, " Student's Name "));
-        System.out.println(String.format(" %-30s|", student.getStudentLName()+ "," + student.getStudentFName()));
+        System.out.println(String.format(" %-30s|", student.getStudentLName() + "," + student.getStudentFName()));
         System.out.print(String.format("|%-1d.%30s|", 3, " Year Of Study "));
         System.out.println(String.format(" %-30d|", student.getYearOfStudy()));
         System.out.print(String.format("|%-1d.%30s|", 4, " Number of AUs obtained "));
@@ -36,52 +37,56 @@ public class LoginUI {
         System.out.print(String.format("|%-1d.%30s|", 8, "Level Of Study "));
         System.out.println(String.format(" %-30s|", student.getYearOfStudy()));
     }
-    public static void printCourse(Course course)
-    {   printParaBreak();
+
+    public static void printCourse(Registration reg) {
+        printParaBreak();
         System.out.print(String.format("\n|%-1d.%30s|", 1, " Course ID "));
-        System.out.println(String.format(" %-30d|", course.getCourseID()));
+        System.out.println(String.format(" %-30d|", reg.retCourseID()));
         System.out.print(String.format("|%-1d.%30s|", 2, " Course's Name "));
-        System.out.println(String.format(" %-30s|", course.getCourseName()));
+        System.out.println(String.format(" %-30s|", reg.retCourseName()));
         System.out.print(String.format("|%-1d.%30s|", 3, " Coordinator "));
-        System.out.println(String.format(" %-30s|", course.getCoordinator()));
-        if(course.getType()== Course.COURSETYPE.Lec)
-        { System.out.print(String.format("|%-1d.%30s|", 4, " Course Type "));
-        System.out.println(String.format(" %-30s|", "Only Lecture "));}
-        else if(course.getType()== Course.COURSETYPE.LecTut)
-    { System.out.print(String.format("|%-1d.%30s|", 4, " Course Type "));
-        System.out.println(String.format(" %-30s|", "Lecture + Tutorial"));}
-        else
-                { System.out.print(String.format("|%-1d.%30s|", 4, " Course Type "));
-                System.out.println(String.format(" %-30s|", "Lecture + Tutorial + Lab ")); }
+        System.out.println(String.format(" %-30s|", reg.retCoordinator()));
+        if (Course.readInFile(reg.retCourseID()).getType() == Course.COURSETYPE.Lec) {
+            System.out.print(String.format("|%-1d.%30s|", 4, " Course Type "));
+            System.out.println(String.format(" %-30s|", "Only Lecture "));
+        } else if (Course.readInFile(reg.retCourseID()).getType() == Course.COURSETYPE.LecTut) {
+            System.out.print(String.format("|%-1d.%30s|", 4, " Tutorial Group "));
+            System.out.println(String.format(" %-30s|", reg.rettutGroup()));
+            System.out.print(String.format("|%-1d.%30s|", 5, " Course Type "));
+            System.out.println(String.format(" %-30s|", "Lecture + Tutorial"));
+        } else {
+            System.out.print(String.format("|%-1d.%30s|", 4, " Tutorial Group "));
+            System.out.println(String.format(" %-30s|", reg.rettutGroup()));
+            System.out.print(String.format("|%-1d.%30s|", 5, " Course Type "));
+            System.out.println(String.format(" %-30s|", "Lecture + Tutorial + Lab "));
+        }
+
+
     }
 
-    public static void printMarks(Student student, Course course)
-    {
-        if(Marks.existsMarks(student.getStudentID(),course.getCourseID()))
-        {
-            MarksUI.displayTranscriptData(Marks.readInFile(student.getStudentID(),course.getCourseID()));
-        }
-        else
+    public static void printMarks(Student student, Course course) {
+        if (Marks.existsMarks(student.getStudentID(), course.getCourseID())) {
+            MarksUI.displayTranscriptData(Marks.readInFile(student.getStudentID(), course.getCourseID()));
+        } else
             displayMarksError();
     }
 
-    public static void displayMarksError()
-    {
-     System.out.println(" No Marks entered as of yet.");
+    public static void displayMarksError() {
+        System.out.println(" No Marks entered as of yet.");
     }
 
-    public static void printParaBreak()
-    {
-        for(int i=0;i<22;i++)
+    public static void printParaBreak() {
+        for (int i = 0; i < 22; i++)
             System.out.print("-+-");
     }
 
-    public static void printParaEnd()
-    {System.out.println();
-        for(int i=0;i<22;i++)
+    public static void printParaEnd() {
+        System.out.println();
+        for (int i = 0; i < 22; i++)
             System.out.print("***");
     }
-    public static void studentIdNonexist(){
+
+    public static void studentIdNonexist() {
         System.out.println("\nStudent ID doesn't exist! Try again.");
     }
 }

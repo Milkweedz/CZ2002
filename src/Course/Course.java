@@ -232,7 +232,7 @@ public class Course {
 
         //markWeights.forEach((key, value) -> markObj.put(key, value));
         markObj.putAll(markWeights);
-        System.out.println(markObj.toJSONString());
+        //System.out.println(markObj.toJSONString());     //DEBUG
         obj.put("markweights", markObj);
         System.out.println(obj.toJSONString());
         file.replace(Integer.toString(courseID), obj);

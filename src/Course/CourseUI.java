@@ -92,12 +92,8 @@ public class CourseUI {
             System.out.print("\nEnter exam weight in percentage: ");
             examWeight = scan.nextInt(); //change this to float possibly
             System.out.printf("\nExam weight: %d, Coursework weight: %d", examWeight, 100-examWeight) ;
-            System.out.print("\nEnter coursework weight in percentage: ");
-//            if (scan.nextInt() != 100 - examWeight)
-            if (scan.nextInt() != 100)      //coursework out of 100
-                System.out.println("Coursework weight doesn't add up to 100! Try again.");
-            else break;
-        }
+            break;
+        } //relic of old code: while loop allows a different implementation where coursework weight is not out of 100
 
         //input coursework component grades
         while(true) {
@@ -110,7 +106,8 @@ public class CourseUI {
             courseworkWeights = new int[numComponents];
             for (int i = 0; i < numComponents; i++) {
                 System.out.printf("\nEnter name of component %d: ", i+1);
-                courseworks[i] = scan.next();
+                scan.nextLine();
+                courseworks[i] = scan.nextLine();
                 System.out.printf("\nEnter weight of %s: ", courseworks[i]);
                 courseworkWeights[i] = scan.nextInt();
                 totalWeight+=courseworkWeights[i];
@@ -120,7 +117,7 @@ public class CourseUI {
                 System.out.println("Coursework component weights don't add up to total weight! Try again.");
             else break;
         }
-
+        System.out.println("Inserted mark weight settings: ");
         markWeights.put("exam", Integer.toString(examWeight));
         //store to hashmap object
         for (int i=0; i<numComponents; i++){

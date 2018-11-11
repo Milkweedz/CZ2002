@@ -23,9 +23,10 @@ public class RegistrationUI {
         Scanner scan = new Scanner(System.in);
         ArrayList<String> tutGroups = Course.readInFile(crsID).getTutorialGroups();
         String tutorial = "";
-        System.out.println("Choose A tutorial Group: \n");
+        System.out.print("Choose A tutorial Group ");
         for (int i = 0; i < tutGroups.size(); i++)
-            System.out.print(tutGroups.get(i) + "|");
+            System.out.print(tutGroups.get(i) + " | ");
+        System.out.println();
         do {
             tutorial = scan.next();
         } while (!tutGroups.contains(tutorial));
@@ -58,7 +59,7 @@ public class RegistrationUI {
     }
     public static void successAdd()
     {
-        System.out.println("Marks Successfully Added !");
+        System.out.println("Registration Successfull !");
     }
     public static void successEdit()
     {
@@ -66,7 +67,7 @@ public class RegistrationUI {
     }
     public static void successRemove()
     {
-        System.out.println("Marks Successfully Removed !");
+        System.out.println("Registration Successfully Removed !");
     }
 
 }

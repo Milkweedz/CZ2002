@@ -2,21 +2,21 @@ package Login;
 
 import Course.*;
 import Mark.MarksCtrl;
+import Statistics.StatisticsCtrl;
 import Student.*;
-import Registration.RegistrationCtrl;
+import Registration.*;
 
 import java.util.List;
 import java.util.Scanner;
-import java.lang.Exception;
 
 public class LoginVerify {
     private static final String USERNAME = "root";
     private static final String PASSWORD = "toor";
 
-    public static void main(String args[]) {
+    public static void main(String args[]){
         Scanner scan = new Scanner(System.in);
 
-        while (true) {
+        while(true) {
             System.out.print("Enter admin password: ");
             if (scan.next().equalsIgnoreCase(PASSWORD)) break;
             else System.out.println("Wrong password. Try again.");
@@ -26,10 +26,10 @@ public class LoginVerify {
 
         do {
             System.out.print("\nWhat area to access? ");
-            System.out.print("\n1: Courses, \n2: Students, \n3: Registration, \n4: Marks \n5: Print Transcripts\n0: Quit\nChoice:");
+            System.out.print("\n1: Courses, \n2: Students, \n3: Registration, \n4: Marks \n5: Print Transcripts\n6: Course Statistics\n0: Quit\nChoice:");
             choice = scan.nextInt();
 
-            switch (choice) {
+            switch(choice){
                 case 1:
                     CourseCtrl courseCtrl = new CourseCtrl();
                     System.out.println("Initiating course controller...");
@@ -53,32 +53,36 @@ public class LoginVerify {
                 case 5:
                     printTranscripts(LoginUI.readStudentID(new Scanner(System.in)));
                     break;
+                case 6:
+                    StatisticsCtrl.init();
+                    break;
             }
 
-        } while (choice != 0);
+        } while(choice != 0);
     }
 
     public static void printTranscripts(int studentID) {
         if (Student.existsStudent(studentID)) {
             Student student = Student.readInFile(studentID);
-            try {
-                List<Integer> courses = RegistrationCtrl.studentCourses(studentID);
-                LoginUI.printStudentDetails(student);
-                for (int i = 0; i < courses.size(); i++) {
-                    LoginUI.printCourse(Course.readInFile(courses.get(i)));
-                    System.out.print(String.format("\n%12s|%20s~ %-19s|", " ", "Exam Component ", "Marks"));
-                    LoginUI.printMarks(student, Course.readInFile(courses.get(i)));
-                    System.out.print(String.format("\n%12s|%20s: %-19.2f|", " ", "Total Percentage ", MarksCtrl.retTotalPercentage(studentID, courses.get(i))));
-
+            List<Integer> courses = RegistrationCtrl.studentCourses(studentID);
+            //courses.forEach((course) -> System.out.println("DEBUG" + course));
+            //System.out.println(courses.size());
+            LoginUI.printStudentDetails(student);
+            for (Integer course : courses) {
+                double totalPercentage = MarksCtrl.retTotalPercentage(studentID, course);
+                if (totalPercentage == -1){
+                    System.out.printf("No marks for student %d in course %d\n", studentID, course);
                 }
-                LoginUI.printParaEnd();
-            } catch (ArithmeticException ex) {
-                System.out.print(ex.getMessage());
-                ex.printStackTrace();
-                System.exit(0);
+                else {
+                    LoginUI.printCourse(Registration.);
+                    System.out.print(String.format("\n%12s|%20s~ %-19s|", " ", "Exam Component ", "Marks"));
+                    LoginUI.printMarks(student, Course.readInFile(course));
+                    System.out.print(String.format("\n%12s|%20s: %-19.2f|", " ", "Total Percentage ", totalPercentage));
+                }
+
             }
+            LoginUI.printParaEnd();
         } else
-            LoginUI.studentIdNonexist();
-//	}
+            StudentUI.studentIdNonexist();
     }
 }

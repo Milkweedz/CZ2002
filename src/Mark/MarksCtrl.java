@@ -42,6 +42,7 @@ public class MarksCtrl {
 		} else {
 			Marks marks = Marks.readInFile(studentID,courseID);
 
+
 			MarksUI.displayMarksData(marks);
 		}
 
@@ -49,23 +50,24 @@ public class MarksCtrl {
 
 
 	public void addMarks(){
-	        int studentID=MarksUI.readStudentID(new Scanner(System.in));
-	        int courseID=MarksUI.readCourseID(new Scanner(System.in));
-	        List<Integer> courses = RegistrationCtrl.studentCourses(studentID);
-	        if(!courses.contains(courseID)){
-				MarksUI.studentCourseIdNonexist();
-			}
-	        else if(Marks.existsMarks(studentID,courseID)){
-	        	MarksUI.studentCourseIdexist();
-			}
-			else {
-	            double[] data = MarksUI.readMarksData(new Scanner(System.in),Course.getMarkWeights(courseID));
-	            Marks marks = makeMarkObj(studentID,courseID,data);
+        MarksUI marksUI = new MarksUI();
+        int studentID=MarksUI.readStudentID(new Scanner(System.in));
+        int courseID=MarksUI.readCourseID(new Scanner(System.in));
+        List<Integer> courses = RegistrationCtrl.studentCourses(studentID);
+        if(!courses.contains(courseID)){
+            MarksUI.studentCourseIdNonexist();
+        }
+        else if(Marks.existsMarks(studentID,courseID)){
+            MarksUI.studentCourseIdexist();
+        }
+        else {
+            double[] data = MarksUI.readMarksData(new Scanner(System.in),Course.getMarkWeights(courseID));
+            Marks marks = makeMarkObj(studentID,courseID,data);
 
-	            Marks.saveToFile(marks);
-	            MarksUI.successAdd();
-	        }
-	    }
+            Marks.saveToFile(marks);
+            marksUI.successAdd();
+        }
+    }
 
 	public void editMarks() {
 		MarksUI markUI = new MarksUI();
@@ -87,7 +89,7 @@ public class MarksCtrl {
 		int courseID = MarksUI.readCourseID(new Scanner(System.in));
 		if (Marks.existsMarks(studentID,courseID)) {
 			Marks.deleteInFile(studentID,courseID);
-			MarksUI.successRemove();
+			marksUI.successRemove();
 		} else
 			marksUI.studentCourseIdNonexist();
 	}
@@ -102,15 +104,28 @@ public class MarksCtrl {
 		return marks;
 	}
 
-	public static double retTotalPercentage(int studentID, int courseID)
-	{
-		Marks marks = Marks.readInFile(studentID,courseID);
-		double sumMarks = 0.0;
-		HashMap<String, String> markWeights = Course.getMarkWeights(marks.retCourseID());
-		int i=0;
-		for (Map.Entry<String, String> entry : markWeights.entrySet())         //somewhat of a poor implementation here
-			sumMarks+=Integer.parseInt(entry.getValue())*marks.retStudentCourseWorkMarks(i++)/100.0;
-		return sumMarks;
-	}
+    public static double retTotalPercentage(int studentID, int courseID) {
+        //System.out.println(courseID + "DEBUG");
+        Marks marks = Marks.readInFile(studentID, courseID);
+        if (marks == null) {
+            return -1;
+        }
+        double sumMarks = 0.0;
+        double newMark;
+        HashMap<String, String> markWeights = Course.getMarkWeights(marks.retCourseID());
+
+        int i = 0;
+        for (Map.Entry<String, String> entry : markWeights.entrySet()) {         //somewhat of a poor implementation here
+            newMark = Integer.parseInt(entry.getValue()) * marks.retStudentCourseWorkMarks(i++) / 100.0;            //coursework component scores
+            //System.out.println("DEBUG" + newMark);
+            if (i==1){
+                sumMarks += newMark;
+                //System.out.println("DEBUG EXAM");
+            } else {
+                sumMarks += newMark * (100 - Integer.parseInt(markWeights.get("exam"))) / 100;
+            }
+        }
+        return sumMarks;
+    }
 
 }

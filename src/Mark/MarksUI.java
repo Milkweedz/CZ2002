@@ -53,10 +53,14 @@ public class MarksUI {
 	public static void displayMarksData(Marks marks) {
 		System.out.println("Student ID :" + marks.retStudentID());
 		System.out.println("Course ID :" + marks.retCourseID());
-		HashMap<String, String> markWeights = Course.getMarkWeights(marks.retCourseID());
-		int i=0;
-		for (Map.Entry<String, String> entry : markWeights.entrySet())         //somewhat of a poor implementation here
-			System.out.println(entry.getKey()+" : "+marks.retStudentCourseWorkMarks(i++));
+		if (marks == null){
+			System.out.println("No marks for this student in this course!");
+		} else {
+			HashMap<String, String> markWeights = Course.getMarkWeights(marks.retCourseID());
+			int i = 0;
+			for (Map.Entry<String, String> entry : markWeights.entrySet())         //somewhat of a poor implementation here
+				System.out.println(entry.getKey() + " : " + marks.retStudentCourseWorkMarks(i++));
+		}
 
 	}
 	public static void displayTranscriptData(Marks marks) {
@@ -66,15 +70,15 @@ public class MarksUI {
 			System.out.print(String.format("\n%12s|%19s : %-19s|"," ",entry.getKey(),marks.retStudentCourseWorkMarks(i++)));
 
 	}
-	public static void successAdd()
+	public void successAdd()
 	{
 		System.out.println("Marks Successfully Added !");
 	}
-    public static void successEdit()
+    public void successEdit()
     {
         System.out.println("Marks Successfully Edited !");
     }
-    public static void successRemove()
+    public void successRemove()
     {
         System.out.println("Marks Successfully Removed !");
     }
