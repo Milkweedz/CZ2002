@@ -56,24 +56,29 @@ public class LoginVerify {
 
         } while(choice != 0);
     }
-    public static void printTranscripts(int studentID)
-    {
-        if(Student.existsStudent(studentID))
-        {Student student = Student.readInFile(studentID);
-        List<Integer> courses = RegistrationCtrl.studentCourses(studentID);
-        LoginUI.printStudentDetails(student);
-        for(int i=0;i<courses.size();i++)
-        {
-            LoginUI.printCourse(Course.readInFile(courses.get(i)));
-            System.out.print(String.format("\n%12s|%20s~ %-19s|"," ","Exam Component ","Marks"));
-            LoginUI.printMarks(student,Course.readInFile(courses.get(i)));
-            System.out.print(String.format("\n%12s|%20s: %-19.2f|"," ","Total Percentage ",MarksCtrl.retTotalPercentage(studentID,courses.get(i))));
 
-        }
-        LoginUI.printParaEnd();
-        }
-		else
+    public static void printTranscripts(int studentID) {
+        if (Student.existsStudent(studentID)) {
+            Student student = Student.readInFile(studentID);
+            List<Integer> courses = RegistrationCtrl.studentCourses(studentID);
+            //courses.forEach((course) -> System.out.println("DEBUG" + course));
+            //System.out.println(courses.size());
+            LoginUI.printStudentDetails(student);
+            for (Integer course : courses) {
+                double totalPercentage = MarksCtrl.retTotalPercentage(studentID, course);
+                if (totalPercentage == -1){
+                    System.out.printf("No marks for student %d in course %d\n", studentID, course);
+                }
+                else {
+                    LoginUI.printCourse(Course.readInFile(course));
+                    System.out.print(String.format("\n%12s|%20s~ %-19s|", " ", "Exam Component ", "Marks"));
+                    LoginUI.printMarks(student, Course.readInFile(course));
+                    System.out.print(String.format("\n%12s|%20s: %-19.2f|", " ", "Total Percentage ", totalPercentage));
+                }
+
+            }
+            LoginUI.printParaEnd();
+        } else
             StudentUI.studentIdNonexist();
-//	}
     }
 }

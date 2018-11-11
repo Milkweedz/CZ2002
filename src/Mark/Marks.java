@@ -135,8 +135,15 @@ public class Marks {
 	public static Marks readInFile(int studentID,int courseID) {
 		String markFile = "src\\Mark\\marks.json";
 		JSONObject file = readJSON(markFile);
-		JSONObject obj = (JSONObject) file.get(Integer.toString(studentID)+"."+Integer.toString(courseID));
-		int n = Integer.parseInt((String) obj.get("numofcomp"));
+		String getTarget = Integer.toString(studentID)+"."+Integer.toString(courseID);
+        //System.out.println(getTarget);
+		JSONObject obj = (JSONObject) file.get(getTarget);
+        if(obj == null){
+            return null;
+        }
+		Object numComponents = obj.get("numofcomp");
+		if (numComponents == null){return null;}
+		int n = Integer.parseInt((String) numComponents);
 		Marks marks = new Marks(n);
 		double courseMarks[] = new double[n];
 		marks.setStudentID(studentID);

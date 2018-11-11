@@ -42,6 +42,7 @@ public class MarksCtrl {
 		} else {
 			Marks marks = Marks.readInFile(studentID,courseID);
 
+
 			MarksUI.displayMarksData(marks);
 		}
 
@@ -104,7 +105,11 @@ public class MarksCtrl {
 
 	public static double retTotalPercentage(int studentID, int courseID)
 	{
-		Marks marks = Marks.readInFile(studentID,courseID);
+        //System.out.println(courseID + "DEBUG");
+	    Marks marks = Marks.readInFile(studentID,courseID);
+	    if (marks == null){
+	        return -1;
+        }
 		double sumMarks = 0.0;
 		HashMap<String, String> markWeights = Course.getMarkWeights(marks.retCourseID());
 		int i=0;
