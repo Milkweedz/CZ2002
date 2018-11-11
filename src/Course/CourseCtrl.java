@@ -39,6 +39,7 @@ public class CourseCtrl {
                     break;
                 case 7:
                     checkVacancy();
+                    break;
 
             }
         } while (choice!=8);    //look at courseUI, 8 happens to be the option to quit
