@@ -1,5 +1,8 @@
 package Course;
 
+import Student.Student;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -32,6 +35,12 @@ public class CourseCtrl {
                     break;
             }
         } while (choice!=6);    //look at courseUI, 5 happens to be the option to quit
+    }
+
+    public void listStudents(){
+        ArrayList<String> courseList = Course.listCourses();
+        CourseUI courseUI = new CourseUI();
+        courseUI.listCourses(courseList);
     }
 
     public void viewCourse(){

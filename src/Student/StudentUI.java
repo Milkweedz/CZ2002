@@ -1,12 +1,13 @@
 package Student;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class StudentUI {
     public int studentCtrlChoice(){
         Scanner scan = new Scanner (System.in);
         System.out.println("\nWhat would you like to do?");
-        System.out.println("0: View Student Details, 1: Create Student, 2: Edit Student, 3: Delete Student, 4: Quit");
+        System.out.println("0: View Student Details, 1: Create Student, 2: Edit Student, 3: Delete Student, 4: List Students, 5: Quit");
         System.out.print("Enter Your Choice: ");
         return scan.nextInt();
     }
@@ -32,6 +33,12 @@ public class StudentUI {
             System.out.println(data[i]);
         }
         System.out.println("\n");
+    }
+
+    public void listStudents(ArrayList<String> studentList){
+        System.out.print("\nStudent IDs: ");
+        studentList.forEach((student) -> System.out.print(student + ", "));
+        System.out.print("\n");
     }
 
 

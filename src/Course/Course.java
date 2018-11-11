@@ -1,6 +1,7 @@
 package Course;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -45,7 +46,6 @@ public class Course {
                     return true;
                 }
                 nextID = br.readLine();
-                System.out.println(nextID + "DEBUG");
             }
             return false;
         } catch (IOException ex){
@@ -58,6 +58,29 @@ public class Course {
             }
         }
         return false;
+    }
+
+    public static ArrayList<String> listCourses(){
+        BufferedReader br = null;
+        ArrayList<String> courseList = new ArrayList<String>();
+        try {
+            br = new BufferedReader(new FileReader("src\\Course\\courselist.txt"));
+            String nextID = br.readLine();
+            while (nextID != null){
+                courseList.add(nextID);
+                nextID = br.readLine();
+            }
+            return courseList;
+        } catch (IOException ex){
+            System.out.println("IOException! courselist.txt not found?");
+            ex.printStackTrace();
+        } finally {
+            if (br != null) {
+                try { br.close(); }
+                catch (IOException ex) {ex.printStackTrace();}
+            }
+        }
+        return null;
     }
 
     public static void saveToFile(Course course){

@@ -5,6 +5,8 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Student {
     private int studentID;
@@ -40,7 +42,6 @@ public class Student {
                     return true;
                 }
                 nextID = br.readLine();
-                System.out.println(nextID + "DEBUG");
             }
             return false;
         } catch (IOException ex){
@@ -53,6 +54,29 @@ public class Student {
             }
         }
         return false;
+    }
+
+    public static ArrayList<String> listStudents(){
+        BufferedReader br = null;
+        ArrayList<String> studentList = new ArrayList<String>();
+        try {
+            br = new BufferedReader(new FileReader("src\\Student\\studentlist.txt"));
+            String nextID = br.readLine();
+            while (nextID != null){
+                studentList.add(nextID);
+                nextID = br.readLine();
+            }
+            return studentList;
+        } catch (IOException ex){
+            System.out.println("IOException! studentlist.txt not found?");
+            ex.printStackTrace();
+        } finally {
+            if (br != null) {
+                try { br.close(); }
+                catch (IOException ex) {ex.printStackTrace();}
+            }
+        }
+        return null;
     }
 
     public static void saveToFile(Student student){

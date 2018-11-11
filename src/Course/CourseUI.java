@@ -1,5 +1,6 @@
 package Course;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -45,6 +46,13 @@ public class CourseUI {
 
         return data;
     }
+
+    public void listCourses(ArrayList<String> courseList){
+        System.out.print("\nStudent IDs: ");
+        courseList.forEach((student) -> System.out.print(student + ", "));
+        System.out.print("\n");
+    }
+
 
     public void displayCourseData(String[] data){
         for(int i=0; i<data.length; i++){

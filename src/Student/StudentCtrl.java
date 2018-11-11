@@ -1,5 +1,6 @@
 package Student;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -28,8 +29,16 @@ public class StudentCtrl {
                 case 3:
                     deleteStudent();
                     break;
+                case 4:
+                    listStudents();
             }
-        } while (choice!=4);    //look at studentUI, 5 happens to be the option to quit
+        } while (choice!=5);    //look at studentUI, 5 happens to be the option to quit
+    }
+
+    public void listStudents(){
+        ArrayList<String> studentList = Student.listStudents();
+        StudentUI studentUI = new StudentUI();
+        studentUI.listStudents(studentList);
     }
 
     public void viewStudent(){

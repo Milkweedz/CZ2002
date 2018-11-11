@@ -46,7 +46,6 @@ public class Marks {
 					return true;
 				}
 				nextID = br.readLine();
-				//System.out.println(nextID + "DEBUG");
 			}
 			return false;
 		} catch (IOException ex) {
