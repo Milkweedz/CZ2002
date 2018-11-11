@@ -9,7 +9,7 @@ public class CourseUI {
     public int courseCtrlChoice(){
         Scanner scan = new Scanner (System.in);
         System.out.println("\nWhat would you like to do?");
-        System.out.println("0: View Course Details, 1: Create Course, 2: Edit Course, 3: Delete Course, 4: View Mark Weights, 5: Change Mark Weights, 6: List Courses, 7: Quit");
+        System.out.println("0: View Course Details, 1: Create Course, 2: Edit Course, 3: Delete Course, 4: View Mark Weights, 5: Change Mark Weights, 6: List Courses, 7: Check Vacancy, 8: Quit");
 
         return scan.nextInt();
     }
@@ -59,6 +59,10 @@ public class CourseUI {
             System.out.println(data[i]);
         }
         System.out.println("\n");
+    }
+
+    public void displayVacancies(int vacancies){
+        System.out.println("Vacancies: " + vacancies);
     }
 
     public HashMap<String, String> inputMarkWeights(){

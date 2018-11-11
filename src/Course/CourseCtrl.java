@@ -1,5 +1,6 @@
 package Course;
 
+import Registration.RegistrationCtrl;
 import Student.Student;
 
 import java.util.ArrayList;
@@ -36,8 +37,12 @@ public class CourseCtrl {
                 case 6:
                     listCourses();
                     break;
+                case 7:
+                    checkVacancy();
+                    break;
+
             }
-        } while (choice!=7);    //look at courseUI, 7 happens to be the option to quit
+        } while (choice!=8);    //look at courseUI, 8 happens to be the option to quit
     }
 
     public void listCourses(){
@@ -66,6 +71,16 @@ public class CourseCtrl {
 
             courseUI.displayCourseData(data);
         }
+    }
+
+    public void checkVacancy(){
+        CourseUI courseUI = new CourseUI();
+        int courseID = courseUI.readCourseID();
+        Course course = Course.readInFile(courseID);
+        int capacity = course.getCapacity();
+        int registered = RegistrationCtrl.studentsInCourses(courseID).size();
+        int vacancies = capacity - registered;
+        courseUI.displayVacancies(vacancies);
     }
 
     public void createCourse(){
