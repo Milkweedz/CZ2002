@@ -38,25 +38,25 @@ public class LoginUI {
         System.out.println(String.format(" %-30s|", student.getYearOfStudy()));
     }
 
-    public static void printCourse(Registration reg) {
+    public static void printCourse(Course reg) {
         printParaBreak();
         System.out.print(String.format("\n|%-1d.%30s|", 1, " Course ID "));
-        System.out.println(String.format(" %-30d|", reg.retCourseID()));
+        System.out.println(String.format(" %-30d|", reg.getCourseID()));
         System.out.print(String.format("|%-1d.%30s|", 2, " Course's Name "));
-        System.out.println(String.format(" %-30s|", reg.retCourseName()));
+        System.out.println(String.format(" %-30s|", reg.getCourseName()));
         System.out.print(String.format("|%-1d.%30s|", 3, " Coordinator "));
-        System.out.println(String.format(" %-30s|", reg.retCoordinator()));
-        if (Course.readInFile(reg.retCourseID()).getType() == Course.COURSETYPE.Lec) {
+        System.out.println(String.format(" %-30s|", reg.getCoordinator()));
+        if (Course.readInFile(reg.getCourseID()).getType() == Course.COURSETYPE.Lec) {
             System.out.print(String.format("|%-1d.%30s|", 4, " Course Type "));
             System.out.println(String.format(" %-30s|", "Only Lecture "));
-        } else if (Course.readInFile(reg.retCourseID()).getType() == Course.COURSETYPE.LecTut) {
-            System.out.print(String.format("|%-1d.%30s|", 4, " Tutorial Group "));
-            System.out.println(String.format(" %-30s|", reg.rettutGroup()));
+        } else if (Course.readInFile(reg.getCourseID()).getType() == Course.COURSETYPE.LecTut) {
+            //System.out.print(String.format("|%-1d.%30s|", 4, " Tutorial Group "));
+            //System.out.println(String.format(" %-30s|", reg.getTutorialGroups()));
             System.out.print(String.format("|%-1d.%30s|", 5, " Course Type "));
             System.out.println(String.format(" %-30s|", "Lecture + Tutorial"));
         } else {
-            System.out.print(String.format("|%-1d.%30s|", 4, " Tutorial Group "));
-            System.out.println(String.format(" %-30s|", reg.rettutGroup()));
+            //System.out.print(String.format("|%-1d.%30s|", 4, " Tutorial Group "));
+            //System.out.println(String.format(" %-30s|", reg.getTutorialGroups()));
             System.out.print(String.format("|%-1d.%30s|", 5, " Course Type "));
             System.out.println(String.format(" %-30s|", "Lecture + Tutorial + Lab "));
         }

@@ -192,11 +192,16 @@ public class Course {
         course.setCoordinator((String) obj.get("coordinator"));
         course.setType(translateType((String) obj.get("type")));
         course.setCapacity(Integer.parseInt((String) obj.get("capacity")));
-        int noOfTut=Integer.parseInt((String)obj.get("nooftut"));
-        ArrayList<String> tutorialNames = new ArrayList<>();
-        for(int i=0;i<noOfTut;i++)
-            tutorialNames.add((String)obj.get("tut"+Integer.toString(i)));
-        course.addTutorialGroups(tutorialNames);
+
+        Object numTut = obj.get("nooftut");
+        if (numTut != null) {
+            int noOfTut = Integer.parseInt((String) numTut);
+            ArrayList<String> tutorialNames = new ArrayList<>();
+            for (int i = 0; i < noOfTut; i++)
+                tutorialNames.add((String) obj.get("tut" + Integer.toString(i)));
+            course.addTutorialGroups(tutorialNames);
+        }
+
         return course;
     }
 

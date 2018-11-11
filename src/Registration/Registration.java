@@ -6,6 +6,7 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import java.io.*;
+import java.util.ArrayList;
 
 public class Registration {
     private String FirstName;
@@ -25,6 +26,7 @@ public class Registration {
         StudentID = 0;
         courseID = 0;
     }
+
 
     public static void saveToFile(Registration reg) {
         String regFile = "src\\Registration\\Registration.json";
@@ -129,6 +131,28 @@ public class Registration {
         else
             return true;
     }
+
+    public static String getStudentGroup(int studentID, int courseID){
+        String tutGroup;
+
+        String courseFile = "src\\Registration\\Registration.json";
+        JSONObject file = readJSON(courseFile);
+        JSONObject obj = (JSONObject) file.get(Integer.toString(studentID) + "." + Integer.toString(courseID));
+
+        if (obj==null){
+            return null;
+        }
+
+        tutGroup = (String) obj.get("tutorialGroup");
+        if (tutGroup == null){
+            return null;
+        } else {
+            return tutGroup;
+        }
+    }
+
+
+
 
     public void getFirstName(String fname) {
         FirstName = fname;

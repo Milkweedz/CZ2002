@@ -10,7 +10,7 @@ public class RegistrationUI {
     public static int registrationCtrlChoice(){
         Scanner scan = new Scanner (System.in);
         System.out.println("\nWhat would you like to do?");
-        System.out.println("1: Register a student for a course\n2: Remove a student from a course\n3: List of courses registered by a student\n4: List of students registered for a course \n5: Quit");
+        System.out.println("1: Register a student for a course\n2: Remove a student from a course\n3: List of courses registered by a student\n4: List of students registered for a course\n5: List of students registered for a tutorial group\n6: Quit");
         System.out.print("Enter Your Choice: ");
         return scan.nextInt();
     }

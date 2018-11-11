@@ -82,4 +82,7 @@ public class MarksUI {
     {
         System.out.println("Marks Successfully Removed !");
     }
+    public void noComponentsError() {
+		System.out.println("No components assigned to course!");
+	}
 }

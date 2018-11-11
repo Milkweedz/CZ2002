@@ -61,11 +61,15 @@ public class MarksCtrl {
             MarksUI.studentCourseIdexist();
         }
         else {
-            double[] data = MarksUI.readMarksData(new Scanner(System.in),Course.getMarkWeights(courseID));
-            Marks marks = makeMarkObj(studentID,courseID,data);
+            if (Course.getMarkWeights(courseID) == null){
+                marksUI.noComponentsError();
+            } else {
+                double[] data = MarksUI.readMarksData(new Scanner(System.in), Course.getMarkWeights(courseID));
+                Marks marks = makeMarkObj(studentID, courseID, data);
 
-            Marks.saveToFile(marks);
-            marksUI.successAdd();
+                Marks.saveToFile(marks);
+                marksUI.successAdd();
+            }
         }
     }
 

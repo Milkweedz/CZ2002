@@ -5,7 +5,13 @@ import Mark.MarksCtrl;
 import Statistics.StatisticsCtrl;
 import Student.*;
 import Registration.*;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -71,11 +77,17 @@ public class LoginVerify {
             for (Integer course : courses) {
                 double totalPercentage = MarksCtrl.retTotalPercentage(studentID, course);
                 if (totalPercentage == -1){
-                    System.out.printf("No marks for student %d in course %d\n", studentID, course);
+                    System.out.printf("\n\nNo marks for student %d in course %d\n\n", studentID, course);
                 }
                 else {
-                    LoginUI.printCourse(Registration.);
+                    LoginUI.printCourse(Course.readInFile(course));
+
+                    String tutGroup = Registration.getStudentGroup(studentID, course);
+                    if (tutGroup != null)
+                        System.out.println("Tutorial Group: " + tutGroup);
+
                     System.out.print(String.format("\n%12s|%20s~ %-19s|", " ", "Exam Component ", "Marks"));
+
                     LoginUI.printMarks(student, Course.readInFile(course));
                     System.out.print(String.format("\n%12s|%20s: %-19.2f|", " ", "Total Percentage ", totalPercentage));
                 }
@@ -84,5 +96,38 @@ public class LoginVerify {
             LoginUI.printParaEnd();
         } else
             StudentUI.studentIdNonexist();
+    }
+
+
+
+
+
+
+
+    // either returns JSON file object or null.
+    private static JSONObject readJSON(String fileName) {
+        try {
+            JSONParser parser = new JSONParser();
+            return (JSONObject) parser.parse(new FileReader(fileName));
+        } catch (IOException ex) {
+            System.out.println("IOException!");
+            ex.printStackTrace();
+        } catch (ParseException parsex) {
+            System.out.println("ParseException!");
+            parsex.printStackTrace();
+        }
+        return new JSONObject();
+    }
+
+    private static void writeJSON(JSONObject file, String fileName) {
+
+        try {
+            FileWriter writer = new FileWriter(fileName, false);
+            file.writeJSONString(writer);
+            writer.close();
+        } catch (IOException ex) {
+            System.out.println("IOException!");
+            ex.printStackTrace();
+        }
     }
 }

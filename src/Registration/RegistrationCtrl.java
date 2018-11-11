@@ -41,8 +41,11 @@ public class RegistrationCtrl {
                     List<Integer> students = studentsInCourses(RegistrationUI.readCourseID(new Scanner(System.in)));
                     RegistrationUI.printStudents(students);
                     break;
+                case 5:
+                    studentsInTut();
+                    break;
             }
-        } while (choice < 5);    //look at studentUI, 5 happens to be the option to quit
+        } while (choice < 6);    //look at studentUI, 5 happens to be the option to quit
     }
 
     public static void registerStudentForCourse() {
@@ -67,8 +70,8 @@ public class RegistrationCtrl {
                     reg.getCoordinator(course.getCoordinator());
                     reg.getCourseID(CourseID);
                     reg.getStudentID(StudentID);
-                    if(Course.readInFile(CourseID).getType()!= Course.COURSETYPE.Lec)
-                    reg.gettutgrp(RegistrationUI.readTutGroup(CourseID));
+                    if (Course.readInFile(CourseID).getType() != Course.COURSETYPE.Lec)
+                        reg.gettutgrp(RegistrationUI.readTutGroup(CourseID));
                     Registration.saveToFile(reg);
                     RegistrationUI.successAdd();
                 }
@@ -78,39 +81,38 @@ public class RegistrationCtrl {
     }
 
 
-public static List<Integer> studentCourses(int StudentID)
-{
-	List<Integer> courses = new ArrayList<Integer>();
-	File readFile = null;
-	BufferedReader br = null;
-	try {
-		readFile = new File("src\\Registration\\reglist.txt");
-		br = new BufferedReader(new FileReader(readFile));
-        String line = br.readLine();
-		if (line == null || line.equals("")){
-			return courses;  //return empty list if reglist is empty
-		}
-		for (; line != null; line = br.readLine()) {
-			String array1[]= line.split("\\.");
-			if(Integer.parseInt(array1[0])==StudentID)
-				courses.add(Integer.parseInt(array1[1]));
-		}
-		return courses;
-		// System.out.println("Delete error. CourseID not found.");
-	} catch (IOException ex) {
-		System.out.println("IOException! reglist.txt not found?");
-		ex.printStackTrace();
-	} finally {
-		try {
-			if (readFile != null && br != null ) {
-				br.close();
-			}
-		} catch (IOException ex) {
-			ex.printStackTrace();
-		}
-	}
-	return courses;
-}
+    public static List<Integer> studentCourses(int StudentID) {
+        List<Integer> courses = new ArrayList<Integer>();
+        File readFile = null;
+        BufferedReader br = null;
+        try {
+            readFile = new File("src\\Registration\\reglist.txt");
+            br = new BufferedReader(new FileReader(readFile));
+            String line = br.readLine();
+            if (line == null || line.equals("")) {
+                return courses;  //return empty list if reglist is empty
+            }
+            for (; line != null; line = br.readLine()) {
+                String array1[] = line.split("\\.");
+                if (Integer.parseInt(array1[0]) == StudentID)
+                    courses.add(Integer.parseInt(array1[1]));
+            }
+            return courses;
+            // System.out.println("Delete error. CourseID not found.");
+        } catch (IOException ex) {
+            System.out.println("IOException! reglist.txt not found?");
+            ex.printStackTrace();
+        } finally {
+            try {
+                if (readFile != null && br != null) {
+                    br.close();
+                }
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
+        return courses;
+    }
 
     public static List<Integer> studentsInCourses(int courseID) {
         List<Integer> students = new ArrayList<Integer>();
@@ -120,9 +122,9 @@ public static List<Integer> studentCourses(int StudentID)
             readFile = new File("src\\Registration\\reglist.txt");
             br = new BufferedReader(new FileReader(readFile));
             String line = br.readLine();
-            if (line == null || line.equals("")){
-            	return students;  //return empty list if reglist is empty
-			}
+            if (line == null || line.equals("")) {
+                return students;  //return empty list if reglist is empty
+            }
             for (; line != null; line = br.readLine()) {
                 String array1[] = line.split("\\.");
                 if (Integer.parseInt(array1[1]) == courseID)
@@ -144,5 +146,49 @@ public static List<Integer> studentCourses(int StudentID)
         }
         return students;
     }
+
+    public void studentsInTut(){
+        RegistrationUI registrationUI = new RegistrationUI();
+        int courseID = registrationUI.readCourseID(new Scanner(System.in));
+        String queryGroup = registrationUI.readTutGroup(courseID);
+        String tutGroup;
+        int studentID;
+
+        List<Integer> students = new ArrayList<Integer>();
+        File readFile = null;
+        BufferedReader br = null;
+        try {
+            readFile = new File("src\\Registration\\reglist.txt");
+            br = new BufferedReader(new FileReader(readFile));
+            String line = br.readLine();
+            if (line != null && !line.equals("")) {
+                for (; line != null; line = br.readLine()) {
+                    String array1[] = line.split("\\.");
+                    if (Integer.parseInt(array1[1]) == courseID){
+                        tutGroup = Registration.getStudentGroup(Integer.parseInt(array1[0]), courseID);
+                        //System.out.println("DEBUG" + tutGroup);
+                        if (queryGroup.equals(tutGroup)) {
+                            students.add(Integer.parseInt(array1[0]));
+                        }
+                    }
+                }
+            }
+            registrationUI.printStudents(students);
+            // System.out.println("Delete error. CourseID not found.");
+        } catch (IOException ex) {
+            System.out.println("IOException! reglist.txt not found?");
+            ex.printStackTrace();
+        } finally {
+            try {
+                if (readFile != null && br != null) {
+                    br.close();
+                }
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
+
+
 
 }
