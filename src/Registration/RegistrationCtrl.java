@@ -6,7 +6,6 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.time.Clock;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -61,7 +60,6 @@ public class RegistrationCtrl {
 					String courseName, coordinator;
 					courseName = course.getCourseName();
 					coordinator = course.getCoordinator();
-					System.out.printf("HI");
 					saveToFile(StudentID, FName, LName, CourseID, courseName, coordinator);
 					RegistrationUI.successAdd();
 				}
@@ -76,7 +74,6 @@ public class RegistrationCtrl {
 		String regFile = "src\\Registration\\Registration.json";
 		JSONObject file = readJSON(regFile);
 		// JSONArray array = (JSONArray) file.get("data");
-        System.out.printf("Hi");
 		JSONObject obj = new JSONObject();
 		obj.put("firstname", FName);
 		obj.put("lastname", LName);
@@ -110,7 +107,6 @@ public class RegistrationCtrl {
 			System.out.println("ParseException!");
 			parsex.printStackTrace();
 		}
-		System.out.printf("Hi");
 		return new JSONObject();
 	}
 
@@ -188,6 +184,9 @@ public static List<Integer> studentCourses(int StudentID)
 		readFile = new File("src\\Registration\\reglist.txt");
 		br = new BufferedReader(new FileReader(readFile));
         String line = br.readLine();
+		if (line == null || line.equals("")){
+			return courses;  //return empty list if reglist is empty
+		}
 		for (; line != null; line = br.readLine()) {
 			String array1[]= line.split("\\.");
 			if(Integer.parseInt(array1[0])==StudentID)
@@ -219,6 +218,9 @@ public static List<Integer> studentCourses(int StudentID)
             readFile = new File("src\\Registration\\reglist.txt");
             br = new BufferedReader(new FileReader(readFile));
             String line = br.readLine();
+            if (line == null || line.equals("")){
+            	return students;  //return empty list if reglist is empty
+			}
             for (; line != null; line = br.readLine()) {
                 String array1[]= line.split("\\.");
                 if(Integer.parseInt(array1[1])==courseID)

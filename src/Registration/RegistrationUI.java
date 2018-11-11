@@ -23,12 +23,24 @@ public class RegistrationUI {
 }
 
     public static void printStudents(List<Integer> students) {
-        for(int n=0;n<students.size();n++)
-            System.out.println((n+1)+" : "+students.get(n));
+        if (students.isEmpty()){
+            System.out.println("No students registered for course!");
+        } else {
+            System.out.println("\nStudents registered for course:");
+            for (int n = 0; n < students.size(); n++)
+                System.out.print(students.get(n) + ", ");
+            System.out.print("\n");
+        }
     }
     public static void printCourses(List<Integer> courses) {
-            for(int n=0;n<courses.size();n++)
-                System.out.println("Course "+(n+1)+" : "+courses.get(n));
+        if (courses.isEmpty()){
+            System.out.println("No courses registered by this student!");
+        } else {
+            System.out.println("\nCourses registered by student:");
+            for (int n = 0; n < courses.size(); n++)
+                System.out.print(courses.get(n) + ", ");
+            System.out.print("\n");
+        }
     }
     public static void successAdd()
     {
