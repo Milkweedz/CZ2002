@@ -61,6 +61,10 @@ public class CourseUI {
         System.out.println("\n");
     }
 
+    public void displayVacancies(int vacancies){
+        System.out.println("Vacancies: " + vacancies);
+    }
+
     public HashMap<String, String> inputMarkWeights(){
         HashMap<String, String> markWeights = new HashMap<String, String>();
         int examWeight;
