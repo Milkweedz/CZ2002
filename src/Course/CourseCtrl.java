@@ -90,8 +90,7 @@ public class CourseCtrl {
         if(Course.existsCourse(courseID)){
             String[] data = courseUI.readCourseData();
             Course course = makeCourseObj(courseID, data);
-            Course.deleteInFile(courseID);
-            Course.saveToFile(course);
+            Course.editFile(course);
         }
         else courseUI.courseIdNonexist(); //error message
     }

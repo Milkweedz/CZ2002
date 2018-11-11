@@ -151,6 +151,25 @@ public class Course {
         }
     }
 
+    public static void editFile(Course course){
+        String courseFile = "src\\Course\\courses.json";
+        JSONObject file = readJSON(courseFile);
+        file.remove(Integer.toString(course.courseID));
+        //JSONArray array = (JSONArray) file.get("data");
+
+        JSONObject obj = new JSONObject();
+        //obj.put("courseid", Integer.toString(course.getCourseID()));
+        obj.put("coursename", course.getCourseName());
+        obj.put("coordinator", course.getCoordinator());
+        obj.put("type", translateType(course.getType()));
+        obj.put("capacity", Integer.toString(course.getCapacity()));
+
+        file.put(Integer.toString(course.getCourseID()), obj);
+        //file.replace("data", array);
+
+        writeJSON(file, courseFile);
+    }
+
     public static Course readInFile(int courseID){
         String courseFile = "src\\Course\\courses.json";
         JSONObject file = readJSON(courseFile);

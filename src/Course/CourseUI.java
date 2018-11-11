@@ -27,10 +27,10 @@ public class CourseUI {
         String data[] = new String[4];
 
         System.out.print("\nEnter course name: ");
-        String courseName = scan.next();
+        String courseName = scan.nextLine();
 
         System.out.print("\nEnter course coordinator: ");
-        String coordinator = scan.next();
+        String coordinator = scan.nextLine();
 
         System.out.print("\nEnter course type (lec/tut/lab): ");
         //private enum COURSETYPE {Lec, LecTut, LecTutLab, NULL};
@@ -48,7 +48,7 @@ public class CourseUI {
     }
 
     public void listCourses(ArrayList<String> courseList){
-        System.out.print("\nStudent IDs: ");
+        System.out.print("\nCourse IDs: ");
         courseList.forEach((course) -> System.out.print(course + ", "));
         System.out.print("\n");
     }

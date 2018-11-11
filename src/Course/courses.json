@@ -1,1 +1,1 @@
-{"4":{"coordinator":"bat","coursename":"boo","type":"lab","markweights":{"exam":"60","rats":"20","bat":"20"},"capacity":"12"}}
+{"1":{"coordinator":"","coursename":"a long name","type":"lab","capacity":"20"},"2":{"coordinator":"Reagan","coursename":"Datbases","type":"","capacity":"13"},"4":{"coordinator":"bat","coursename":"boo","type":"lab","markweights":{"exam":"60","bat":"20","rats":"20"},"capacity":"12"}}

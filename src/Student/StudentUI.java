@@ -63,12 +63,12 @@ public class StudentUI {
 
     private static String readFName(Scanner scan) {
         System.out.println("Enter Student's First Name : ");
-        return scan.next();
+        return scan.nextLine();
     }
 
     private static String readLName(Scanner scan) {
         System.out.println("Enter Student's Last Name : ");
-        return scan.next();
+        return scan.nextLine();
     }
 
     private static int readYear(Scanner scan){
