@@ -59,7 +59,7 @@ public class MarksUI {
 			System.out.println(entry.getKey()+" : "+marks.retStudentCourseWorkMarks(i++));
 
 	}
-	public static void displayTranscriptMarksData(Marks marks) {
+	public static void displayTranscriptData(Marks marks) {
 		HashMap<String, String> markWeights = Course.getMarkWeights(marks.retCourseID());
 		int i=0;
 		for (Map.Entry<String, String> entry : markWeights.entrySet())         //somewhat of a poor implementation here

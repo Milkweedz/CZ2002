@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
 import Student.*;
 import Course.*;
 import org.json.simple.*;
@@ -17,18 +18,18 @@ import org.json.simple.parser.ParseException;
 
 
 public class RegistrationCtrl {
-	public void init(){
+    public void init() {
 
-		int choice;
+        int choice;
 
-		do {
-			choice = RegistrationUI.registrationCtrlChoice();
-			switch(choice){
-				case 1:
-					registerStudentForCourse();
-					break;
+        do {
+            choice = RegistrationUI.registrationCtrlChoice();
+            switch (choice) {
+                case 1:
+                    registerStudentForCourse();
+                    break;
                 case 2:
-                    deleteInFile(RegistrationUI.readStudentID(new Scanner(System.in)),RegistrationUI.readCourseID(new Scanner(System.in)));
+                    deleteInFile(RegistrationUI.readStudentID(new Scanner(System.in)), RegistrationUI.readCourseID(new Scanner(System.in)));
                     break;
                 case 3:
                     List<Integer> courses = studentCourses(RegistrationUI.readStudentID(new Scanner(System.in)));
@@ -38,36 +39,36 @@ public class RegistrationCtrl {
                     List<Integer> students = studentsInCourses(RegistrationUI.readCourseID(new Scanner(System.in)));
                     RegistrationUI.printStudents(students);
                     break;
-			}
-		} while (choice<5);    //look at studentUI, 5 happens to be the option to quit
-	}
-	public static void registerStudentForCourse() {
-		Student student= new Student();
-		int StudentID = RegistrationUI.readStudentID(new Scanner(System.in));
-		if (!student.existsStudent(StudentID)) {
-			StudentUI.studentIdNonexist();
-		} else {
-			student = Student.readInFile(StudentID);
-			String FName, LName;
-			FName = student.getStudentFName();
-			LName = student.getStudentLName();
-			int CourseID = RegistrationUI.readCourseID(new Scanner(System.in));
-			if (!Course.existsCourse(CourseID))
-				System.out.printf("Course Id Does Not Exist");
-			else {
-				Course course = Course.readInFile(CourseID);
-				if (course.courseRegister() && !isInFile(StudentID, CourseID)) {
-					String courseName, coordinator;
-					courseName = course.getCourseName();
-					coordinator = course.getCoordinator();
-					saveToFile(StudentID, FName, LName, CourseID, courseName, coordinator);
-					RegistrationUI.successAdd();
-				}
+            }
+        } while (choice < 5);    //look at studentUI, 5 happens to be the option to quit
+    }
 
-			}
-		}
+    public static void registerStudentForCourse() {
+        Student student = new Student();
+        int StudentID = RegistrationUI.readStudentID(new Scanner(System.in));
+        if (!student.existsStudent(StudentID)) {
+            StudentUI.studentIdNonexist();
+        } else {
+            student = Student.readInFile(StudentID);
+            String FName, LName;
+            FName = student.getStudentFName();
+            LName = student.getStudentLName();
+            int CourseID = RegistrationUI.readCourseID(new Scanner(System.in));
+            if (!Course.existsCourse(CourseID))
+                System.out.printf("Course Id Does Not Exist");
+            else {
+                Course course = Course.readInFile(CourseID);
+                if (course.courseRegister() && !isInFile(StudentID, CourseID)) {
+                    String courseName, coordinator;
+                    courseName = course.getCourseName();
+                    coordinator = course.getCoordinator();
+                    System.out.printf("HI");
+                    saveToFile(StudentID, FName, LName, CourseID, courseName, coordinator);
+                    RegistrationUI.successAdd();
+                }
 
-	}
+            }
+        }
 
 	public static void saveToFile(int StudentID, String FName, String LName, int CourseID, String courseName,
 			String coordinator) {
@@ -81,19 +82,19 @@ public class RegistrationCtrl {
 		obj.put("coursename", courseName);
 		obj.put("coordinator", coordinator);
 
-		file.put(Integer.toString(StudentID) + "." + Integer.toString(CourseID), obj);
-		// file.replace("data", array);
+        file.put(Integer.toString(StudentID) + "." + Integer.toString(CourseID), obj);
+        // file.replace("data", array);
 
-		writeJSON(file, regFile);
+        writeJSON(file, regFile);
 
-		// add new course to courseid cache
-		try (BufferedWriter bw = new BufferedWriter(new FileWriter("src\\Registration\\reglist.txt", true))) {
-			bw.write(StudentID + "." + CourseID + "\n");
-		} catch (IOException ex) {
-			System.out.println("IOException! reglist.txt not found?");
-			ex.printStackTrace();
-		}
-	}
+        // add new course to courseid cache
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter("src\\Registration\\reglist.txt", true))) {
+            bw.write(StudentID + "." + CourseID + "\n");
+        } catch (IOException ex) {
+            System.out.println("IOException! reglist.txt not found?");
+            ex.printStackTrace();
+        }
+    }
 
 // either returns JSON file object or null.
 	private static JSONObject readJSON(String fileName) {
@@ -110,70 +111,70 @@ public class RegistrationCtrl {
 		return new JSONObject();
 	}
 
-	private static void writeJSON(JSONObject file, String fileName) {
+    private static void writeJSON(JSONObject file, String fileName) {
 
-		try {
-			FileWriter writer = new FileWriter(fileName, false);
-			file.writeJSONString(writer);
-			writer.close();
-		} catch (IOException ex) {
-			System.out.println("IOException!");
-			ex.printStackTrace();
-		}
-	}
+        try {
+            FileWriter writer = new FileWriter(fileName, false);
+            file.writeJSONString(writer);
+            writer.close();
+        } catch (IOException ex) {
+            System.out.println("IOException!");
+            ex.printStackTrace();
+        }
+    }
 
-	public static void deleteInFile(int studentID, int courseID) {
-		String courseFile = "src\\Registration\\Registration.json";
-		JSONObject file = readJSON(courseFile);
-		file.remove(Integer.toString(studentID) + "." + Integer.toString(courseID));
+    public static void deleteInFile(int studentID, int courseID) {
+        String courseFile = "src\\Registration\\Registration.json";
+        JSONObject file = readJSON(courseFile);
+        file.remove(Integer.toString(studentID) + "." + Integer.toString(courseID));
 
-		writeJSON(file, courseFile);
+        writeJSON(file, courseFile);
 
-		File readFile = null;
-		File tempFile = null;
-		BufferedReader br = null;
-		BufferedWriter bw = null;
-		try {
-			// remove entry from course list file
-			readFile = new File("src\\Registration\\reglist.txt");
-			tempFile = File.createTempFile("file", ".txt", readFile.getParentFile());
-			br = new BufferedReader(new FileReader(readFile));
-			bw = new BufferedWriter(new FileWriter(tempFile));
+        File readFile = null;
+        File tempFile = null;
+        BufferedReader br = null;
+        BufferedWriter bw = null;
+        try {
+            // remove entry from course list file
+            readFile = new File("src\\Registration\\reglist.txt");
+            tempFile = File.createTempFile("file", ".txt", readFile.getParentFile());
+            br = new BufferedReader(new FileReader(readFile));
+            bw = new BufferedWriter(new FileWriter(tempFile));
 
-			for (String line = ""; line != null; line = br.readLine()) {
-				if (!line.equals(Integer.toString(studentID) + "." + Integer.toString(courseID))) {
-					bw.write(line);
-				}
-			}
-			RegistrationUI.successRemove();
-			// System.out.println("Delete error. CourseID not found.");
-		} catch (IOException ex) {
-			System.out.println("IOException! reglist.txt not found?");
-			ex.printStackTrace();
-		} finally {
-			try {
-				if (readFile != null && tempFile != null && br != null && bw != null) {
-					br.close();
-					bw.close();
-					readFile.delete();
-					tempFile.renameTo(readFile);
-				}
-			} catch (IOException ex) {
-				ex.printStackTrace();
-			}
-		}
-	}
+            for (String line = ""; line != null; line = br.readLine()) {
+                if (!line.equals(Integer.toString(studentID) + "." + Integer.toString(courseID))) {
+                    bw.write(line);
+                }
+            }
+            RegistrationUI.successRemove();
+            // System.out.println("Delete error. CourseID not found.");
+        } catch (IOException ex) {
+            System.out.println("IOException! reglist.txt not found?");
+            ex.printStackTrace();
+        } finally {
+            try {
+                if (readFile != null && tempFile != null && br != null && bw != null) {
+                    br.close();
+                    bw.close();
+                    readFile.delete();
+                    tempFile.renameTo(readFile);
+                }
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
 
-	public static boolean isInFile(int studentID, int courseID) {
-		String courseFile = "src\\Registration\\Registration.json";
-		JSONObject file = readJSON(courseFile);
-		JSONObject obj = (JSONObject) file.get(Integer.toString(studentID) + "." + Integer.toString(courseID));
+    public static boolean isInFile(int studentID, int courseID) {
+        String courseFile = "src\\Registration\\Registration.json";
+        JSONObject file = readJSON(courseFile);
+        JSONObject obj = (JSONObject) file.get(Integer.toString(studentID) + "." + Integer.toString(courseID));
 
-		if (obj == null)
-			return false;
-		else
-			return true;
-	}
+        if (obj == null)
+            return false;
+        else
+            return true;
+    }
 
 public static List<Integer> studentCourses(int StudentID)
 {
@@ -209,8 +210,7 @@ public static List<Integer> studentCourses(int StudentID)
 	return courses;
 }
 
-    public static List<Integer> studentsInCourses(int courseID)
-    {
+    public static List<Integer> studentsInCourses(int courseID) {
         List<Integer> students = new ArrayList<Integer>();
         File readFile = null;
         BufferedReader br = null;
@@ -222,8 +222,8 @@ public static List<Integer> studentCourses(int StudentID)
             	return students;  //return empty list if reglist is empty
 			}
             for (; line != null; line = br.readLine()) {
-                String array1[]= line.split("\\.");
-                if(Integer.parseInt(array1[1])==courseID)
+                String array1[] = line.split("\\.");
+                if (Integer.parseInt(array1[1]) == courseID)
                     students.add(Integer.parseInt(array1[0]));
             }
             return students;
@@ -233,7 +233,7 @@ public static List<Integer> studentCourses(int StudentID)
             ex.printStackTrace();
         } finally {
             try {
-                if (readFile != null && br != null ) {
+                if (readFile != null && br != null) {
                     br.close();
                 }
             } catch (IOException ex) {

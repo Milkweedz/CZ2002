@@ -59,7 +59,7 @@ public class LoginUI {
     {
         if(Marks.existsMarks(student.getStudentID(),course.getCourseID()))
         {
-            MarksUI.displayTranscriptMarksData(Marks.readInFile(student.getStudentID(),course.getCourseID()));
+            MarksUI.displayTranscriptData(Marks.readInFile(student.getStudentID(),course.getCourseID()));
         }
         else
             displayMarksError();
@@ -80,5 +80,8 @@ public class LoginUI {
     {System.out.println();
         for(int i=0;i<22;i++)
             System.out.print("***");
+    }
+    public static void studentIdNonexist(){
+        System.out.println("\nStudent ID doesn't exist! Try again.");
     }
 }
