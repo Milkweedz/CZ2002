@@ -2,30 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="45dbb465-4c4e-4ba1-ba56-bef34a4a78d0" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/Statistics/StatisticsCtrl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Statistics/StatisticsUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CZ2002/Course/Course.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CZ2002/Course/Course.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CZ2002/Course/CourseCtrl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CZ2002/Course/CourseCtrl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CZ2002/Course/CourseUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CZ2002/Course/CourseUI.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CZ2002/Course/courselist.txt" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CZ2002/Course/courselist.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CZ2002/Course/courses.json" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CZ2002/Course/courses.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CZ2002/Mark/marklist.txt" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CZ2002/Mark/marklist.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CZ2002/Mark/marks.json" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CZ2002/Mark/marks.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CZ2002/Registration/Registration.json" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CZ2002/Registration/Registration.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CZ2002/Registration/reglist.txt" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CZ2002/Registration/reglist.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CZ2002/Student/students.json" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CZ2002/Student/students.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Course/Course.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Course/Course.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Course/CourseUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Course/CourseUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Course/courselist.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/Course/courselist.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Course/courses.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/Course/courses.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CZ2002/Login/LoginVerify.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CZ2002/Login/LoginVerify.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CZ2002/Mark/Marks.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CZ2002/Mark/Marks.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CZ2002/Mark/MarksCtrl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CZ2002/Mark/MarksCtrl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CZ2002/Mark/MarksUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CZ2002/Mark/MarksUI.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Login/LoginVerify.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Login/LoginVerify.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Mark/Marks.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Mark/Marks.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Mark/MarksCtrl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Mark/MarksCtrl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Mark/MarksUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Mark/MarksUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Mark/marklist.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/Mark/marklist.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Mark/marks.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/Mark/marks.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Registration/Registration.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/Registration/Registration.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Registration/reglist.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/Registration/reglist.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Student/students.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/Student/students.json" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="C:\Users\acer\IdeaProjects\CZ2002\.idea\shelf/" />
@@ -89,30 +75,30 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="java" value="31" />
+          <entry key="java" value="39" />
           <entry key="json" value="7" />
           <entry key="txt" value="8" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="JAVA" value="31" />
+          <entry key="JAVA" value="39" />
           <entry key="JSON" value="7" />
           <entry key="PLAIN_TEXT" value="8" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="3194" />
+          <entry key="java" value="4549" />
           <entry key="json" value="10" />
-          <entry key="txt" value="428" />
+          <entry key="txt" value="486" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="3194" />
+          <entry key="JAVA" value="4549" />
           <entry key="JSON" value="10" />
-          <entry key="PLAIN_TEXT" value="428" />
+          <entry key="PLAIN_TEXT" value="486" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.vcs.git.usages" />
@@ -120,11 +106,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Login/LoginVerify.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="198">
-              <caret line="68" column="43" lean-forward="true" selection-start-line="68" selection-start-column="43" selection-end-line="68" selection-end-column="43" />
+            <state relative-caret-position="130">
+              <caret line="71" column="88" selection-start-line="71" selection-start-column="41" selection-end-line="71" selection-end-column="88" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -132,11 +118,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Mark/MarksCtrl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="232">
-              <caret line="110" column="22" selection-start-line="110" selection-start-column="22" selection-end-line="110" selection-end-column="22" />
+            <state relative-caret-position="351">
+              <caret line="122" column="88" selection-start-line="122" selection-start-column="88" selection-end-line="122" selection-end-column="88" />
             </state>
           </provider>
         </entry>
@@ -144,53 +130,21 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Mark/Marks.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="207">
-              <caret line="141" column="23" selection-start-line="141" selection-start-column="23" selection-end-line="141" selection-end-column="23" />
+            <state relative-caret-position="266">
+              <caret line="232" selection-start-line="232" selection-end-line="232" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#5766#5767#0" expanded="true" />
-                <element signature="e#5794#5795#0" expanded="true" />
-                <element signature="e#5836#5837#0" expanded="true" />
-                <element signature="e#5862#5863#0" expanded="true" />
-                <element signature="e#6083#6084#0" expanded="true" />
-                <element signature="e#6100#6101#0" expanded="true" />
-                <element signature="e#6140#6141#0" expanded="true" />
-                <element signature="e#6171#6172#0" expanded="true" />
-                <element signature="e#6203#6204#0" expanded="true" />
-                <element signature="e#6226#6227#0" expanded="true" />
-                <element signature="e#6256#6257#0" expanded="true" />
-                <element signature="e#6278#6279#0" expanded="true" />
-                <element signature="e#6307#6308#0" expanded="true" />
-                <element signature="e#6329#6330#0" expanded="true" />
-                <element signature="e#6380#6381#0" expanded="true" />
-                <element signature="e#6411#6412#0" expanded="true" />
+                <element signature="e#6425#6426#0" expanded="true" />
               </folding>
             </state>
           </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Login/LoginUI.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="663">
-              <caret line="48" column="53" selection-start-line="48" selection-start-column="53" selection-end-line="48" selection-end-column="53" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Mark/marks.json">
-          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Mark/MarksUI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="216">
-              <caret line="56" column="47" lean-forward="true" selection-start-line="56" selection-start-column="47" selection-end-line="56" selection-end-column="47" />
+            <state relative-caret-position="269">
+              <caret line="80" column="11" selection-start-line="80" selection-start-column="11" selection-end-line="80" selection-end-column="11" />
               <folding>
                 <element signature="e#2787#2788#0" expanded="true" />
                 <element signature="e#2842#2843#0" expanded="true" />
@@ -198,6 +152,39 @@
                 <element signature="e#2950#2951#0" expanded="true" />
                 <element signature="e#2995#2996#0" expanded="true" />
                 <element signature="e#3061#3062#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Statistics/StatisticsUI.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="289">
+              <caret line="17" lean-forward="true" selection-start-line="17" selection-end-line="17" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Registration/RegistrationCtrl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="148">
+              <caret line="211" column="32" selection-start-line="211" selection-start-column="32" selection-end-line="211" selection-end-column="32" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Course/CourseUI.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="173">
+              <caret line="17" column="4" lean-forward="true" selection-start-line="17" selection-start-column="4" selection-end-line="22" selection-end-column="5" />
+              <folding>
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -224,6 +211,8 @@
       <find>debug</find>
       <find>System.out</find>
       <find>display</find>
+      <find>readCourse</find>
+      <find>studentC</find>
     </findStrings>
     <replaceStrings>
       <replace>students</replace>
@@ -252,10 +241,12 @@
         <option value="$PROJECT_DIR$/src/Mark/marklist.txt" />
         <option value="$PROJECT_DIR$/src/Mark/marks.json" />
         <option value="$PROJECT_DIR$/src/Student/students.json" />
-        <option value="$PROJECT_DIR$/src/Mark/MarksUI.java" />
         <option value="$PROJECT_DIR$/src/Mark/Marks.java" />
-        <option value="$PROJECT_DIR$/src/Mark/MarksCtrl.java" />
         <option value="$PROJECT_DIR$/src/Login/LoginVerify.java" />
+        <option value="$PROJECT_DIR$/src/Statistics/StatisticsUI.java" />
+        <option value="$PROJECT_DIR$/src/Statistics/StatisticsCtrl.java" />
+        <option value="$PROJECT_DIR$/src/Mark/MarksUI.java" />
+        <option value="$PROJECT_DIR$/src/Mark/MarksCtrl.java" />
       </list>
     </option>
   </component>
@@ -310,6 +301,12 @@
               <item name="CZ2002" type="b2602c69:ProjectViewProjectNode" />
               <item name="CZ2002" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Statistics" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CZ2002" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CZ2002" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="Student" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
@@ -321,7 +318,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1541928679948" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1541930911118" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
@@ -384,7 +381,14 @@
       <option name="project" value="LOCAL" />
       <updated>1541926278699</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Finished printTranscript option in LoginVerify">
+      <created>1541928717519</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1541928717519</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TodoView">
@@ -469,7 +473,8 @@
     <MESSAGE value="Fixed a UI bug where Course management options were not correct. (Option 7 quits the course manager, but 6 is displayed.)" />
     <MESSAGE value="Fixed a UI error where extra whitespaces in user input causes program to crash. In CourseUI and StudentUI.&#10;Fixed formatting error in courselist when editing course details." />
     <MESSAGE value="Fixed a UI error in switch statement of CourseUI" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed a UI error in switch statement of CourseUI" />
+    <MESSAGE value="Finished printTranscript option in LoginVerify" />
+    <option name="LAST_COMMIT_MESSAGE" value="Finished printTranscript option in LoginVerify" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/Registration/Registration.java">
@@ -534,16 +539,6 @@
     <entry file="file://$PROJECT_DIR$/src/Registration/reglist.txt">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Registration/RegistrationCtrl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1921">
-          <caret line="86" column="33" lean-forward="true" selection-start-line="86" selection-start-column="33" selection-end-line="86" selection-end-column="33" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Student/students.json">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -588,28 +583,77 @@
     <entry file="file://$PROJECT_DIR$/src/Mark/marklist.txt">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
+    <entry file="jar://C:/Program Files/Java/jdk-10.0.2/lib/src.zip!/java.base/java/util/List.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="164">
+          <caret line="571" column="6" selection-start-line="571" selection-start-column="6" selection-end-line="571" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Mark/marks.json">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Course/CourseUI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1343">
-          <caret line="112" column="23" lean-forward="true" selection-start-line="112" selection-start-column="23" selection-end-line="112" selection-end-column="23" />
+        <state relative-caret-position="173">
+          <caret line="17" column="4" lean-forward="true" selection-start-line="17" selection-start-column="4" selection-end-line="22" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1866#1867#0" expanded="true" />
-            <element signature="e#1902#1903#0" expanded="true" />
-            <element signature="e#3846#3847#0" expanded="true" />
-            <element signature="e#3922#3923#0" expanded="true" />
-            <element signature="e#3959#3960#0" expanded="true" />
-            <element signature="e#4034#4035#0" expanded="true" />
-            <element signature="e#4074#4075#0" expanded="true" />
-            <element signature="e#4155#4156#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Login/LoginUI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-193">
+          <caret line="48" column="53" selection-start-line="48" selection-start-column="53" selection-end-line="48" selection-end-column="53" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Login/LoginVerify.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="130">
+          <caret line="71" column="88" selection-start-line="71" selection-start-column="41" selection-end-line="71" selection-end-column="88" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Registration/RegistrationCtrl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="148">
+          <caret line="211" column="32" selection-start-line="211" selection-start-column="32" selection-end-line="211" selection-end-column="32" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Statistics/StatisticsUI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="17" lean-forward="true" selection-start-line="17" selection-end-line="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Statistics/StatisticsCtrl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="28">
+          <caret line="6" column="22" selection-start-line="6" selection-start-column="22" selection-end-line="6" selection-end-column="22" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Mark/MarksUI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="56" column="47" lean-forward="true" selection-start-line="56" selection-start-column="47" selection-end-line="56" selection-end-column="47" />
+        <state relative-caret-position="269">
+          <caret line="80" column="11" selection-start-line="80" selection-start-column="11" selection-end-line="80" selection-end-column="11" />
           <folding>
             <element signature="e#2787#2788#0" expanded="true" />
             <element signature="e#2842#2843#0" expanded="true" />
@@ -621,66 +665,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://C:/Program Files/Java/jdk-10.0.2/lib/src.zip!/java.base/java/util/List.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="164">
-          <caret line="571" column="6" selection-start-line="571" selection-start-column="6" selection-end-line="571" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Mark/marks.json">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Login/LoginUI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="663">
-          <caret line="48" column="53" selection-start-line="48" selection-start-column="53" selection-end-line="48" selection-end-column="53" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Mark/Marks.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="207">
-          <caret line="141" column="23" selection-start-line="141" selection-start-column="23" selection-end-line="141" selection-end-column="23" />
+        <state relative-caret-position="266">
+          <caret line="232" selection-start-line="232" selection-end-line="232" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#5766#5767#0" expanded="true" />
-            <element signature="e#5794#5795#0" expanded="true" />
-            <element signature="e#5836#5837#0" expanded="true" />
-            <element signature="e#5862#5863#0" expanded="true" />
-            <element signature="e#6083#6084#0" expanded="true" />
-            <element signature="e#6100#6101#0" expanded="true" />
-            <element signature="e#6140#6141#0" expanded="true" />
-            <element signature="e#6171#6172#0" expanded="true" />
-            <element signature="e#6203#6204#0" expanded="true" />
-            <element signature="e#6226#6227#0" expanded="true" />
-            <element signature="e#6256#6257#0" expanded="true" />
-            <element signature="e#6278#6279#0" expanded="true" />
-            <element signature="e#6307#6308#0" expanded="true" />
-            <element signature="e#6329#6330#0" expanded="true" />
-            <element signature="e#6380#6381#0" expanded="true" />
-            <element signature="e#6411#6412#0" expanded="true" />
+            <element signature="e#6425#6426#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Mark/MarksCtrl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="232">
-          <caret line="110" column="22" selection-start-line="110" selection-start-column="22" selection-end-line="110" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Login/LoginVerify.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="68" column="43" lean-forward="true" selection-start-line="68" selection-start-column="43" selection-end-line="68" selection-end-column="43" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="351">
+          <caret line="122" column="88" selection-start-line="122" selection-start-column="88" selection-end-line="122" selection-end-column="88" />
         </state>
       </provider>
     </entry>

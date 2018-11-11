@@ -2,6 +2,7 @@ package Login;
 
 import Course.*;
 import Mark.MarksCtrl;
+import Statistics.StatisticsCtrl;
 import Student.*;
 import Registration.RegistrationCtrl;
 
@@ -25,7 +26,7 @@ public class LoginVerify {
 
         do {
             System.out.print("\nWhat area to access? ");
-            System.out.print("\n1: Courses, \n2: Students, \n3: Registration, \n4: Marks \n5: Print Transcripts\n0: Quit\nChoice:");
+            System.out.print("\n1: Courses, \n2: Students, \n3: Registration, \n4: Marks \n5: Print Transcripts\n6: Course Statistics\n0: Quit\nChoice:");
             choice = scan.nextInt();
 
             switch(choice){
@@ -51,6 +52,9 @@ public class LoginVerify {
                     break;
                 case 5:
                     printTranscripts(LoginUI.readStudentID(new Scanner(System.in)));
+                    break;
+                case 6:
+                    StatisticsCtrl.init();
                     break;
             }
 

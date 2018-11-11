@@ -70,15 +70,15 @@ public class MarksUI {
 			System.out.print(String.format("\n%12s|%19s : %-19s|"," ",entry.getKey(),marks.retStudentCourseWorkMarks(i++)));
 
 	}
-	public static void successAdd()
+	public void successAdd()
 	{
 		System.out.println("Marks Successfully Added !");
 	}
-    public static void successEdit()
+    public void successEdit()
     {
         System.out.println("Marks Successfully Edited !");
     }
-    public static void successRemove()
+    public void successRemove()
     {
         System.out.println("Marks Successfully Removed !");
     }
