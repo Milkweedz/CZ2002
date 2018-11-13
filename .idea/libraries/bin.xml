@@ -3,6 +3,7 @@
     <CLASSES>
       <root url="jar://$PROJECT_DIR$/bin/java-json.jar!/" />
       <root url="jar://$PROJECT_DIR$/bin/java-json new (not used).jar!/" />
+      <root url="jar://$PROJECT_DIR$/bin/commons-lang3-3.8.1.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

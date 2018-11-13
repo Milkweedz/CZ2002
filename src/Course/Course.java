@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import FileManager.FileManager;
 import org.json.simple.*;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -21,6 +22,9 @@ public class Course {
     private int capacity;
     private int noOfStudents;
     private ArrayList<String> tutorials;
+
+    private static final String courseFile = "src\\Course\\courses.txt";
+    private static final String listFile = "src\\Course\\courselist.txt";
 
     //private HashMap<String, String> markWeights;
 
@@ -86,11 +90,9 @@ public class Course {
     }
 
     public static void saveToFile(Course course){
-        String courseFile = "src\\Course\\courses.json";
-        JSONObject file = readJSON(courseFile);
-        //JSONArray array = (JSONArray) file.get("data");
 
-        JSONObject obj = new JSONObject();
+        //create map object for course
+        HashMap<String,String> obj = new HashMap<String,String>();
         //obj.put("courseid", Integer.toString(course.getCourseID()));
         obj.put("coursename", course.getCourseName());
         obj.put("coordinator", course.getCoordinator());
@@ -99,73 +101,21 @@ public class Course {
         obj.put("nooftut",Integer.toString(course.getTutorialGroups().size()));
         for(int i=0;i<course.getTutorialGroups().size();i++)
             obj.put("tut"+Integer.toString(i),course.getTutorialGroups().get(i));
-        file.put(Integer.toString(course.getCourseID()), obj);
-        //file.replace("data", array);
 
-        writeJSON(file, courseFile);
-
-        //add new course to courseid cache
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter("src\\Course\\courselist.txt", true))){
-            bw.write(course.getCourseID()+"\n");
-        } catch (IOException ex){
-            System.out.println("IOException! courselist.txt not found?");
-            ex.printStackTrace();
-        }
+        FileManager.saveToFile(course.courseID, obj, courseFile, listFile);
     }
 
     public void addTutorialGroups(ArrayList<String> tutorialGroups)
     {
         tutorials = tutorialGroups;
     }
+
     public static void deleteInFile(int courseID){
-        String courseFile = "src\\Course\\courses.json";
-        JSONObject file = readJSON(courseFile);
-        file.remove(Integer.toString(courseID));
-
-        writeJSON(file, courseFile);
-
-
-        File readFile = null;
-        File tempFile = null;
-        BufferedReader br = null;
-        BufferedWriter bw = null;
-        try {
-            //remove entry from course list file
-            readFile = new File("src\\Course\\courselist.txt");
-            tempFile = File.createTempFile("file",".txt", readFile.getParentFile());
-            br = new BufferedReader(new FileReader(readFile));
-            bw = new BufferedWriter(new FileWriter(tempFile));
-
-            for (String line=""; line != null; line = br.readLine()){
-                if (!line.equals(Integer.toString(courseID))){
-                    bw.write(line);
-                }
-            }
-            //System.out.println("Delete error. CourseID not found.");
-        } catch (IOException ex){
-            System.out.println("IOException! courselist.txt not found?");
-            ex.printStackTrace();
-        } finally {
-            try {
-                if (readFile != null && tempFile != null && br != null && bw != null) {
-                    br.close();
-                    bw.close();
-                    readFile.delete();
-                    tempFile.renameTo(readFile);
-                }
-            } catch (IOException ex){
-                ex.printStackTrace();
-            }
-        }
+        FileManager.deleteInFile(courseID, courseFile, listFile);
     }
 
     public static void editFile(Course course){
-        String courseFile = "src\\Course\\courses.json";
-        JSONObject file = readJSON(courseFile);
-        file.remove(Integer.toString(course.courseID));
-        //JSONArray array = (JSONArray) file.get("data");
-
-        JSONObject obj = new JSONObject();
+        HashMap<String,String> obj = new HashMap<String,String>();
         //obj.put("courseid", Integer.toString(course.getCourseID()));
         obj.put("coursename", course.getCourseName());
         obj.put("coordinator", course.getCoordinator());
@@ -175,16 +125,11 @@ public class Course {
         for(int i=0;i<course.getTutorialGroups().size();i++)
             obj.put("tut"+Integer.toString(i),course.getTutorialGroups().get(i));
 
-        file.put(Integer.toString(course.getCourseID()), obj);
-        //file.replace("data", array);
-
-        writeJSON(file, courseFile);
+        FileManager.editFile(course.courseID, obj, courseFile, listFile);
     }
 
     public static Course readInFile(int courseID){
-        String courseFile = "src\\Course\\courses.json";
-        JSONObject file = readJSON(courseFile);
-        JSONObject obj = (JSONObject) file.get(Integer.toString(courseID));
+        HashMap<String,String> obj = FileManager.accessFile(courseID, courseFile);
 
         Course course = new Course();
         course.setCourseID(courseID);
@@ -206,71 +151,38 @@ public class Course {
     }
 
     public static HashMap<String, String> getMarkWeights(int courseID){
-        String courseFile = "src\\Course\\courses.json";
-        JSONObject file = readJSON(courseFile);
+        HashMap<String,String> file = FileManager.readFile(courseFile);
 
-        JSONObject obj = (JSONObject) file.get(Integer.toString(courseID));
+        String objString = file.get(Integer.toString(courseID));
+        HashMap<String,String> obj = FileManager.decompressMap(objString);
 
         if (obj.containsKey("markweights")){
-            JSONObject markObj = (JSONObject) obj.get("markweights");
-            HashMap<String, String> markWeights = new HashMap<>();
-
-            markObj.forEach((key, value) -> markWeights.put(key.toString(), value.toString()));
-
-            return markWeights;
-        } else return null;
+            String markObjStr = obj.get("markweights");
+            return FileManager.decompressMap(markObjStr, true);
+        }
+        else {
+            return null;
+        }
     }
 
     public static void setMarkWeights(int courseID, HashMap<String, String> markWeights){
-        String courseFile = "src\\Course\\courses.json";
-        JSONObject file = readJSON(courseFile);
+        HashMap<String,String> file = FileManager.readFile(courseFile);
 
-        JSONObject obj = (JSONObject) file.get(Integer.toString(courseID));
-        JSONObject markObj;
+        String objString = file.get(Integer.toString(courseID));
+        HashMap<String,String> obj = FileManager.decompressMap(objString);
 
+        HashMap<String,String> markObj;
         if (obj.containsKey("markweights")){
-            markObj = (JSONObject) obj.get("markweights");
             obj.remove("markweights");
-        } else {
-            markObj = new JSONObject();
         }
 
-        //markWeights.forEach((key, value) -> markObj.put(key, value));
-        markObj.putAll(markWeights);
-        //System.out.println(markObj.toJSONString());     //DEBUG
-        obj.put("markweights", markObj);
-        System.out.println(obj.toJSONString());
-        file.replace(Integer.toString(courseID), obj);
 
-        writeJSON(file, courseFile);
-    }
+        String markWeightStr = FileManager.compressMap(markWeights, true);
+        obj.put("markweights", markWeightStr);
+        System.out.println("Your input: " + markWeightStr);
+        file.replace(Integer.toString(courseID), FileManager.compressMap(obj));
 
-
-    //either returns JSON file object or null.
-    private static JSONObject readJSON(String fileName){
-        try {
-            JSONParser parser = new JSONParser();
-            return (JSONObject) parser.parse(new FileReader(fileName));
-        } catch (IOException ex) {
-            System.out.println("IOException!");
-            ex.printStackTrace();
-        } catch (ParseException parsex) {
-            System.out.println("ParseException!");
-            //parsex.printStackTrace();
-        }
-        return new JSONObject();
-    }
-
-    private static void writeJSON(JSONObject file, String fileName){
-
-        try {
-            FileWriter writer = new FileWriter(fileName, false);
-            file.writeJSONString(writer);
-            writer.close();
-        } catch (IOException ex) {
-            System.out.println("IOException!");
-            ex.printStackTrace();
-        }
+        FileManager.writeFile(file, courseFile);
     }
 
 

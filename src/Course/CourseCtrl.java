@@ -147,6 +147,11 @@ public class CourseCtrl {
                 data[i] = key + ": " + value + "%";
                 i++;
             }
+
+            //this does some formatting for the exam score output (bad code, but it's a duct tape approach)
+            int examScore = Integer.parseInt(markWeights.get("exam"));
+            data[0] = "exam: " + examScore + ", coursework: " + (100-examScore) + "\nCoursework components:";
+
             courseUI.displayCourseData(data);
         }
     }

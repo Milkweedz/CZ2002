@@ -1,0 +1,2 @@
+#Tue Nov 13 13:54:09 CST 2018
+1={coordinator\:James Bond},{coursename\:Magic Bombs},{nooftut\:2},{tut1\:SP2},{tut0\:SP1},{type\:tut},{markweights\:{exam\:60}{Quiz 1\:30}{Quiz 2\:30}{Homework\:40}},{capacity\:10},
