@@ -15,7 +15,7 @@ public class Registration {
     private int StudentID;
     private int courseID;
 
-    private static final String registrationFile = "src\\Registration\\Registration.txt";
+    private static final String registrationFile = "src\\Registration\\registration.txt";
     private static final String listFile = "src\\Registration\\reglist.txt";
 
     public Registration() {

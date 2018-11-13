@@ -34,7 +34,7 @@ public class Student {
         CGPA = -1.0;
     }
 
-    private static final String studentFile = "src\\Student\\student.txt";
+    private static final String studentFile = "src\\Student\\students.txt";
     private static final String listFile = "src\\Student\\studentlist.txt";
     public static boolean existsStudent(int studentID){
         BufferedReader br = null;

@@ -26,15 +26,15 @@ public class LoginUI {
         System.out.println(String.format(" %-30s|", student.getStudentLName() + "," + student.getStudentFName()));
         System.out.print(String.format("|%-1d.%30s|", 3, " Year Of Study "));
         System.out.println(String.format(" %-30d|", student.getYearOfStudy()));
-        System.out.print(String.format("|%-1d.%30s|", 4, " Number of AUs obtained "));
-        System.out.println(String.format(" %-30d|", student.getNumOfAU()));
-        System.out.print(String.format("|%-1d.%30s|", 5, " CGPA "));
-        System.out.println(String.format(" %-30.2f|", student.getCGPA()));
-        System.out.print(String.format("|%-1d.%30s|", 6, "Gender "));
+//        System.out.print(String.format("|%-1d.%30s|", 4, " Number of AUs obtained "));
+//        System.out.println(String.format(" %-30d|", student.getNumOfAU()));
+//        System.out.print(String.format("|%-1d.%30s|", 5, " CGPA "));
+//        System.out.println(String.format(" %-30.2f|", student.getCGPA()));
+        System.out.print(String.format("|%-1d.%30s|", 4, "Gender "));
         System.out.println(String.format(" %-30s|", student.getGender()));
-        System.out.print(String.format("|%-1d.%30s|", 7, "Department of study "));
+        System.out.print(String.format("|%-1d.%30s|", 5, "Department of study "));
         System.out.println(String.format(" %-30s|", student.getDepartment()));
-        System.out.print(String.format("|%-1d.%30s|", 8, "Level Of Study "));
+        System.out.print(String.format("|%-1d.%30s|", 6, "Level Of Study "));
         System.out.println(String.format(" %-30s|", student.getYearOfStudy()));
     }
 

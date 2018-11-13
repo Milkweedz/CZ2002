@@ -26,7 +26,7 @@ public class Marks {
 	private double courseWorkMark[];
 	private boolean courseWorkMarkSet, examMarkSet;
 
-	private static final String marksFile = "src\\Mark\\Marks.txt";
+	private static final String marksFile = "src\\Mark\\marks.txt";
 	private static final String listFile = "src\\Marks\\marklist.txt";
 
 	public Marks(int n) {
