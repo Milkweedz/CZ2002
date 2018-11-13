@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
+import FileManager.FileManager;
 import org.json.simple.*;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -24,6 +25,9 @@ public class Marks {
 	private double ExamMark;
 	private double courseWorkMark[];
 	private boolean courseWorkMarkSet, examMarkSet;
+
+	private static final String marksFile = "src\\Mark\\Marks.txt";
+	private static final String listFile = "src\\Marks\\marklist.txt";
 
 	public Marks(int n) {
 		StudentID = 0;
@@ -64,11 +68,7 @@ public class Marks {
 	}
 
 	public static void saveToFile(Marks marks) {
-		String MarkFile = "src\\Mark\\marks.json";
-		JSONObject file = readJSON(MarkFile);
-		// JSONArray array = (JSONArray) file.get("data");
-
-		JSONObject obj = new JSONObject();
+        HashMap<String,String> obj = new HashMap<String,String>();
 		// obj.put("studentid", Integer.toString(student.getStudentID()));
 		obj.put("numofcomp", String.valueOf(marks.retNumOfComp()));
 		HashMap<String, String> markWeights = Course.getMarkWeights(marks.retCourseID());
@@ -76,68 +76,15 @@ public class Marks {
 		for (Map.Entry<String, String> entry : markWeights.entrySet())         //somewhat of a poor implementation here
 			obj.put(entry.getKey(),String.valueOf(marks.retStudentCourseWorkMarks(i++)));
 
-		file.put(Integer.toString(marks.retStudentID()) + "." + Integer.toString(marks.retCourseID()), obj);
-		// file.replace("data", array);
-
-		writeJSON(file, MarkFile);
-
-		// add new student to studentid cache
-		try (BufferedWriter bw = new BufferedWriter(new FileWriter("src\\Mark\\marklist.txt", true))) {
-			bw.write(marks.retStudentID() + "." + marks.retCourseID() + "\n");
-		} catch (IOException ex) {
-			System.out.println("IOException! marklist.txt not found?");
-			ex.printStackTrace();
-		}
+        FileManager.saveToFile(marks.retStudentID(),marks.retCourseID(), obj, marksFile, listFile);
 
 	}
 
-	public static void deleteInFile(int studentID,int courseID) {
-		String markFile = "src\\Mark\\marks.json";
-		JSONObject file = readJSON(markFile);
-		file.remove(Integer.toString(studentID)+"."+Integer.toString(courseID));
-
-		writeJSON(file, markFile);
-
-		File readFile = null;
-		File tempFile = null;
-		BufferedReader br = null;
-		BufferedWriter bw = null;
-		try {
-			// remove entry from student list file
-			readFile = new File("src\\Mark\\marklist.txt");
-			tempFile = File.createTempFile("file", ".txt", readFile.getParentFile());
-			br = new BufferedReader(new FileReader(readFile));
-			bw = new BufferedWriter(new FileWriter(tempFile));
-
-			for (String line = ""; line != null; line = br.readLine()) {
-				if (!line.equals(Integer.toString(studentID)+"."+Integer.toString(courseID))) {
-					bw.write(line);
-				}
-			}
-			// System.out.println("Delete error. StudentID not found.");
-		} catch (IOException ex) {
-			System.out.println("IOException! marklist.txt not found?");
-			ex.printStackTrace();
-		} finally {
-			try {
-				if (readFile != null && tempFile != null && br != null && bw != null) {
-					br.close();
-					bw.close();
-					readFile.delete();
-					tempFile.renameTo(readFile);
-				}
-			} catch (IOException ex) {
-				ex.printStackTrace();
-			}
-		}
-	}
-
+    public static void deleteInFile(int studentID, int courseID) {
+        FileManager.deleteInFile(studentID,courseID, marksFile, listFile);
+    }
 	public static Marks readInFile(int studentID,int courseID) {
-		String markFile = "src\\Mark\\marks.json";
-		JSONObject file = readJSON(markFile);
-		String getTarget = Integer.toString(studentID)+"."+Integer.toString(courseID);
-        //System.out.println(getTarget);
-		JSONObject obj = (JSONObject) file.get(getTarget);
+        HashMap<String,String> obj = FileManager.accessFile(studentID,courseID, marksFile);
         if(obj == null){
             return null;
         }
@@ -154,33 +101,6 @@ public class Marks {
 			courseMarks[i++]=Double.valueOf((String)obj.get(entry.getKey()));
 		marks.setStudentCourseMarks(courseMarks);
 		return marks;
-	}
-
-	// either returns JSON file object or null.
-	private static JSONObject readJSON(String fileName) {
-		try {
-			JSONParser parser = new JSONParser();
-			return (JSONObject) parser.parse(new FileReader(fileName));
-		} catch (IOException ex) {
-			System.out.println("IOException!");
-			ex.printStackTrace();
-		} catch (ParseException parsex) {
-			System.out.println("ParseException!");
-			// parsex.printStackTrace();
-		}
-		return new JSONObject();
-	}
-
-	private static void writeJSON(JSONObject file, String fileName) {
-
-		try {
-			FileWriter writer = new FileWriter(fileName, false);
-			file.writeJSONString(writer);
-			writer.close();
-		} catch (IOException ex) {
-			System.out.println("IOException!");
-			ex.printStackTrace();
-		}
 	}
 
 	public boolean isStudMarks(int StdID, int CrseID) {

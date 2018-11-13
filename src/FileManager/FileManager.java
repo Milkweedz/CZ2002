@@ -163,6 +163,28 @@ public class FileManager {
         }
     }
 
+    public static void saveToFile(int objID1,int objID2, Map<String,String> map, String fileName, String listFileName){
+        HashMap<String,String> file = FileManager.readFile(fileName);
+
+
+        //compress course object to string and add it to file map object
+        String objString = FileManager.compressMap(map);
+        file.put(Integer.toString(objID1)+"."+Integer.toString(objID2), objString);
+
+        //write map object for file to file
+        FileManager.writeFile(file, fileName);
+
+
+
+        //add new course to courseid cache
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(listFileName, true))){
+            bw.write(objID1+"."+objID2+"\n");
+        } catch (IOException ex){
+            System.out.println("IOException! List file not found?");
+            ex.printStackTrace();
+        }
+    }
+
     public static void editFile(int objID, Map<String,String> map, String fileName, String listFileName){
         HashMap<String,String> file = readFile(fileName);
 
@@ -213,10 +235,57 @@ public class FileManager {
         }
     }
 
+    public static void deleteInFile(int objID1,int objID2, String fileName, String listFileName){
+        HashMap<String,String> file = readFile(fileName);
+        file.remove(Integer.toString(objID1)+"."+Integer.toString(objID2));
+        FileManager.writeFile(file, fileName);
+
+        File readFile = null;
+        File tempFile = null;
+        BufferedReader br = null;
+        BufferedWriter bw = null;
+        try {
+            //remove entry from course list file
+            readFile = new File(listFileName);
+            tempFile = File.createTempFile("file",".txt", readFile.getParentFile());
+            br = new BufferedReader(new FileReader(readFile));
+            bw = new BufferedWriter(new FileWriter(tempFile));
+
+            for (String line=""; line != null; line = br.readLine()){
+                if (!line.equals(Integer.toString(objID1)+"."+Integer.toString(objID2))){
+                    bw.write(line);
+                }
+            }
+            //System.out.println("Delete error. CourseID not found.");
+        } catch (IOException ex){
+            System.out.println("IOException! List file not found?");
+            ex.printStackTrace();
+        } finally {
+            try {
+                if (readFile != null && tempFile != null && br != null && bw != null) {
+                    br.close();
+                    bw.close();
+                    readFile.delete();
+                    tempFile.renameTo(readFile);
+                }
+            } catch (IOException ex){
+                ex.printStackTrace();
+            }
+        }
+    }
+
     public static HashMap<String,String> accessFile(int objID, String fileName){
         HashMap<String,String> file = readFile(fileName);
 
         String objString = file.get(Integer.toString(objID));
+
+        return decompressMap(objString);
+    }
+
+    public static HashMap<String,String> accessFile(int objID1,int objID2, String fileName){
+        HashMap<String,String> file = readFile(fileName);
+
+        String objString = file.get(Integer.toString(objID1)+"."+Integer.toString(objID2));
 
         return decompressMap(objString);
     }

@@ -1,11 +1,13 @@
 package Student;
 
+import FileManager.FileManager;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class Student {
@@ -32,6 +34,8 @@ public class Student {
         CGPA = -1.0;
     }
 
+    private static final String studentFile = "src\\Student\\student.txt";
+    private static final String listFile = "src\\Student\\studentlist.txt";
     public static boolean existsStudent(int studentID){
         BufferedReader br = null;
         try {
@@ -80,12 +84,7 @@ public class Student {
     }
 
     public static void saveToFile(Student student){
-        String studentFile = "src\\Student\\students.json";
-        JSONObject file = readJSON(studentFile);
-        //JSONArray array = (JSONArray) file.get("data");
-
-        JSONObject obj = new JSONObject();
-        //obj.put("studentid", Integer.toString(student.getStudentID()));
+        HashMap<String,String> obj = new HashMap<String,String>();
         obj.put("fname", student.getStudentFName());
         obj.put("lname", student.getStudentLName());
         obj.put("year", Integer.toString(student.getYearOfStudy()));
@@ -93,70 +92,17 @@ public class Student {
         obj.put("department", student.getDepartment());
         obj.put("graduate", student.getGraduate());
 
-        file.put(Integer.toString(student.getStudentID()), obj);
-        //file.replace("data", array);
-
-        writeJSON(file, studentFile);
-
-        //add new student to studentid cache
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter("src\\Student\\studentlist.txt", true))){
-            bw.write(student.getStudentID()+"\n");
-        } catch (IOException ex){
-            System.out.println("IOException! studentlist.txt not found?");
-            ex.printStackTrace();
-        }
+        FileManager.saveToFile(student.studentID, obj, studentFile, listFile);
 
     }
 
     public static void deleteInFile(int studentID){
-        String studentFile = "src\\Student\\students.json";
-        JSONObject file = readJSON(studentFile);
-        file.remove(Integer.toString(studentID));
-
-        writeJSON(file, studentFile);
-
-
-        File readFile = null;
-        File tempFile = null;
-        BufferedReader br = null;
-        BufferedWriter bw = null;
-        try {
-            //remove entry from student list file
-            readFile = new File("src\\Student\\studentlist.txt");
-            tempFile = File.createTempFile("file",".txt", readFile.getParentFile());
-            br = new BufferedReader(new FileReader(readFile));
-            bw = new BufferedWriter(new FileWriter(tempFile));
-
-            for (String line=""; line != null; line = br.readLine()){
-                if (!line.equals(Integer.toString(studentID))){
-                    bw.write(line);
-                }
-            }
-            //System.out.println("Delete error. StudentID not found.");
-        } catch (IOException ex){
-            System.out.println("IOException! studentlist.txt not found?");
-            ex.printStackTrace();
-        } finally {
-            try {
-                if (readFile != null && tempFile != null && br != null && bw != null) {
-                    br.close();
-                    bw.close();
-                    readFile.delete();
-                    tempFile.renameTo(readFile);
-                }
-            } catch (IOException ex){
-                ex.printStackTrace();
-            }
-        }
+        FileManager.deleteInFile(studentID, studentFile, listFile);
     }
 
-    public static void editFile(Student student){
-        String studentFile = "src\\Student\\students.json";
-        JSONObject file = readJSON(studentFile);
-        file.remove(Integer.toString(student.studentID));
-        //JSONArray array = (JSONArray) file.get("data");
 
-        JSONObject obj = new JSONObject();
+    public static void editFile(Student student){
+        HashMap<String,String> obj = new HashMap<String,String>();
         //obj.put("studentid", Integer.toString(student.getStudentID()));
         obj.put("fname", student.getStudentFName());
         obj.put("lname", student.getStudentLName());
@@ -165,16 +111,11 @@ public class Student {
         obj.put("department", student.getDepartment());
         obj.put("graduate", student.getGraduate());
 
-        file.put(Integer.toString(student.getStudentID()), obj);
-        //file.replace("data", array);
-
-        writeJSON(file, studentFile);
+        FileManager.editFile(student.studentID, obj, studentFile, listFile);
     }
 
     public static Student readInFile(int studentID){
-        String studentFile = "src\\Student\\students.json";
-        JSONObject file = readJSON(studentFile);
-        JSONObject obj = (JSONObject) file.get(Integer.toString(studentID));
+        HashMap<String,String> obj = FileManager.accessFile(studentID, studentFile);
 
         Student student = new Student();
         student.setStudentID(studentID);
@@ -187,35 +128,6 @@ public class Student {
 
         return student;
     }
-
-    //either returns JSON file object or null.
-    private static JSONObject readJSON(String fileName){
-        try {
-            JSONParser parser = new JSONParser();
-            return (JSONObject) parser.parse(new FileReader(fileName));
-        } catch (IOException ex) {
-            System.out.println("IOException!");
-            ex.printStackTrace();
-        } catch (ParseException parsex) {
-            System.out.println("ParseException!");
-            //parsex.printStackTrace();
-        }
-        return new JSONObject();
-    }
-
-    private static void writeJSON(JSONObject file, String fileName){
-
-        try {
-            FileWriter writer = new FileWriter(fileName, false);
-            file.writeJSONString(writer);
-            writer.close();
-        } catch (IOException ex) {
-            System.out.println("IOException!");
-            ex.printStackTrace();
-        }
-    }
-
-
 
 
     //getters and setters below

@@ -65,7 +65,6 @@ public class RegistrationCtrl {
             else {
                 Course course = Course.readInFile(CourseID);
                 if (course.courseRegister() && !Registration.isInFile(StudentID, CourseID)) {
-                    String courseName, coordinator;
                     reg.getCourseName(course.getCourseName());
                     reg.getCoordinator(course.getCoordinator());
                     reg.getCourseID(CourseID);
