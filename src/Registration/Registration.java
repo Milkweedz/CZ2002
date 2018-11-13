@@ -41,7 +41,11 @@ public class Registration {
 
 
     public static void deleteInFile(int studentID, int courseID) {
+        if(isInFile(studentID,courseID)){
         FileManager.deleteInFile(studentID,courseID, registrationFile, listFile);
+        RegistrationUI.successRemove();}
+        else
+            RegistrationUI.studentCourseNotExist();
     }
 
     public static boolean isInFile(int studentID, int courseID) {

@@ -34,12 +34,20 @@ public class RegistrationCtrl {
                     Registration.deleteInFile(RegistrationUI.readStudentID(new Scanner(System.in)), RegistrationUI.readCourseID(new Scanner(System.in)));
                     break;
                 case 3:
-                    List<Integer> courses = studentCourses(RegistrationUI.readStudentID(new Scanner(System.in)));
-                    RegistrationUI.printCourses(courses);
+                    int stdid;
+                    if(Student.existsStudent(stdid=RegistrationUI.readStudentID(new Scanner(System.in))))
+                    {List<Integer> courses = studentCourses(stdid);
+                    RegistrationUI.printCourses(courses);}
+                    else
+                       RegistrationUI.studentNotExist();
                     break;
                 case 4:
-                    List<Integer> students = studentsInCourses(RegistrationUI.readCourseID(new Scanner(System.in)));
-                    RegistrationUI.printStudents(students);
+                    int crsid;
+                    if(Course.existsCourse(crsid=RegistrationUI.readCourseID(new Scanner(System.in)))){
+                    List<Integer> students = studentsInCourses(crsid);
+                    RegistrationUI.printStudents(students);}
+                    else
+                        RegistrationUI.courseNotExist();
                     break;
                 case 5:
                     studentsInTut();
@@ -146,48 +154,50 @@ public class RegistrationCtrl {
         return students;
     }
 
-    public void studentsInTut(){
+    public void studentsInTut() {
         RegistrationUI registrationUI = new RegistrationUI();
         int courseID = registrationUI.readCourseID(new Scanner(System.in));
-        String queryGroup = registrationUI.readTutGroup(courseID);
-        String tutGroup;
-        int studentID;
+        if (Course.existsCourse(courseID)) {
+            String queryGroup = registrationUI.readTutGroup(courseID);
+            String tutGroup;
+            int studentID;
 
-        List<Integer> students = new ArrayList<Integer>();
-        File readFile = null;
-        BufferedReader br = null;
-        try {
-            readFile = new File("src\\Registration\\reglist.txt");
-            br = new BufferedReader(new FileReader(readFile));
-            String line = br.readLine();
-            if (line != null && !line.equals("")) {
-                for (; line != null; line = br.readLine()) {
-                    String array1[] = line.split("\\.");
-                    if (Integer.parseInt(array1[1]) == courseID){
-                        tutGroup = Registration.getStudentGroup(Integer.parseInt(array1[0]), courseID);
-                        //System.out.println("DEBUG" + tutGroup);
-                        if (queryGroup.equals(tutGroup)) {
-                            students.add(Integer.parseInt(array1[0]));
+            List<Integer> students = new ArrayList<Integer>();
+            File readFile = null;
+            BufferedReader br = null;
+            try {
+                readFile = new File("src\\Registration\\reglist.txt");
+                br = new BufferedReader(new FileReader(readFile));
+                String line = br.readLine();
+                if (line != null && !line.equals("")) {
+                    for (; line != null; line = br.readLine()) {
+                        String array1[] = line.split("\\.");
+                        if (Integer.parseInt(array1[1]) == courseID) {
+                            tutGroup = Registration.getStudentGroup(Integer.parseInt(array1[0]), courseID);
+                            //System.out.println("DEBUG" + tutGroup);
+                            if (queryGroup.equals(tutGroup)) {
+                                students.add(Integer.parseInt(array1[0]));
+                            }
                         }
                     }
                 }
-            }
-            registrationUI.printStudents(students);
-            // System.out.println("Delete error. CourseID not found.");
-        } catch (IOException ex) {
-            System.out.println("IOException! reglist.txt not found?");
-            ex.printStackTrace();
-        } finally {
-            try {
-                if (readFile != null && br != null) {
-                    br.close();
-                }
+                registrationUI.printStudents(students);
+                // System.out.println("Delete error. CourseID not found.");
             } catch (IOException ex) {
+                System.out.println("IOException! reglist.txt not found?");
                 ex.printStackTrace();
+            } finally {
+                try {
+                    if (readFile != null && br != null) {
+                        br.close();
+                    }
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
             }
-        }
+        } else
+            RegistrationUI.courseNotExist();
     }
-
 
 
 }

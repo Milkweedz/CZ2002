@@ -1,0 +1,2 @@
+#Tue Nov 13 16:33:34 CST 2018
+100={fname\:James},{lname\:Bond},{gender\:2},{year\:3},{graduate\:pg},{department\:civil engineering},

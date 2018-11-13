@@ -6,6 +6,7 @@ import java.util.*;
 
 import Course.Course;
 import Registration.RegistrationUI;
+import Student.Student;
 
 public class MarksCtrl {
 	public void init(){
@@ -52,6 +53,7 @@ public class MarksCtrl {
 	public void addMarks(){
         MarksUI marksUI = new MarksUI();
         int studentID=MarksUI.readStudentID(new Scanner(System.in));
+        if(Student.existsStudent(studentID)){
         int courseID=MarksUI.readCourseID(new Scanner(System.in));
         List<Integer> courses = RegistrationCtrl.studentCourses(studentID);
         if(!courses.contains(courseID)){
@@ -70,7 +72,9 @@ public class MarksCtrl {
                 Marks.saveToFile(marks);
                 marksUI.successAdd();
             }
-        }
+        }}
+        else
+        	MarksUI.studentIdNotexist();
     }
 
 	public void editMarks() {
