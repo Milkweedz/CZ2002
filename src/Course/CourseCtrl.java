@@ -1,7 +1,6 @@
 package Course;
 
 import Registration.RegistrationCtrl;
-import Student.Student;
 
 import java.util.ArrayList;
 import java.util.HashMap;

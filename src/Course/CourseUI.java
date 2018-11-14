@@ -9,7 +9,7 @@ public class CourseUI {
     public int courseCtrlChoice(){
         Scanner scan = new Scanner (System.in);
         System.out.println("\nWhat would you like to do?");
-        System.out.println("0: View Course Details, 1: Create Course, 2: Edit Course, 3: Delete Course, 4: View Mark Weights, 5: Change Mark Weights, 6: List Courses, 7: Check Vacancy, 8: Quit");
+        System.out.println("\n0: View Course Details \n1: Create Course \n2: Edit Course \n3: Delete Course \n4: View Mark Weights \n5: Change Mark Weights \n6: List Courses \n7: Check Vacancy \n8: Quit");
 
         return scan.nextInt();
     }

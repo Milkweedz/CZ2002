@@ -7,7 +7,7 @@ public class StudentUI {
     public int studentCtrlChoice(){
         Scanner scan = new Scanner (System.in);
         System.out.println("\nWhat would you like to do?");
-        System.out.println("0: View Student Details, 1: Create Student, 2: Edit Student, 3: Delete Student, 4: List Students, 5: Quit");
+        System.out.println("0: View Student Details \n1: Create Student \n2: Edit Student \n3: Delete Student \n4: List Students \n5: Quit");
         System.out.print("Enter Your Choice: ");
         return scan.nextInt();
     }

@@ -3,7 +3,6 @@ package Login;
 import Course.Course;
 import Mark.Marks;
 import Mark.MarksUI;
-import Registration.Registration;
 import Student.Student;
 
 import java.util.Scanner;
@@ -39,6 +38,7 @@ public class LoginUI {
     }
 
     public static void printCourse(Course reg) {
+        System.out.println();
         printParaBreak();
         System.out.print(String.format("\n|%-1d.%30s|", 1, " Course ID "));
         System.out.println(String.format(" %-30d|", reg.getCourseID()));

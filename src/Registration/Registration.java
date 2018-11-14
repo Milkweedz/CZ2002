@@ -3,7 +3,6 @@ package Registration;
 import FileManager.FileManager;
 
 import java.io.*;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Registration {
@@ -23,7 +22,7 @@ public class Registration {
         LastName = "";
         CourseName = "";
         Coordinator = "";
-        TutorialGroup = "";
+        TutorialGroup = null;
         StudentID = 0;
         courseID = 0;
     }
@@ -31,12 +30,12 @@ public class Registration {
 
     public static void saveToFile(Registration reg) {
         HashMap<String,String> obj = new HashMap<String,String>();
-        obj.put("firstname", reg.retFirstName());
-        obj.put("lastname", reg.retLastName());
-        obj.put("coursename", reg.retCourseName());
-        obj.put("coordinator", reg.retCoordinator());
-        obj.put("tutorialGroup",reg.rettutGroup());
-        FileManager.saveToFile(reg.retStudentID(),reg.retCourseID(), obj, registrationFile, listFile);
+        obj.put("firstname", reg.getFirstName());
+        obj.put("lastname", reg.getLastName());
+        obj.put("coursename", reg.getCourseName());
+        obj.put("coordinator", reg.getCoordinator());
+        obj.put("tutorialGroup",reg.gettutGroup());
+        FileManager.saveToFile(reg.getStudentID(),reg.getCourseID(), obj, registrationFile, listFile);
     }
 
 
@@ -57,8 +56,10 @@ public class Registration {
         try {
             br = new BufferedReader(new FileReader(listFile));
             String nextID = br.readLine();
+
             while (nextID != null){
-                if (nextID == String.valueOf(studentID)+"."+String.valueOf(courseID)){
+                String array1[] = nextID.split("\\.");
+                if (Integer.valueOf(array1[0])==studentID&&Integer.valueOf(array1[1])==courseID){
                     return true;
                 }
                 nextID = br.readLine();
@@ -96,52 +97,52 @@ public class Registration {
 
 
 
-    public void getFirstName(String fname) {
+    public void setFirstName(String fname) {
         FirstName = fname;
     }
 
-    public void getLastName(String lname) {
+    public void setLastName(String lname) {
         LastName = lname;
     }
 
-    public void getCourseName(String cname) {
+    public void setCourseName(String cname) {
         CourseName = cname;
     }
 
-    public void getCoordinator(String coordinatorName) {
+    public void setCoordinator(String coordinatorName) {
         Coordinator = coordinatorName;
     }
 
-    public void gettutgrp(String tutgrp) {
+    public void settutgrp(String tutgrp) {
         TutorialGroup = tutgrp;
     }
 
-    public void getStudentID(int stdid) {
+    public void setStudentID(int stdid) {
         StudentID = stdid;
     }
 
-    public void getCourseID(int crsid) {
+    public void setCourseID(int crsid) {
         courseID = crsid;
     }
-    public String retLastName() {
+    public String getLastName() {
         return LastName;
     }
-    public String retFirstName() {
+    public String getFirstName() {
         return FirstName;
     }
-    public String retCourseName() {
+    public String getCourseName() {
         return CourseName;
     }
-    public String retCoordinator() {
+    public String getCoordinator() {
         return Coordinator;
     }
-    public String rettutGroup() {
+    public String gettutGroup() {
         return TutorialGroup;
     }
-    public int retStudentID() {
+    public int getStudentID() {
         return StudentID;
     }
-    public int retCourseID() {
+    public int getCourseID() {
         return courseID;
     }
 

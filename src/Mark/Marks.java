@@ -1,19 +1,14 @@
 package Mark;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Scanner;
+
 
 import FileManager.FileManager;
-import org.json.simple.*;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
+
 
 import Course.Course;
 
@@ -70,13 +65,13 @@ public class Marks {
 	public static void saveToFile(Marks marks) {
         HashMap<String,String> obj = new HashMap<String,String>();
 		// obj.put("studentid", Integer.toString(student.getStudentID()));
-		obj.put("numofcomp", String.valueOf(marks.retNumOfComp()));
-		HashMap<String, String> markWeights = Course.getMarkWeights(marks.retCourseID());
+		obj.put("numofcomp", String.valueOf(marks.getNumOfComp()));
+		HashMap<String, String> markWeights = Course.getMarkWeights(marks.getCourseID());
 		int i=0;
 		for (Map.Entry<String, String> entry : markWeights.entrySet())         //somewhat of a poor implementation here
-			obj.put(entry.getKey(),String.valueOf(marks.retStudentCourseWorkMarks(i++)));
+			obj.put(entry.getKey(),String.valueOf(marks.getStudentCourseWorkMarks(i++)));
 
-        FileManager.saveToFile(marks.retStudentID(),marks.retCourseID(), obj, marksFile, listFile);
+        FileManager.saveToFile(marks.getStudentID(),marks.getCourseID(), obj, marksFile, listFile);
 
 	}
 
@@ -95,7 +90,7 @@ public class Marks {
 		double courseMarks[] = new double[n];
 		marks.setStudentID(studentID);
 		marks.setCourseID(courseID);
-		HashMap<String, String> markWeights = Course.getMarkWeights(marks.retCourseID());
+		HashMap<String, String> markWeights = Course.getMarkWeights(marks.getCourseID());
 		int i=0;
 		for (Map.Entry<String, String> entry : markWeights.entrySet())
 			courseMarks[i++]=Double.valueOf((String)obj.get(entry.getKey()));
@@ -103,12 +98,6 @@ public class Marks {
 		return marks;
 	}
 
-	public boolean isStudMarks(int StdID, int CrseID) {
-		if (StudentID == StdID && CourseID == CrseID)
-			return true;
-		else
-			return false;
-	}
 
 	public void setStudentID(int studentID)
 	{
@@ -136,20 +125,20 @@ public class Marks {
 	}
 
 
-	public int retStudentID()
+	public int getStudentID()
 	{
 		return StudentID;
 	}
 
-	public int retNumOfComp() {
+	public int getNumOfComp() {
 		return NoOfComp;
 	}
 
-	public int retCourseID() {
+	public int getCourseID() {
 		return CourseID;
 	}
 
-	public double retStudentCourseWorkMarks(int n) {
+	public double getStudentCourseWorkMarks(int n) {
 		return courseWorkMark[n];
 	}
 

@@ -53,24 +53,24 @@ public class MarksUI {
 	}
 
 	public static void displayMarksData(Marks marks) {
-		System.out.println("Student ID :" + marks.retStudentID());
-		System.out.println("Course ID :" + marks.retCourseID());
+		System.out.println("Student ID :" + marks.getStudentID());
+		System.out.println("Course ID :" + marks.getCourseID());
 		if (marks == null) {
 			System.out.println("No marks for this student in this course!");
 		} else {
-			HashMap<String, String> markWeights = Course.getMarkWeights(marks.retCourseID());
+			HashMap<String, String> markWeights = Course.getMarkWeights(marks.getCourseID());
 			int i = 0;
 			for (Map.Entry<String, String> entry : markWeights.entrySet())         //somewhat of a poor implementation here
-				System.out.println(entry.getKey() + " : " + marks.retStudentCourseWorkMarks(i++));
+				System.out.println(entry.getKey() + " : " + marks.getStudentCourseWorkMarks(i++));
 		}
 
 	}
 
 	public static void displayTranscriptData(Marks marks) {
-		HashMap<String, String> markWeights = Course.getMarkWeights(marks.retCourseID());
+		HashMap<String, String> markWeights = Course.getMarkWeights(marks.getCourseID());
 		int i = 0;
 		for (Map.Entry<String, String> entry : markWeights.entrySet())         //somewhat of a poor implementation here
-			System.out.print(String.format("\n%12s|%19s : %-19s|", " ", entry.getKey(), marks.retStudentCourseWorkMarks(i++)));
+			System.out.print(String.format("\n%12s|%19s : %-19s|", " ", entry.getKey(), marks.getStudentCourseWorkMarks(i++)));
 
 	}
 

@@ -1,14 +1,9 @@
 package Student;
 
 import FileManager.FileManager;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
-
 import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 public class Student {
     private int studentID;

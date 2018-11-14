@@ -1,2 +1,1 @@
-#Tue Nov 13 17:18:26 SGT 2018
-100.1={exam\:55.0},{numofcomp\:4},{Quiz 1\:55.0},{Quiz 2\:55.0},{Homework\:55.0},
+#Wed Nov 14 16:45:45 SGT 2018

@@ -1,10 +1,8 @@
 package Registration;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,11 +10,6 @@ import java.util.Scanner;
 
 import Student.*;
 import Course.*;
-import org.json.simple.*;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
-
-
 public class RegistrationCtrl {
 
 
@@ -65,20 +58,20 @@ public class RegistrationCtrl {
             student = Student.readInFile(StudentID);
             String FName, LName;
             Registration reg = new Registration();
-            reg.getFirstName(student.getStudentFName());
-            reg.getLastName(student.getStudentLName());
+            reg.setFirstName(student.getStudentFName());
+            reg.setLastName(student.getStudentLName());
             int CourseID = RegistrationUI.readCourseID(new Scanner(System.in));
             if (!Course.existsCourse(CourseID))
                 System.out.printf("Course Id Does Not Exist");
             else {
                 Course course = Course.readInFile(CourseID);
                 if (course.courseRegister() && !Registration.isInFile(StudentID, CourseID)) {
-                    reg.getCourseName(course.getCourseName());
-                    reg.getCoordinator(course.getCoordinator());
-                    reg.getCourseID(CourseID);
-                    reg.getStudentID(StudentID);
+                    reg.setCourseName(course.getCourseName());
+                    reg.setCoordinator(course.getCoordinator());
+                    reg.setCourseID(CourseID);
+                    reg.setStudentID(StudentID);
                     if (Course.readInFile(CourseID).getType() != Course.COURSETYPE.Lec)
-                        reg.gettutgrp(RegistrationUI.readTutGroup(CourseID));
+                        reg.settutgrp(RegistrationUI.readTutGroup(CourseID));
                     Registration.saveToFile(reg);
                     RegistrationUI.successAdd();
                 }

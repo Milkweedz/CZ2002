@@ -5,7 +5,6 @@ import Registration.RegistrationCtrl;
 import java.util.*;
 
 import Course.Course;
-import Registration.RegistrationUI;
 import Student.Student;
 
 public class MarksCtrl {
@@ -120,11 +119,11 @@ public class MarksCtrl {
         }
         double sumMarks = 0.0;
         double newMark;
-        HashMap<String, String> markWeights = Course.getMarkWeights(marks.retCourseID());
+        HashMap<String, String> markWeights = Course.getMarkWeights(marks.getCourseID());
 
         int i = 0;
         for (Map.Entry<String, String> entry : markWeights.entrySet()) {         //somewhat of a poor implementation here
-            newMark = Integer.parseInt(entry.getValue()) * marks.retStudentCourseWorkMarks(i++) / 100.0;            //coursework component scores
+            newMark = Integer.parseInt(entry.getValue()) * marks.getStudentCourseWorkMarks(i++) / 100.0;            //coursework component scores
             //System.out.println("DEBUG" + newMark);
             if (i==1){
                 sumMarks += newMark;
