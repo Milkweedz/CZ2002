@@ -2,17 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="45dbb465-4c4e-4ba1-ba56-bef34a4a78d0" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Mark/marks.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Registration/registration.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Student/students.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CZ2002/FileManager/FileManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CZ2002/FileManager/FileManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Login/LoginUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Login/LoginUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CZ2002/Course/courselist.txt" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CZ2002/Course/courselist.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CZ2002/Course/courses.txt" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CZ2002/Course/courses.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CZ2002/Mark/marklist.txt" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CZ2002/Mark/marklist.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CZ2002/Registration/reglist.txt" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CZ2002/Registration/reglist.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CZ2002/Student/studentlist.txt" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CZ2002/Student/studentlist.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Course/courselist.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/Course/courselist.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Course/courses.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/Course/courses.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Mark/Marks.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Mark/Marks.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Registration/Registration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Registration/Registration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Student/Student.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Student/Student.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Mark/marklist.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/Mark/marklist.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Mark/marks.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/Mark/marks.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Registration/registration.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/Registration/registration.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Registration/reglist.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/Registration/reglist.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Student/studentlist.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/Student/studentlist.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Student/students.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/Student/students.txt" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="C:\Users\acer\IdeaProjects\CZ2002\.idea\shelf/" />
@@ -79,45 +83,47 @@
     <session id="-2057319925">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="3" />
+          <entry key="project.closed" value="5" />
           <entry key="project.open.time.10" value="1" />
           <entry key="project.open.time.15" value="1" />
           <entry key="project.open.time.17" value="1" />
+          <entry key="project.open.time.18" value="1" />
+          <entry key="project.open.time.2" value="1" />
           <entry key="project.open.time.22" value="1" />
           <entry key="project.open.time.28" value="1" />
           <entry key="project.open.time.3" value="1" />
           <entry key="project.open.time.4" value="1" />
-          <entry key="project.opened" value="7" />
+          <entry key="project.opened" value="9" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="class" value="3" />
-          <entry key="java" value="65" />
+          <entry key="java" value="66" />
           <entry key="json" value="14" />
-          <entry key="txt" value="24" />
+          <entry key="txt" value="26" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="CLASS" value="3" />
-          <entry key="JAVA" value="65" />
+          <entry key="JAVA" value="66" />
           <entry key="JSON" value="14" />
-          <entry key="PLAIN_TEXT" value="24" />
+          <entry key="PLAIN_TEXT" value="26" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="java" value="12856" />
           <entry key="json" value="42" />
-          <entry key="txt" value="499" />
+          <entry key="txt" value="544" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="JAVA" value="12856" />
           <entry key="JSON" value="42" />
-          <entry key="PLAIN_TEXT" value="499" />
+          <entry key="PLAIN_TEXT" value="544" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.vcs.git.usages" />
@@ -128,17 +134,44 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Mark/Marks.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="28" column="57" selection-start-line="28" selection-start-column="57" selection-end-line="28" selection-end-column="57" />
+            <state relative-caret-position="134">
+              <caret line="29" column="53" selection-start-line="29" selection-start-column="53" selection-end-line="29" selection-end-column="53" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Mark/marks.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="51">
+              <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Mark/marklist.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="17">
+              <caret line="1" column="5" selection-start-line="1" selection-start-column="5" selection-end-line="1" selection-end-column="5" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Login/LoginUI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="36" column="55" selection-start-line="36" selection-start-column="55" selection-end-line="36" selection-end-column="55" />
+            <state relative-caret-position="134">
+              <caret line="31" column="27" selection-start-line="31" selection-start-column="27" selection-end-line="31" selection-end-column="27" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/FileManager/FileManager.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="153">
+              <caret line="179" column="76" lean-forward="true" selection-start-line="179" selection-start-column="76" selection-end-line="179" selection-end-column="76" />
             </state>
           </provider>
         </entry>
@@ -164,8 +197,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Registration/Registration.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="32" column="66" lean-forward="true" selection-start-line="32" selection-start-column="66" selection-end-line="32" selection-end-column="66" />
+            <state relative-caret-position="476">
+              <caret line="32" column="66" selection-start-line="32" selection-start-column="66" selection-end-line="32" selection-end-column="66" />
             </state>
           </provider>
         </entry>
@@ -173,12 +206,10 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Student/Student.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="321">
-              <caret line="119" column="17" lean-forward="true" selection-start-line="119" selection-start-column="17" selection-end-line="119" selection-end-column="17" />
+            <state relative-caret-position="1853">
+              <caret line="119" column="17" selection-start-line="119" selection-start-column="17" selection-end-line="119" selection-end-column="17" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#3158#3159#0" expanded="true" />
-                <element signature="e#3232#3233#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -223,6 +254,7 @@
       <find>system.out</find>
       <find>read</find>
       <find>view</find>
+      <find>transcript</find>
     </findStrings>
     <replaceStrings>
       <replace>students</replace>
@@ -244,7 +276,6 @@
         <option value="$PROJECT_DIR$/src/Login/LoginVerify.java" />
         <option value="$PROJECT_DIR$/src/Registration/RegistrationUI.java" />
         <option value="$PROJECT_DIR$/src/Course/courses.json" />
-        <option value="$PROJECT_DIR$/src/Mark/marklist.txt" />
         <option value="$PROJECT_DIR$/src/Mark/marks.json" />
         <option value="$PROJECT_DIR$/src/Registration/Registration.json" />
         <option value="$PROJECT_DIR$/src/Registration/reglist.txt" />
@@ -262,8 +293,9 @@
         <option value="$PROJECT_DIR$/cz2002.properties" />
         <option value="$PROJECT_DIR$/src/Student/Student.java" />
         <option value="$PROJECT_DIR$/src/Registration/Registration.java" />
-        <option value="$PROJECT_DIR$/src/Mark/Marks.java" />
         <option value="$PROJECT_DIR$/src/Login/LoginUI.java" />
+        <option value="$PROJECT_DIR$/src/Mark/Marks.java" />
+        <option value="$PROJECT_DIR$/src/Mark/marklist.txt" />
       </list>
     </option>
   </component>
@@ -278,6 +310,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -289,24 +322,6 @@
               <item name="CZ2002" type="b2602c69:ProjectViewProjectNode" />
               <item name="CZ2002" type="462c0819:PsiDirectoryNode" />
               <item name="bin" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="CZ2002" type="b2602c69:ProjectViewProjectNode" />
-              <item name="CZ2002" type="462c0819:PsiDirectoryNode" />
-              <item name="out" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="CZ2002" type="b2602c69:ProjectViewProjectNode" />
-              <item name="CZ2002" type="462c0819:PsiDirectoryNode" />
-              <item name="out" type="462c0819:PsiDirectoryNode" />
-              <item name="production" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="CZ2002" type="b2602c69:ProjectViewProjectNode" />
-              <item name="CZ2002" type="462c0819:PsiDirectoryNode" />
-              <item name="out" type="462c0819:PsiDirectoryNode" />
-              <item name="production" type="462c0819:PsiDirectoryNode" />
-              <item name="CZ2002" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="CZ2002" type="b2602c69:ProjectViewProjectNode" />
@@ -360,7 +375,6 @@
         </subPane>
       </pane>
       <pane id="Scope" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -368,7 +382,7 @@
     <property name="GenerateAntBuildDialog.enableUiFormCompile" value="true" />
     <property name="GenerateAntBuildDialog.forceTargetJdk" value="true" />
     <property name="GenerateAntBuildDialog.outputFileNameProperty" value="cz2002" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1542098298848" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1542180201471" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/bin/commons-lang3-3.8.1.jar!/" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15209472" />
@@ -441,7 +455,14 @@
       <option name="project" value="LOCAL" />
       <updated>1541928717519</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Finalized application for demo">
+      <created>1542098338552</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1542098338552</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TodoView">
@@ -455,9 +476,8 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49473685" visible="true" weight="0.16577181" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49473685" visible="true" weight="0.16979866" />
       <window_info id="Structure" order="1" sideWeight="0.50526315" side_tool="true" weight="0.25346375" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -467,8 +487,8 @@
       <window_info id="Learn" order="7" />
       <window_info id="DB Browser" order="8" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info active="true" anchor="bottom" id="Find" order="1" visible="true" weight="0.3286119" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.35835695" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.3286119" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.35835695" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -496,7 +516,8 @@
     <MESSAGE value="Fixed a UI error where extra whitespaces in user input causes program to crash. In CourseUI and StudentUI.&#10;Fixed formatting error in courselist when editing course details." />
     <MESSAGE value="Fixed a UI error in switch statement of CourseUI" />
     <MESSAGE value="Finished printTranscript option in LoginVerify" />
-    <option name="LAST_COMMIT_MESSAGE" value="Finished printTranscript option in LoginVerify" />
+    <MESSAGE value="Finalized application for demo" />
+    <option name="LAST_COMMIT_MESSAGE" value="Finalized application for demo" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/Student/StudentUI.java">
@@ -541,9 +562,6 @@
           <caret line="1" column="2" selection-start-line="1" selection-start-column="2" selection-end-line="1" selection-end-column="2" />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Mark/marklist.txt">
-      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Registration/Registration.json">
       <provider selected="true" editor-type-id="text-editor">
@@ -647,13 +665,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Mark/MarksCtrl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1122">
-          <caret line="71" column="13" selection-start-line="71" selection-start-column="13" selection-end-line="71" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Course/Course.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1972">
@@ -668,47 +679,11 @@
     <entry file="file://$PROJECT_DIR$/src/Student/studentlist.txt">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Mark/marks.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Registration/registration.txt">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/FileManager/FileManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="19" selection-start-line="19" selection-end-line="19" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Student/students.txt">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Student/Student.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="321">
-          <caret line="119" column="17" lean-forward="true" selection-start-line="119" selection-start-column="17" selection-end-line="119" selection-end-column="17" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#3158#3159#0" expanded="true" />
-            <element signature="e#3232#3233#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Registration/Registration.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="32" column="66" lean-forward="true" selection-start-line="32" selection-start-column="66" selection-end-line="32" selection-end-column="66" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Mark/Marks.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="28" column="57" selection-start-line="28" selection-start-column="57" selection-end-line="28" selection-end-column="57" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Mark/MarksUI.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -717,10 +692,62 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Mark/MarksCtrl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1122">
+          <caret line="71" column="13" selection-start-line="71" selection-start-column="13" selection-end-line="71" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Registration/Registration.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="476">
+          <caret line="32" column="66" selection-start-line="32" selection-start-column="66" selection-end-line="32" selection-end-column="66" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Student/Student.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1853">
+          <caret line="119" column="17" selection-start-line="119" selection-start-column="17" selection-end-line="119" selection-end-column="17" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Login/LoginUI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="36" column="55" selection-start-line="36" selection-start-column="55" selection-end-line="36" selection-end-column="55" />
+        <state relative-caret-position="134">
+          <caret line="31" column="27" selection-start-line="31" selection-start-column="27" selection-end-line="31" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FileManager/FileManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="179" column="76" lean-forward="true" selection-start-line="179" selection-start-column="76" selection-end-line="179" selection-end-column="76" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Mark/Marks.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="134">
+          <caret line="29" column="53" selection-start-line="29" selection-start-column="53" selection-end-line="29" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Mark/marklist.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" column="5" selection-start-line="1" selection-start-column="5" selection-end-line="1" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Mark/marks.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
         </state>
       </provider>
     </entry>
