@@ -52,6 +52,18 @@ public class InputMismatchHandler {
         return value;
     }
 
+    public float checkFloat(float min, float max){
+        float value;
+
+        while(true){
+            value = checkFloat();
+            if (value >= min && value <= max) break;
+            else System.out.println("Input not within range! Try again.");
+        }
+
+        return value;
+    }
+
     public String checkString(String[] options){
         Scanner scan = new Scanner(System.in);
         String value = "";

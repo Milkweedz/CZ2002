@@ -40,7 +40,7 @@ public class MarksUI {
 				String key = entry.getKey();
 				int value = Integer.valueOf(entry.getValue());
 				System.out.println("Enter Marks Of " + key + ": (" + value + "%)");
-				data[i] = imh.checkFloat();
+				data[i] = imh.checkFloat(0,100);
 				i++;
 			}
 		}
