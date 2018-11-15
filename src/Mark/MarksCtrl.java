@@ -9,11 +9,12 @@ import Student.Student;
 
 public class MarksCtrl {
 	public void init(){
+		MarksUI marksUI = new MarksUI();
 
 		int choice;
 
 		do {
-			choice = MarksUI.marksCtrlChoice();
+			choice = marksUI.marksCtrlChoice();
 			switch(choice){
 				case 1:
 					addMarks();
@@ -51,9 +52,9 @@ public class MarksCtrl {
 
 	public void addMarks(){
         MarksUI marksUI = new MarksUI();
-        int studentID=MarksUI.readStudentID(new Scanner(System.in));
+        int studentID=marksUI.readStudentID(new Scanner(System.in));
         if(Student.existsStudent(studentID)){
-        int courseID=MarksUI.readCourseID(new Scanner(System.in));
+        int courseID=marksUI.readCourseID(new Scanner(System.in));
         List<Integer> courses = RegistrationCtrl.studentCourses(studentID);
         if(!courses.contains(courseID)){
             MarksUI.studentCourseIdNonexist();
@@ -65,7 +66,7 @@ public class MarksCtrl {
             if (Course.getMarkWeights(courseID) == null){
                 marksUI.noComponentsError();
             } else {
-                double[] data = MarksUI.readMarksData(new Scanner(System.in), Course.getMarkWeights(courseID));
+                double[] data = marksUI.readMarksData(new Scanner(System.in), Course.getMarkWeights(courseID));
                 Marks marks = makeMarkObj(studentID, courseID, data);
 
                 Marks.saveToFile(marks);
@@ -92,8 +93,8 @@ public class MarksCtrl {
 
 	public void deleteMarks() {
 		MarksUI marksUI = new MarksUI();
-		int studentID = MarksUI.readStudentID(new Scanner(System.in));
-		int courseID = MarksUI.readCourseID(new Scanner(System.in));
+		int studentID = marksUI.readStudentID(new Scanner(System.in));
+		int courseID = marksUI.readCourseID(new Scanner(System.in));
 		if (Marks.existsMarks(studentID,courseID)) {
 			Marks.deleteInFile(studentID,courseID);
 			marksUI.successRemove();

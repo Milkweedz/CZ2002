@@ -75,11 +75,15 @@ public class CourseCtrl {
     public void checkVacancy(){
         CourseUI courseUI = new CourseUI();
         int courseID = courseUI.readCourseID();
-        Course course = Course.readInFile(courseID);
-        int capacity = course.getCapacity();
-        int registered = RegistrationCtrl.studentsInCourses(courseID).size();
-        int vacancies = capacity - registered;
-        courseUI.displayVacancies(vacancies);
+        if(Course.existsCourse(courseID)) {
+            Course course = Course.readInFile(courseID);
+            int capacity = course.getCapacity();
+            int registered = course.getNoOfStudents();
+            int vacancies = capacity - registered;
+            courseUI.displayVacancies(vacancies);
+        } else {
+            courseUI.courseIdNonexist();
+        }
     }
 
     public void createCourse(){
@@ -98,6 +102,8 @@ public class CourseCtrl {
             }
             Course.saveToFile(course);
         }
+
+        listCourses();
     }
 
     public void editCourse(){
@@ -107,7 +113,7 @@ public class CourseCtrl {
         if(Course.existsCourse(courseID)){
             String[] data = courseUI.readCourseData();
             Course course = makeCourseObj(courseID, data);
-            if(course.getType()== Course.COURSETYPE.Lec)
+            if(course.getType()!= Course.COURSETYPE.Lec)
             {ArrayList<String> tutorialGroups = courseUI.readTutorials();
                 course.addTutorialGroups(tutorialGroups);}
             Course.editFile(course);

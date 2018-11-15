@@ -8,13 +8,19 @@ public class StatisticsCtrl {
         StatisticsUI statisticsUI = new StatisticsUI();
         int courseID = statisticsUI.readCourseID();
         int numStudents = RegistrationCtrl.studentsInCourses(courseID).size();
+        int numStudentsScored = 0;
         double avgScore;
         double totalScore = 0.0;
+        double studentScore;
 
         for(int student : RegistrationCtrl.studentsInCourses(courseID)){
-            totalScore += MarksCtrl.retTotalPercentage(student, courseID);
+            studentScore = MarksCtrl.retTotalPercentage(student, courseID);
+            if (studentScore != -1){
+                totalScore += studentScore;
+                numStudentsScored++;
+            }
         }
-        avgScore = totalScore / numStudents;
+        avgScore = totalScore / numStudentsScored;
 
         String[] stats = new String[3];
         stats[0] = Integer.toString(courseID);

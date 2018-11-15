@@ -13,6 +13,8 @@ public class Course {
     public enum COURSETYPE {Lec, LecTut, LecTutLab, NULL};
     private COURSETYPE type;
     private int capacity;
+
+
     private int noOfStudents;
     private ArrayList<String> tutorials;
 
@@ -91,6 +93,7 @@ public class Course {
         obj.put("coordinator", course.getCoordinator());
         obj.put("type", translateType(course.getType()));
         obj.put("capacity", Integer.toString(course.getCapacity()));
+        obj.put("numstudents", Integer.toString(course.getNoOfStudents()));
         obj.put("nooftut",Integer.toString(course.getTutorialGroups().size()));
         for(int i=0;i<course.getTutorialGroups().size();i++)
             obj.put("tut"+Integer.toString(i),course.getTutorialGroups().get(i));
@@ -114,6 +117,7 @@ public class Course {
         obj.put("coordinator", course.getCoordinator());
         obj.put("type", translateType(course.getType()));
         obj.put("capacity", Integer.toString(course.getCapacity()));
+        obj.put("numstudents", Integer.toString(course.getNoOfStudents()));
         obj.put("nooftut",Integer.toString(course.getTutorialGroups().size()));
         for(int i=0;i<course.getTutorialGroups().size();i++)
             obj.put("tut"+Integer.toString(i),course.getTutorialGroups().get(i));
@@ -130,6 +134,8 @@ public class Course {
         course.setCoordinator((String) obj.get("coordinator"));
         course.setType(translateType((String) obj.get("type")));
         course.setCapacity(Integer.parseInt((String) obj.get("capacity")));
+        course.setNoOfStudents(Integer.parseInt((String) obj.get("numstudents")));
+
 
         Object numTut = obj.get("nooftut");
         if (numTut != null) {
@@ -245,14 +251,35 @@ public class Course {
     public void setCapacity(int capacity) {
         this.capacity = capacity;
     }
+
+    public int getNoOfStudents() {
+        return noOfStudents;
+    }
+
+    public void setNoOfStudents(int noOfStudents) {
+        this.noOfStudents = noOfStudents;
+    }
     
     public boolean courseRegister()
-    {if(noOfStudents<capacity)
-    	{noOfStudents++;
-    	return true;}
-    else
-    {System.out.println("Full Capacity! ");
-    	return false;}
+    {
+        if(noOfStudents<capacity)
+    	{
+    	    noOfStudents++;
+    	    editFile(this);
+    	    return true;
+    	}
+        else
+        {
+            System.out.println("Full Capacity! ");
+            return false;
+        }
+    }
+
+    public void courseDeregister()
+    {
+            noOfStudents--;
+            editFile(this);
+            //already check if student exists in Registration.java
     }
 
 

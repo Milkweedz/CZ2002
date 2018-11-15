@@ -80,6 +80,8 @@ public class StudentCtrl {
 
             Student.saveToFile(student);
         }
+
+        listStudents();
     }
 
     public void editStudent(){

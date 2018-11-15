@@ -5,19 +5,21 @@ import java.util.List;
 import java.util.Scanner;
 
 import Course.*;
+import FileManager.InputMismatchHandler;
 
 public class RegistrationUI {
-    public static int registrationCtrlChoice() {
+    InputMismatchHandler imh = new InputMismatchHandler();
+    public int registrationCtrlChoice() {
         Scanner scan = new Scanner(System.in);
         System.out.println("\nWhat would you like to do?");
         System.out.println("1: Register a student for a course\n2: Remove a student from a course\n3: List of courses registered by a student\n4: List of students registered for a course\n5: List of students registered for a tutorial group\n6: Quit");
         System.out.print("Enter Your Choice: ");
-        return scan.nextInt();
+        return imh.checkInt();
     }
 
-    public static int readStudentID(Scanner scan) {
+    public int readStudentID(Scanner scan) {
         System.out.println("Enter Student ID : ");
-        return scan.nextInt();
+        return imh.checkInt();
     }
 
     public static String readTutGroup(int crsID) {
@@ -34,9 +36,9 @@ public class RegistrationUI {
         return tutorial;
     }
 
-    public static int readCourseID(Scanner scan) {
+    public int readCourseID(Scanner scan) {
         System.out.println("Enter Course ID : ");
-        return scan.nextInt();
+        return imh.checkInt();
     }
 
     public static void printStudents(List<Integer> students) {
@@ -45,7 +47,7 @@ public class RegistrationUI {
         } else {
             System.out.println("\nStudents registered for course:");
             for (int n = 0; n < students.size(); n++)
-                System.out.print("Student ID "+(n+1)+" : "+students.get(n));
+                System.out.print("Student ID "+(n+1)+" : "+students.get(n) + ",    ");
             System.out.print("\n");
         }
     }
@@ -86,6 +88,10 @@ public class RegistrationUI {
 
     public static void studentCoursesNotExist() {
         System.out.println("Student not registered for any course!");
+    }
+
+    public static void courseNoTutorials(){
+        System.out.println("Course has no tutorials!");
     }
 
 

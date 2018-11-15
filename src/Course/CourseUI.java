@@ -1,17 +1,20 @@
 package Course;
 
+import FileManager.InputMismatchHandler;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
 public class CourseUI {
+    InputMismatchHandler imh = new InputMismatchHandler();
 
     public int courseCtrlChoice(){
         Scanner scan = new Scanner (System.in);
         System.out.println("\nWhat would you like to do?");
         System.out.println("\n0: View Course Details \n1: Create Course \n2: Edit Course \n3: Delete Course \n4: View Mark Weights \n5: Change Mark Weights \n6: List Courses \n7: Check Vacancy \n8: Quit");
 
-        return scan.nextInt();
+        return imh.checkInt();
     }
 
 
@@ -19,7 +22,7 @@ public class CourseUI {
         Scanner scan = new Scanner(System.in);
 
         System.out.print("\nEnter course ID: ");
-        return scan.nextInt();
+        return imh.checkInt();
     }
 
     public String[] readCourseData(){
@@ -34,10 +37,11 @@ public class CourseUI {
 
         System.out.print("\nEnter course type (lec/tut/lab): ");
         //private enum COURSETYPE {Lec, LecTut, LecTutLab, NULL};
-        String tempType = scan.next();
+        String[] options = {"LEC", "TUT", "LAB"};
+        String tempType = imh.checkString(options);
 
         System.out.print("\nEnter course capacity: ");
-        int maxVacancies = scan.nextInt();
+        int maxVacancies = imh.checkInt();
 
         data[0] = courseName;
         data[1] = coordinator;
@@ -52,7 +56,7 @@ public class CourseUI {
         ArrayList<String> tutorials = new ArrayList<>();
         System.out.print("\nEnter number of tutorials groups : ");
         //String dummychar = "";
-        int numberOfTutorialGroups = scan.nextInt();
+        int numberOfTutorialGroups = imh.checkInt();;
         for (int i = 0; i < numberOfTutorialGroups; i++) {
             //scan.next(dummychar);
             System.out.print("\nEnter tutorial " + i + " group name: ");
@@ -90,7 +94,7 @@ public class CourseUI {
         //input exam and coursework weights
         while(true) {
             System.out.print("\nEnter exam weight in percentage: ");
-            examWeight = scan.nextInt(); //change this to float possibly
+            examWeight = imh.checkInt();; //change this to float possibly
             System.out.printf("\nExam weight: %d, Coursework weight: %d", examWeight, 100-examWeight) ;
             break;
         } //relic of old code: while loop allows a different implementation where coursework weight is not out of 100
@@ -98,7 +102,7 @@ public class CourseUI {
         //input coursework component grades
         while(true) {
             System.out.print("\nHow many components in coursework: ");
-            numComponents = scan.nextInt();
+            numComponents = imh.checkInt();;
             int totalWeight=0;
 
             //create temporary arrays to store coursework types and respective weights
@@ -106,10 +110,9 @@ public class CourseUI {
             courseworkWeights = new int[numComponents];
             for (int i = 0; i < numComponents; i++) {
                 System.out.printf("\nEnter name of component %d: ", i+1);
-                scan.nextLine();
                 courseworks[i] = scan.nextLine();
                 System.out.printf("\nEnter weight of %s: ", courseworks[i]);
-                courseworkWeights[i] = scan.nextInt();
+                courseworkWeights[i] = imh.checkInt();;
                 totalWeight+=courseworkWeights[i];
             }
 

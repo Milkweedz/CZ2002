@@ -1,18 +1,21 @@
 package Student;
 
+import FileManager.InputMismatchHandler;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class StudentUI {
+    InputMismatchHandler imh = new InputMismatchHandler();
     public int studentCtrlChoice(){
         Scanner scan = new Scanner (System.in);
         System.out.println("\nWhat would you like to do?");
         System.out.println("0: View Student Details \n1: Create Student \n2: Edit Student \n3: Delete Student \n4: List Students \n5: Quit");
         System.out.print("Enter Your Choice: ");
-        return scan.nextInt();
+        return imh.checkInt();
     }
 
-    public static String[] readStudentData() {
+    public String[] readStudentData() {
         String[] args;
 
         Scanner scan = new Scanner(System.in);
@@ -56,49 +59,50 @@ public class StudentUI {
 
 
 
-    static int readStudentID(Scanner scan) {
+    int readStudentID(Scanner scan) {
             System.out.println("Enter Student ID : ");
-            return scan.nextInt();
+            return imh.checkInt();
     }
 
-    private static String readFName(Scanner scan) {
+    private String readFName(Scanner scan) {
         System.out.println("Enter Student's First Name : ");
         return scan.nextLine();
     }
 
-    private static String readLName(Scanner scan) {
+    private String readLName(Scanner scan) {
         System.out.println("Enter Student's Last Name : ");
         return scan.nextLine();
     }
 
-    private static int readYear(Scanner scan){
+    private int readYear(Scanner scan){
         System.out.println("Enter Student's year of study : ");
-        return scan.nextInt();
+        return imh.checkInt();
     }
 
-    private static int readAU(Scanner scan){
+    private int readAU(Scanner scan){
         System.out.println("Enter number of AU's obtained so far : ");
-        return scan.nextInt();
+        return imh.checkInt();
     }
 
-    private static int readCGPASum(Scanner scan){
+    private int readCGPASum(Scanner scan){
         System.out.println("Enter CGPA numerator obtained so far : ");
-        return scan.nextInt();
+        return imh.checkInt();
     }
 
-    private static int readGender(Scanner scan){
+    private int readGender(Scanner scan){
         System.out.println("Enter Student's Gender (Male: 1, Female: 2, Other: 3) : ");
-        return scan.nextInt();
+        return imh.checkInt(1,3);   //makes sure range in [1,3] inclusive
     }
 
-    private static String readDepartment(Scanner scan){
+    private String readDepartment(Scanner scan){
         System.out.println("Enter Department of Study : ");
-        scan.nextLine();        //gets rid of newline character
         return scan.nextLine();
     }
 
-    private static String readGraduate(Scanner scan) {
+    private String readGraduate(Scanner scan) {
         System.out.println("Enter Level of Study (UG/PG) : ");
-        return scan.next();
+        String[] options = {"UG", "PG"};
+
+        return imh.checkString(options);
     }
 }

@@ -1,3 +1,9 @@
-#Wed Nov 14 16:45:19 SGT 2018
-1={coordinator\:James Bond},{coursename\:Magic Bombs},{nooftut\:2},{tut1\:SP2},{tut0\:SP1},{type\:tut},{markweights\:{exam\:60}{Quiz 1\:30}{Quiz 2\:30}{Homework\:40}},{capacity\:10},
-123={coordinator\:b},{coursename\:a},{nooftut\:0},{type\:lec},{markweights\:{exam\:60}{a\:20}{b\:20}{c\:20}{d\:20}{e\:20}},{capacity\:55},
+#Thu Nov 15 22:44:03 CST 2018
+1={coordinator\:Arijit Khosan},{coursename\:Algorithms},{numstudents\:7},{nooftut\:0},{type\:lec},{markweights\:{exam\:50}{Quiz\:100}},{capacity\:10},
+2={coordinator\:Jane Krayovski},{coursename\:Food Science},{numstudents\:5},{nooftut\:1},{tut0\:FS1},{type\:tut},{markweights\:{exam\:60}{Quiz 1\:50}{Quiz 2\:50}},{capacity\:5},
+3={coordinator\:Lee Wei Xin},{coursename\:Product Design},{nooftut\:2},{tut1\:PD2},{tut0\:PD1},{type\:lab},{markweights\:{exam\:50}{Project\:100}},{capacity\:10},{numstudents\:7},
+4={coordinator\:David Richter},{coursename\:Process Engineering},{numstudents\:2},{nooftut\:1},{tut0\:PE1},{type\:lab},{capacity\:10},
+5={coordinator\:Yousef Arnold},{coursename\:Mathematics},{numstudents\:0},{nooftut\:2},{tut1\:SP2},{tut0\:SP1},{type\:lab},{capacity\:10},
+16={coordinator\:James Vietch},{coursename\:Magic},{numstudents\:0},{nooftut\:2},{tut1\:SP2},{tut0\:SP1},{type\:lab},{markweights\:{exam\:60}{Quiz 1\:50}{Quiz 2\:50}},{capacity\:20},
+6={coordinator\:asdf asdf},{coursename\:asdf jsi},{numstudents\:0},{nooftut\:0},{type\:lec},{capacity\:10},
+17={coordinator\:Yousef Izaati},{coursename\:Mathematics},{numstudents\:0},{nooftut\:2},{tut1\:SP2},{tut0\:SP1},{type\:tut},{markweights\:{exam\:60}{Quiz 1\:50}{Quiz 2\:50}},{capacity\:10},

@@ -75,6 +75,10 @@ public class LoginUI {
         System.out.println(" No Marks entered as of yet.");
     }
 
+    public static void displayMarksError(int studentID, int courseID) {
+        System.out.printf("\n           No marks for student %d in course %d\n", studentID, courseID);
+    }
+
     public static void printParaBreak() {
         for (int i = 0; i < 22; i++)
             System.out.print("-+-");

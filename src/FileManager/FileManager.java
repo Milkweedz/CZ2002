@@ -215,6 +215,7 @@ public class FileManager {
             for (String line=""; line != null; line = br.readLine()){
                 if (!line.equals(Integer.toString(objID))){
                     bw.write(line);
+                    bw.write("\n");
                 }
             }
             //System.out.println("Delete error. CourseID not found.");
@@ -254,6 +255,7 @@ public class FileManager {
             for (String line=""; line != null; line = br.readLine()){
                 if (!line.equals(Integer.toString(objID1)+"."+Integer.toString(objID2))){
                     bw.write(line);
+                    bw.write("\n");
                 }
             }
             //System.out.println("Delete error. CourseID not found.");
@@ -276,6 +278,7 @@ public class FileManager {
 
     public static HashMap<String,String> accessFile(int objID, String fileName){
         HashMap<String,String> file = readFile(fileName);
+
 
         String objString = file.get(Integer.toString(objID));
 

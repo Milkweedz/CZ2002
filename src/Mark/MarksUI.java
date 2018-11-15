@@ -1,32 +1,35 @@
 package Mark;
 
 import java.util.HashMap;
+import java.util.InputMismatchException;
 import java.util.Map;
 import java.util.Scanner;
 
 import Course.Course;
 import Course.CourseUI;
+import FileManager.InputMismatchHandler;
 
 public class MarksUI {
-	public static int marksCtrlChoice() {
+	InputMismatchHandler imh = new InputMismatchHandler();
+	public int marksCtrlChoice() {
 		Scanner scan = new Scanner(System.in);
 		System.out.println("\nWhat would you like to do?");
 		System.out.println("1: Add marks of a student for a course\n2: Edit Marks of a student for a course\n3: Remove a student's marks for a course\n4: Return a student's marks for a course  \n5: Quit");
 		System.out.print("Enter Your Choice: ");
-		return scan.nextInt();
+		return imh.checkInt();
 	}
 
-	public static int readStudentID(Scanner scan) {
+	public int readStudentID(Scanner scan) {
 		System.out.println("Enter Student ID : ");
-		return scan.nextInt();
+		return imh.checkInt();
 	}
 
-	public static int readCourseID(Scanner scan) {
+	public int readCourseID(Scanner scan) {
 		System.out.println("Enter Course ID : ");
-		return scan.nextInt();
+		return imh.checkInt();
 	}
 
-	public static double[] readMarksData(Scanner scan, HashMap<String, String> markWeights) {
+	public double[] readMarksData(Scanner scan, HashMap<String, String> markWeights) {
 		double[] data = new double[0];
 		if (markWeights == null) CourseUI.hashmapEmpty();
 		else {
@@ -37,7 +40,7 @@ public class MarksUI {
 				String key = entry.getKey();
 				int value = Integer.valueOf(entry.getValue());
 				System.out.println("Enter Marks Of " + key + ": (" + value + "%)");
-				data[i] = scan.nextFloat();
+				data[i] = imh.checkFloat();
 				i++;
 			}
 		}

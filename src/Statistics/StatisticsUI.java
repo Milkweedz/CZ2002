@@ -14,7 +14,7 @@ public class StatisticsUI {
     public void printStats(String[] stats){
         System.out.printf("Stats for course %s\n", stats[0]);
         System.out.println("Number of students: " + stats[1]);
-        System.out.println("Average score percentage: " + stats[2]);
+        System.out.printf("Average score percentage: %.2f\n", Float.parseFloat(stats[2]));
 
     }
 }

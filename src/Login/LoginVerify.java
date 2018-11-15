@@ -76,7 +76,7 @@ public class LoginVerify {
                     System.out.println("Tutorial Group: " + tutGroup);
                 double totalPercentage = MarksCtrl.retTotalPercentage(studentID, course);
                 if (totalPercentage == -1) {
-                    System.out.printf("\n           No marks for student %d in course %d\n", studentID, course);
+                    LoginUI.displayMarksError(studentID, course);
                 } else {
 
 
