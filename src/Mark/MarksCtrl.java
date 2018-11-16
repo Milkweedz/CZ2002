@@ -6,8 +6,16 @@ import java.util.*;
 
 import Course.Course;
 import Student.Student;
-
+/**
+ * Represents the control class for student's Marks
+ * @author Nam
+ * @version 1.0
+ * @since 2018-11-15
+ */
 public class MarksCtrl {
+	/**
+	 * The main control that chooses which function to carry out
+	 */
 	public void init(){
 		MarksUI marksUI = new MarksUI();
 
@@ -32,6 +40,9 @@ public class MarksCtrl {
 		} while (choice<5);    //look at studentUI, 5 happens to be the option to quit
 	}
 
+	/**
+	 * Print out the marks of a student for a course
+	 */
 	public void viewMarks() {
 		int studentID,courseID;
 		MarksUI marksUI = new MarksUI();
@@ -49,7 +60,9 @@ public class MarksCtrl {
 
 	}
 
-
+	/**
+	 * Add a student's marks for a course to the storage file
+	 */
 	public void addMarks(){
         MarksUI marksUI = new MarksUI();
         int studentID=marksUI.readStudentID(new Scanner(System.in));
@@ -77,6 +90,9 @@ public class MarksCtrl {
         	MarksUI.studentIdNotexist();
     }
 
+	/**
+	 * Change a student's marks for a course in the storage file
+	 */
 	public void editMarks() {
 		MarksUI markUI = new MarksUI();
 		int studentID = markUI.readStudentID(new Scanner(System.in));
@@ -91,6 +107,9 @@ public class MarksCtrl {
 			markUI.studentCourseIdNonexist(); // error message
 	}
 
+	/**
+	 * Remove a student's marks for a course from the storage file
+	 */
 	public void deleteMarks() {
 		MarksUI marksUI = new MarksUI();
 		int studentID = marksUI.readStudentID(new Scanner(System.in));
@@ -101,6 +120,10 @@ public class MarksCtrl {
 		} else
 			marksUI.studentCourseIdNonexist();
 	}
+	
+	/**
+	 * Create a Marks object for a student and a course
+	 */
 
 	private Marks makeMarkObj(int studentID, int courseID, double[] args) {
 		Marks marks = new Marks(Course.getMarkWeights(courseID).size());
@@ -112,6 +135,13 @@ public class MarksCtrl {
 		return marks;
 	}
 
+	/**
+	 * Get the total marks of the student for the course
+	 * @param studentID the ID of the student
+	 * @param courseID the ID of the course
+	 * @return -1 if the student does not take all components in the course,
+	 * else the marks the student acquired for the course
+	 */
     public static double retTotalPercentage(int studentID, int courseID) {
         //System.out.println(courseID + "DEBUG");
         Marks marks = Marks.readInFile(studentID, courseID);
