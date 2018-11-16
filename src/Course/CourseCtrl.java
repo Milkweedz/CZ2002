@@ -1,12 +1,21 @@
 package Course;
-
-import Registration.RegistrationCtrl;
+/**
+ * This class controls all functionality of the course package including input/output and file writing/reading
+ * @author Nikhita Menon
+ * @version 1.0
+ * @date 2018-11-15
+ */
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 public class CourseCtrl {
+    /**
+     * This function the method controller
+     * which outputs a list of options for the user to choose from with respect to the class and then
+     * calls the respective methods to be executed
+     */
     public void init(){
         CourseUI courseUI = new CourseUI();
 
@@ -44,12 +53,19 @@ public class CourseCtrl {
         } while (choice!=8);    //look at courseUI, 8 happens to be the option to quit
     }
 
+    /**
+     * This method is responsible for displaying all the courses that have been implemented so far
+     */
     public void listCourses(){
         ArrayList<String> courseList = Course.listCourses();
         CourseUI courseUI = new CourseUI();
         courseUI.listCourses(courseList);
     }
 
+    /**
+     * This method allows the user to view the particulars of any one course according to course ID entered by the user
+     * after checking whether the course exists in the file
+     */
     public void viewCourse(){
         int courseID;
         CourseUI courseUI = new CourseUI();
@@ -72,6 +88,10 @@ public class CourseCtrl {
         }
     }
 
+    /**
+     * This method checks whether a particular course identified by its course ID has any vacancies by
+     * reading the appropriate information from the course file
+     */
     public void checkVacancy(){
         CourseUI courseUI = new CourseUI();
         int courseID = courseUI.readCourseID();
@@ -85,6 +105,11 @@ public class CourseCtrl {
             courseUI.courseIdNonexist();
         }
     }
+
+    /**
+     * This method is responsible for creating a course with a unique ID
+     * after checking if the course ID entered by the user does not already exist
+     */
 
     public void createCourse(){
         int courseID;
@@ -106,6 +131,10 @@ public class CourseCtrl {
         listCourses();
     }
 
+    /**
+     * This method allows the user to edit the details of any course if the course exists
+     */
+
     public void editCourse(){
         CourseUI courseUI = new CourseUI();
         int courseID = courseUI.readCourseID();
@@ -121,6 +150,10 @@ public class CourseCtrl {
         else courseUI.courseIdNonexist(); //error message
     }
 
+    /**
+     * This method deletes a course from the file if the course exists
+     */
+
     public void deleteCourse(){
         CourseUI courseUI = new CourseUI();
         int courseID = courseUI.readCourseID();
@@ -129,6 +162,11 @@ public class CourseCtrl {
         }
         else courseUI.courseIdNonexist();
     }
+
+    /**
+     * This method prints the course weightages for different components and sub-components of the overall mark
+     * if the course exists
+     */
 
     public void printCourseWeight(){
         CourseUI courseUI = new CourseUI();
@@ -160,7 +198,9 @@ public class CourseCtrl {
             courseUI.displayCourseData(data);
         }
     }
-
+    /**
+     * This method return course marks weights of a particular course if the course ID inputed by the user is correct
+     */
     public HashMap<String, String> getCourseWeight(int courseID){
 
         if (!Course.existsCourse(courseID)) {
@@ -175,7 +215,10 @@ public class CourseCtrl {
         }
     }
 
-    //updates mark weights
+    /**
+     * This method sets the course weightages for different components and sub-components of the overall mark
+     * if the course exists
+     */
     public void setCourseWeight(){
         CourseUI courseUI = new CourseUI();
         int courseID = courseUI.readCourseID();
@@ -189,6 +232,12 @@ public class CourseCtrl {
         Course.setMarkWeights(courseID, markWeights);
     }
 
+    /**
+     * This method creates a Course object after reading all the relevant data from the file
+     * @param courseID
+     * @param data
+     * @return Course with all parameters set to the information of required course
+     */
 
     private Course makeCourseObj(int courseID, String[] data){
         Course course = new Course();
@@ -202,6 +251,13 @@ public class CourseCtrl {
         return course;
     }
 
+    /**
+     * This method translated he type of course as input from the user or read from the file
+     * as an element of enumerator COURSETYPE [NULL,Lec,LecTut,LecTutLab]
+     * @param tempType
+     * @return COURSETYPE stating the type of course it is
+     */
+
     private Course.COURSETYPE translateType(String tempType){
         Course.COURSETYPE type = Course.COURSETYPE.NULL;
         //following converts string input of type to valid COURSETYPE
@@ -211,6 +267,12 @@ public class CourseCtrl {
 
         return type;
     }
+
+    /**
+     * This method return a string displaying whether the course in question is of which type
+     * @param type
+     * @return String containing course type
+     */
 
     private String translateType(Course.COURSETYPE type){
         String tempType = "";
