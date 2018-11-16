@@ -5,24 +5,56 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import FileManager.FileManager;
 
-
+/**
+ * Represents the course entity
+ * Contains the details of each course
+ * Responsible for any changes or operations with respect to all the courses in the system
+ * @author Nikhita
+ * @version 1.0
+ * @since 2018-11-15
+ */
 public class Course {
+	/**
+	 * Unique ID of the course
+	 */
     private int courseID;
+    /**
+     * Name of the course
+     */
     private String courseName;
+    /**
+     * Name of coordinator of the course
+     */
     private String coordinator;
     public enum COURSETYPE {Lec, LecTut, LecTutLab, NULL};
+    
     private COURSETYPE type;
+    /**
+     * Capacity of the course (number of students it can take)
+     */
     private int capacity;
 
-
+    /**
+     * Number of students
+     */
     private int noOfStudents;
+    /**
+     * List of tutorials of the course as an ArrayList (String)
+     */
     private ArrayList<String> tutorials;
-
+    /**
+     * File name in the directory
+     */
     private static final String courseFile = "src\\Course\\courses.txt";
+    /**
+     * File name in the directory
+     */
     private static final String listFile = "src\\Course\\courselist.txt";
 
     //private HashMap<String, String> markWeights;
-
+    /**
+     * Constructor to initialize class variables
+     */
     public Course(){
         courseID = -1;
         courseName = "";
@@ -33,6 +65,11 @@ public class Course {
         tutorials = new ArrayList<>();
     }
 
+    /**
+     * Check if course exists based on given course ID
+     * @param courseID Id of the course which is to be checked
+     * @return Boolean value true if course exists and false if it does not
+     */
     public static boolean existsCourse(int courseID){
 //        String courseList = "src\\Course\\courselist.txt";
 //        JSONObject file = readJSON(courseList);
@@ -60,7 +97,10 @@ public class Course {
         }
         return false;
     }
-
+    /**
+     * Lists Courses
+     * @return The list of all the courses in the system
+     */
     public static ArrayList<String> listCourses(){
         BufferedReader br = null;
         ArrayList<String> courseList = new ArrayList<String>();
@@ -83,7 +123,10 @@ public class Course {
         }
         return null;
     }
-
+    /**
+     * Saves the course and its details to the file 
+     * @param course Object of the Course class
+     */
     public static void saveToFile(Course course){
 
         //create map object for course
@@ -100,16 +143,25 @@ public class Course {
 
         FileManager.saveToFile(course.courseID, obj, courseFile, listFile);
     }
-
+    /**
+     * Adds the list of tutorial groups
+     * @param tutorialGroups List of tutorial groups
+     */
     public void addTutorialGroups(ArrayList<String> tutorialGroups)
     {
         tutorials = tutorialGroups;
     }
-
+    /**
+     * Deletes a course from the file
+     * @param courseID Id of the course to be deleted
+     */
     public static void deleteInFile(int courseID){
         FileManager.deleteInFile(courseID, courseFile, listFile);
     }
-
+    /**
+     * Edits details of course in the file
+     * @param course Object of the Course class
+     */
     public static void editFile(Course course){
         HashMap<String,String> obj = new HashMap<String,String>();
         //obj.put("courseid", Integer.toString(course.getCourseID()));
@@ -124,7 +176,11 @@ public class Course {
 
         FileManager.editFile(course.courseID, obj, courseFile, listFile);
     }
-
+    /**
+     * Reads course details from the file
+     * @param courseID Id of the course to be read in
+     * @return Returns details of the course
+     */
     public static Course readInFile(int courseID){
         HashMap<String,String> obj = FileManager.accessFile(courseID, courseFile);
 
@@ -148,7 +204,11 @@ public class Course {
 
         return course;
     }
-
+    /**
+     * Gets marks weightage of the course
+     * @param CourseID id of the course 
+     * @return Marks weights data as HashMap
+     */
     public static HashMap<String, String> getMarkWeights(int courseID){
         HashMap<String,String> file = FileManager.readFile(courseFile);
 
@@ -163,7 +223,11 @@ public class Course {
             return null;
         }
     }
-
+    /**
+     * Sets marks weightage of the course
+     * @param courseID Id of the course 
+     * @param markWeights Marks weights data as HashMap
+     */
     public static void setMarkWeights(int courseID, HashMap<String, String> markWeights){
         HashMap<String,String> file = FileManager.readFile(courseFile);
 
@@ -185,7 +249,11 @@ public class Course {
     }
 
 
-
+    /**
+     * Translates the type of the course from String to COURSETYPE
+     * @param tempType Type of the course as String
+     * @return Type of the course as COURSETYPE
+     */
     private static COURSETYPE translateType(String tempType){
         COURSETYPE type = COURSETYPE.NULL;
         //following converts string input of type to valid COURSETYPE
@@ -195,7 +263,11 @@ public class Course {
 
         return type;
     }
-
+    /**
+     * Translates the type of the course from COURSETYPE to String
+     * @param type Type of the course as COURSETYPE
+     * @return Type of the course as String
+     */
     private static String translateType(COURSETYPE type){
         String tempType = "";
 
@@ -208,58 +280,101 @@ public class Course {
 
 
     //getters and setters
+    /**
+     * Gets the unique id of the course
+     * @return The course id
+     */
     public int getCourseID() {
         return courseID;
     }
-
+    /**
+     * Sets the id of the course from parameter
+     * @param courseID The unique id of the course to be set
+     */
     public void setCourseID(int courseID) {
         this.courseID = courseID;
     }
-
+    /**
+     * Gets the name of the course
+     * @return The name of the course
+     */
     public String getCourseName() {
         return courseName;
     }
-
+    /**
+     * Sets the name of the course from parameter
+     * @param courseName The name of the course
+     */
     public void setCourseName(String courseName) {
         this.courseName = courseName;
     }
-
+    /**
+     * Gets the name of the course coordinator
+     * @return The name of the course coordinator
+     */
     public String getCoordinator() {
         return coordinator;
     }
-
+    /**
+     * Sets the name of the course coordinator from parameter
+     * @param courseName The name of the course coordinator
+     */
     public void setCoordinator(String coordinator) {
         this.coordinator = coordinator;
     }
-
+    /**
+     * Gets the type of the course (lecture, tutorial, lab)
+     * @return The type of the course (lecture, tutorial, lab)
+     */
     public COURSETYPE getType() {
         return type;
     }
-
+    /**
+     * Sets the type of the course (lecture, tutorial, lab) from parameter
+     * @param courseName The type of the course (lecture, tutorial, lab)
+     */
     public void setType(COURSETYPE type) {
         this.type = type;
     }
-
+    /**
+     * Gets the capacity of the course
+     * @return The capacity of the course
+     */
     public int getCapacity() {
         return capacity;
     }
-
+    /**
+     * Gets the list of tutorial groups of the course
+     * @return The list of tutorial groups of the course
+     */
     public ArrayList<String> getTutorialGroups() {
         return tutorials;
     }
-
+    /**
+     * Sets the capacity of the course from parameter
+     * @param courseName The capacity of the course
+     */
     public void setCapacity(int capacity) {
         this.capacity = capacity;
     }
-
+    /**
+     * Gets the number of students in the course
+     * @return The number of students in the course
+     */
     public int getNoOfStudents() {
         return noOfStudents;
     }
-
+    /**
+     * Sets the number of students in the course from parameter
+     * @param courseName The number of students in the course
+     */
     public void setNoOfStudents(int noOfStudents) {
         this.noOfStudents = noOfStudents;
     }
-    
+    /**
+     * Registers a student into the course
+     * @return Boolean value true if registration is successful and false if it is not
+     */
     public boolean courseRegister()
     {
         if(noOfStudents<capacity)
@@ -274,7 +389,10 @@ public class Course {
             return false;
         }
     }
-
+    /**
+     * Deregisters or removes a student from the course
+     * @return Boolean value true if deregistration or removal is successful and false if it is not
+     */
     public void courseDeregister()
     {
             noOfStudents--;
