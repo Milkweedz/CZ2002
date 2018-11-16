@@ -1,4 +1,15 @@
 package Login;
+/**
+ * This class firstly holds the main method from which program execution begins.
+ * It then asks user to enter a password as the program is designed for administrative purposes only
+ * after which this class is responsible for initializing all the other package controllers
+ * @author Mayank Nariani
+ * @version 1.0
+ * @date 2018-11-15
+ *
+ * @param USERNAME to hold the username of the administration, this allows program extensibility to allows more users to use the program if required
+ * @param PASSWORD to allow users to gain access
+ */
 
 import Course.*;
 import Mark.MarksCtrl;
@@ -13,6 +24,11 @@ public class LoginVerify {
     private static final String USERNAME = "root";
     private static final String PASSWORD = "toor";
 
+    /**
+     * Responsible for program execution and verifying users credentials
+     * Initializing and calling all other package controllers
+     * @param args
+     */
     public static void main(String args[]) {
         Scanner scan = new Scanner(System.in);
 
@@ -51,7 +67,7 @@ public class LoginVerify {
                     mrkCtrl.init();
                     break;
                 case 5:
-                    printTranscripts(LoginUI.readStudentID(new Scanner(System.in)));
+                    printTranscripts(LoginUI.readStudentID());
                     break;
                 case 6:
                     StatisticsCtrl.init();
@@ -61,6 +77,10 @@ public class LoginVerify {
         } while (choice != 0);
     }
 
+    /**
+     * This method prints student transcripts based on student ID by reading from student file, course file ,registration file and the marks file.
+     * @param studentID
+     */
     public static void printTranscripts(int studentID) {
         if (Student.existsStudent(studentID)) {
             Student student = Student.readInFile(studentID);
@@ -78,10 +98,7 @@ public class LoginVerify {
                 if (totalPercentage == -1) {
                     LoginUI.displayMarksError(studentID, course);
                 } else {
-
-
                     System.out.print(String.format("\n%12s|%20s~ %-19s|", " ", "Exam Component ", "Marks"));
-
                     LoginUI.printMarks(student, Course.readInFile(course));
                     System.out.print(String.format("\n%12s|%20s: %-19.2f|", " ", "Total Percentage ", totalPercentage));
                 }

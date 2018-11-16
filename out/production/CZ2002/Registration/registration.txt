@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 #Thu Nov 15 22:30:13 CST 2018
 13.3={firstname\:Mungungu},{tutorialGroup\:PD1},{coordinator\:Lee Wei Xin},{coursename\:Product Design},{lastname\:Ogawe},
 12.3={firstname\:Ellie},{tutorialGroup\:PD2},{coordinator\:Lee Wei Xin},{coursename\:Product Design},{lastname\:Munger},
@@ -19,3 +20,7 @@
 9.2={firstname\:Rachael},{tutorialGroup\:FS1},{coordinator\:Jane Krayovski},{coursename\:Food Science},{lastname\:Salezaar},
 15.3={firstname\:Abdul Ali},{tutorialGroup\:PD2},{coordinator\:Lee Wei Xin},{coursename\:Product Design},{lastname\:Muhammed},
 14.3={firstname\:Ud},{tutorialGroup\:PD1},{coordinator\:Lee Wei Xin},{coursename\:Product Design},{lastname\:Hrafghi},
+=======
+#Wed Nov 14 17:45:09 SGT 2018
+100.1={firstname\:James},{tutorialGroup\:SP2},{coordinator\:James Bond},{coursename\:Magic Bombs},{lastname\:Bond},
+>>>>>>> Stashed changes

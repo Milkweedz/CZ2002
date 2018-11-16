@@ -1,4 +1,22 @@
 package Registration;
+/**
+ * This class is responsible for all file handling methods and holds all details important to a student's registration to a course
+ * @author Thomas Stephen Felix
+ * @version 1.0
+ * @date 2018-11-15
+ *
+ *
+ * @param FirstName - first name of student
+ * @param LastName - last name of student
+ * @param CourseName - name of course taken
+ * @param Coordinator - name of coordinator of course
+ * @param TutorialGroup - tutorial group in which student is registered
+ * @param StudentID
+ * @param courseID
+ * @param registrationFile - holds the text file in which all details with respect to registration is stored
+ * @param listFile - holds the text file in which he index values of different registrations are stored
+ *
+ */
 
 import FileManager.FileManager;
 
@@ -17,6 +35,9 @@ public class Registration {
     private static final String registrationFile = "src\\Registration\\registration.txt";
     private static final String listFile = "src\\Registration\\reglist.txt";
 
+    /**
+     * Constructor method that initialised value f all variables
+     */
     public Registration() {
         FirstName = "";
         LastName = "";
@@ -27,7 +48,10 @@ public class Registration {
         courseID = 0;
     }
 
-
+    /**
+     * Saves the registration to the files after obtaining all required information
+     * @param reg
+     */
     public static void saveToFile(Registration reg) {
         HashMap<String,String> obj = new HashMap<String,String>();
         obj.put("firstname", reg.getFirstName());
@@ -38,7 +62,12 @@ public class Registration {
         FileManager.saveToFile(reg.getStudentID(),reg.getCourseID(), obj, registrationFile, listFile);
     }
 
-
+    /**
+     * This method removes a student from the file after checking if the registration exists or not and returns true if de-registration is successful
+     * @param studentID
+     * @param courseID
+     * @return boolean
+     */
     public static boolean deleteInFile(int studentID, int courseID) {
         if(isInFile(studentID,courseID)){
         FileManager.deleteInFile(studentID,courseID, registrationFile, listFile);
@@ -51,6 +80,12 @@ public class Registration {
         }
     }
 
+    /**
+     * This method reads to the listFile and returns true if registration ID exists else returns false
+     * @param studentID
+     * @param courseID
+     * @return boolean
+     */
     public static boolean isInFile(int studentID, int courseID) {
 //        String courseList = "src\\Course\\courselist.txt";
 //        JSONObject file = readJSON(courseList);
@@ -81,6 +116,13 @@ public class Registration {
         return false;
     }
 
+    /**
+     * Returns tutorial group in which student is registered in if it exists
+     * @param studentID
+     * @param courseID
+     * @return tutorial group ID
+     */
+
     public static String getStudentGroup(int studentID, int courseID){
         String tutGroup;
 
@@ -99,7 +141,9 @@ public class Registration {
     }
 
 
-
+    /*
+     * Accessors and Mutator
+     */
 
     public void setFirstName(String fname) {
         FirstName = fname;

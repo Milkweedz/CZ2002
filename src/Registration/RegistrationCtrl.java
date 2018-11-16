@@ -1,4 +1,10 @@
 package Registration;
+/**
+ * This class is responsible for controlling all operations with regards to registration which include input/output options and file reading and writing
+ * @author Thomas Stephen Felix
+ * @version 1.0
+ * @Date 2018-11-15
+ */
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -6,13 +12,14 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 import Student.*;
 import Course.*;
 public class RegistrationCtrl {
 
-
+    /**
+     * Does a registration functionality based on the input entered by the user
+     */
     public void init() {
         RegistrationUI regUI = new RegistrationUI();
         int choice;
@@ -28,7 +35,7 @@ public class RegistrationCtrl {
                     break;
                 case 3:
                     int stdid;
-                    if(Student.existsStudent(stdid=regUI.readStudentID(new Scanner(System.in))))
+                    if(Student.existsStudent(stdid=regUI.readStudentID()))
                     {List<Integer> courses = studentCourses(stdid);
                     RegistrationUI.printCourses(courses);}
                     else
@@ -36,7 +43,7 @@ public class RegistrationCtrl {
                     break;
                 case 4:
                     int crsid;
-                    if(Course.existsCourse(crsid=regUI.readCourseID(new Scanner(System.in)))){
+                    if(Course.existsCourse(crsid=regUI.readCourseID())){
                     List<Integer> students = studentsInCourses(crsid);
                     RegistrationUI.printStudents(students);}
                     else
@@ -48,11 +55,16 @@ public class RegistrationCtrl {
             }
         } while (choice < 6);    //look at studentUI, 5 happens to be the option to quit
     }
-
+    /**
+     * Registers a student for the course by
+     * 1. getting a valid student ID, course ID
+     * 2. checking if record already exists
+     * 3. saving the registration in the file
+     */
     public static void registerStudentForCourse() {
         Student student = new Student();
         RegistrationUI regUI = new RegistrationUI();
-        int StudentID = regUI.readStudentID(new Scanner(System.in));
+        int StudentID = regUI.readStudentID();
         if (!student.existsStudent(StudentID)) {
             StudentUI.studentIdNonexist();
         } else {
@@ -61,7 +73,7 @@ public class RegistrationCtrl {
             Registration reg = new Registration();
             reg.setFirstName(student.getStudentFName());
             reg.setLastName(student.getStudentLName());
-            int CourseID = regUI.readCourseID(new Scanner(System.in));
+            int CourseID = regUI.readCourseID();
             if (!Course.existsCourse(CourseID))
                 System.out.printf("Course Id Does Not Exist");
             else {
@@ -81,12 +93,16 @@ public class RegistrationCtrl {
         }
     }
 
+    /**
+     * Deregister a student for a course by calling deleteInFile function in registration class and updates course details if de-registration is  successful
+     *
+     */
     public static void deregisterStudentForCourse(){
         RegistrationUI regUI = new RegistrationUI();
         boolean success;            //successful deregister
 
-        int courseID = regUI.readCourseID(new Scanner(System.in));
-        success = Registration.deleteInFile(regUI.readStudentID(new Scanner(System.in)), courseID);
+        int courseID = regUI.readCourseID();
+        success = Registration.deleteInFile(regUI.readStudentID(), courseID);
 
 
         if(success) {
@@ -95,7 +111,11 @@ public class RegistrationCtrl {
         }
     }
 
-
+    /**
+     * This method returns course IDs of courses registered by a student
+     * @param StudentID
+     * @return List</Integer> containing course IDs
+     */
     public static List<Integer> studentCourses(int StudentID) {
         List<Integer> courses = new ArrayList<Integer>();
         File readFile = null;
@@ -129,6 +149,11 @@ public class RegistrationCtrl {
         return courses;
     }
 
+    /**
+     * This method returns a list of student i.e their student IDs, registered for a particular course
+     * @param courseID
+     * @return List</Integer> containing studen IDs
+     */
     public static List<Integer> studentsInCourses(int courseID) {
         List<Integer> students = new ArrayList<Integer>();
         File readFile = null;
@@ -162,16 +187,17 @@ public class RegistrationCtrl {
         return students;
     }
 
+    /**
+     * This method is responsible for finding the students in a particular tutorial group and then printing their student IDs
+     */
     public void studentsInTut() {
         RegistrationUI registrationUI = new RegistrationUI();
-        int courseID = registrationUI.readCourseID(new Scanner(System.in));
+        int courseID = registrationUI.readCourseID();
         if (Course.existsCourse(courseID)) {
             Course course = Course.readInFile(courseID);
             if (course.getType() != Course.COURSETYPE.Lec) {
                 String queryGroup = registrationUI.readTutGroup(courseID);
                 String tutGroup;
-                int studentID;
-
                 List<Integer> students = new ArrayList<Integer>();
                 File readFile = null;
                 BufferedReader br = null;
