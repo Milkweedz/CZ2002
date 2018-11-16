@@ -5,10 +5,20 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * The StudentCtrl class handles all of the application logic pertaining to the student objects.
+ *
+ * @author Ng Man Chun
+ * @version 1.0
+ * @since 2018-11-15
+ */
 public class StudentCtrl {
-//    private static final int SUCCESS = 0;
-//    private static final int FAIL = 1;
 
+    /**
+     * This method is the initial function of student control. It is needed because all student related operations are
+     * initiated by the student control class. The initial function acts as a switch between all possible user actions
+     * pertaining to student objects.
+     */
     public void init(){
         StudentUI studentUI = new StudentUI();
 
@@ -35,12 +45,19 @@ public class StudentCtrl {
         } while (choice!=5);    //look at studentUI, 5 happens to be the option to quit
     }
 
+    /**
+     * This method handles the action sequence when the user requests a list of students
+     */
     public void listStudents(){
         ArrayList<String> studentList = Student.listStudents();
         StudentUI studentUI = new StudentUI();
         studentUI.listStudents(studentList);
     }
 
+    /**
+     * This method calls the Student class to return a student and then calls the StudentUI class to display it
+     * It also performs error catching.
+     */
     public void viewStudent(){
         int studentID;
         StudentUI studentUI = new StudentUI();
@@ -63,10 +80,11 @@ public class StudentCtrl {
 
             studentUI.displayStudentData(data);
         }
-
-
     }
 
+    /**
+     * This method handles the logic of creating a student
+     */
     public void createStudent(){
         int studentID;
         StudentUI studentUI = new StudentUI();
@@ -84,6 +102,9 @@ public class StudentCtrl {
         listStudents();
     }
 
+    /**
+     * This method handles the logic of editing student data
+     */
     public void editStudent(){
         StudentUI studentUI = new StudentUI();
         int studentID = studentUI.readStudentID(new Scanner(System.in));
@@ -96,6 +117,9 @@ public class StudentCtrl {
         else studentUI.studentIdNonexist(); //error message
     }
 
+    /**
+     * This method handles the logic of deleting a student
+     */
     public void deleteStudent(){
         StudentUI studentUI = new StudentUI();
         int studentID = studentUI.readStudentID(new Scanner(System.in));
@@ -105,7 +129,14 @@ public class StudentCtrl {
         else studentUI.studentIdNonexist();
     }
 
-
+    /**
+     * This method takes a string array containing student details from the StudentUI, and puts it into a student object.
+     * This is the only method that needs to be changed if the boundary classes change (e.g. switch to a GUI instead of
+     * console). This allows for more extensibility without having to change a lot of code.
+     * @param studentID
+     * @param args
+     * @return student object
+     */
     private Student makeStudentObj(int studentID, String[] args){
         Student student = new Student();
 
@@ -123,6 +154,13 @@ public class StudentCtrl {
         return student;
     }
 
+    /**
+     * This is a supporting method that reduces code duplication. It is called whenever another method wants to check if
+     * a string matches a particular regular expression
+     * @param string
+     * @param patstring
+     * @return
+     */
     private boolean patternMatching(String string, String patstring){
         Pattern pattern = Pattern.compile(patstring);
         Matcher matcher = pattern.matcher(string);
@@ -130,12 +168,19 @@ public class StudentCtrl {
         return isMatch;
     }
 
+    /**
+     * This method handles unexpected user inputs for gender. Since gender is stored as an integer from 1 to 3 inclusive
+     * the user may mistakenly input male or female instead. This method will then convert those strings to the correct
+     * format to be stored.
+     * @param string
+     * @return
+     */
     private int parseGender(String string){
         String patstring = "\\d"; //pattern to match
         if (patternMatching(string, patstring)) return Integer.parseInt(string);
-        else if (string.equalsIgnoreCase("male")) return 0;
-        else if (string.equalsIgnoreCase("female")) return 1;
-        else return 2;
+        else if (string.equalsIgnoreCase("male")) return 1;
+        else if (string.equalsIgnoreCase("female")) return 2;
+        else return 3;
     }
 
 //    private int parseGraduate(String string){
