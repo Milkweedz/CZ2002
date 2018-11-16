@@ -10,8 +10,22 @@ import java.io.*;
 import java.nio.Buffer;
 import java.util.*;
 
-
+/**
+ * This is an input/output class that handles all of the dirty work in the read and write operations of the entity classes.
+ * It is instantiated in each entity class, and gets called by the read/write functions of all the entity classes.
+ * @author Ng Man Chun
+ * @version 1.0
+ * @since 2018-11-15
+ */
 public class FileManager {
+
+    /**
+     * This method does the actual file access. It takes a file name as string and returns a HashMap containing the data
+     * in the file.
+     * Data is stored as properties in a plain text file, which helps with debugging.
+     * @param fileName
+     * @return HashMap of file data
+     */
     public static HashMap<String,String> readFile(String fileName){
         HashMap<String, String> map = new HashMap<String, String>();
         Properties properties = new Properties();
@@ -29,6 +43,12 @@ public class FileManager {
         return map;
     }
 
+    /**
+     * This method does the actual file access. It takes some data as hashmap and a file name as string and writes it to the file.
+     * The data is stored as properties in a plain text file.
+     * @param map
+     * @param fileName
+     */
     public static void writeFile(Map<String,String> map, String fileName){
         Properties properties = new Properties();
 
@@ -44,7 +64,15 @@ public class FileManager {
     }
 
 
-
+    /**
+     * This method takes a hash map and converts it into a string, with formatting similar to JSON.
+     * It is necessary because of hash map nesting with heterogeneous objects in the application-
+     * hashmaps can contain objects, string, or arrays of objects, so it is not possible to instantiate a nested hashmap.
+     * Our solution was to compress nested hashmaps to string so that when instantiating hashmaps, the data fields are
+     * always strings.
+     * @param map
+     * @return compressed map as string
+     */
     public static String compressMap(Map<String,String> map){
         StringBuilder mapString = new StringBuilder();
 
@@ -56,6 +84,12 @@ public class FileManager {
         return mapString.toString();
     }
 
+    /**
+     * This method is the same as compressMap(String), but with some different string formatting to handle arrays of objects
+     * @param map
+     * @param isArray
+     * @return compressed map as string
+     */
     public static String compressMap(Map<String,String> map, boolean isArray){
         if(isArray){
             StringBuilder mapString = new StringBuilder();
@@ -73,6 +107,11 @@ public class FileManager {
     }
 
 
+    /**
+     * This method takes a compressed hashmap in the form of string, and extracts data from it, returning the original hashmap
+     * @param mapString
+     * @return decompressed hashmap
+     */
     public static HashMap<String,String> decompressMap(String mapString){
         HashMap<String,String> map = new HashMap<String,String>();
         String[] KeyVal;
@@ -102,6 +141,12 @@ public class FileManager {
         return map;
     }
 
+    /**
+     * This method is same as decompressMap(String), but with different string formatting to handle object arrays.
+     * @param mapString
+     * @param isArray
+     * @return
+     */
     public static HashMap<String,String> decompressMap(String mapString, boolean isArray) {
         if (isArray){
             HashMap<String,String> map = new HashMap<String,String>();
@@ -139,8 +184,16 @@ public class FileManager {
     }
 
 
-
-
+    /**
+     * This method is called by each entity class to handle writing to file. It handles all of the hashmap compression
+     * necessary and updates the listFile which contains a list of all the names of objects stored in the main file.
+     * The method is separate from the actual read/write to the main file because originally I/O was handled by JSON in our application
+     * During the conversion from JSON to plain java read/write we simply wrote new methods to handle the file access.
+     * @param objID
+     * @param map
+     * @param fileName
+     * @param listFileName
+     */
     public static void saveToFile(int objID, Map<String,String> map, String fileName, String listFileName){
         HashMap<String,String> file = FileManager.readFile(fileName);
 
@@ -163,6 +216,15 @@ public class FileManager {
         }
     }
 
+    /**
+     * This method is an overloaded version of saveToFile(int, Map, String, String). It handles cases where two objects
+     * with some relation need to be stored together (i.e. entries for registration and marks)
+     * @param objID1
+     * @param objID2
+     * @param map
+     * @param fileName
+     * @param listFileName
+     */
     public static void saveToFile(int objID1,int objID2, Map<String,String> map, String fileName, String listFileName){
         HashMap<String,String> file = FileManager.readFile(fileName);
 
@@ -185,6 +247,14 @@ public class FileManager {
         }
     }
 
+    /**
+     * This method handles editing an object in file. It takes a new map containing modified data of the object and fully
+     * overwrites the original data.
+     * @param objID
+     * @param map
+     * @param fileName
+     * @param listFileName
+     */
     public static void editFile(int objID, Map<String,String> map, String fileName, String listFileName){
         HashMap<String,String> file = readFile(fileName);
 
@@ -194,6 +264,12 @@ public class FileManager {
         FileManager.writeFile(file, fileName);
     }
 
+    /**
+     * This method deletes an object in the file. It then updates the listFile (which contains a list of all objects stored).
+     * @param objID
+     * @param fileName
+     * @param listFileName
+     */
     public static void deleteInFile(int objID, String fileName, String listFileName){
         HashMap<String,String> file = readFile(fileName);
         file.remove(Integer.toString(objID));
@@ -236,6 +312,14 @@ public class FileManager {
         }
     }
 
+    /**
+     * This method is an overloaded version of deleteInFile(int, String, String). It handles cases where one data entry
+     * in file containing two related objects need to be deleted (i.e. entries in registration and marks).
+     * @param objID1
+     * @param objID2
+     * @param fileName
+     * @param listFileName
+     */
     public static void deleteInFile(int objID1,int objID2, String fileName, String listFileName){
         HashMap<String,String> file = readFile(fileName);
         file.remove(Integer.toString(objID1)+"."+Integer.toString(objID2));
@@ -276,6 +360,12 @@ public class FileManager {
         }
     }
 
+    /**
+     * This method simply reads an object from the file
+     * @param objID
+     * @param fileName
+     * @return object data as hashmap
+     */
     public static HashMap<String,String> accessFile(int objID, String fileName){
         HashMap<String,String> file = readFile(fileName);
 
@@ -285,6 +375,14 @@ public class FileManager {
         return decompressMap(objString);
     }
 
+    /**
+     * This method is an overloaded version of accessFile(int, String). It handles cases where the entry that the user
+     * wants to read contains two related objects.
+     * @param objID1
+     * @param objID2
+     * @param fileName
+     * @return objects data as hashmap
+     */
     public static HashMap<String,String> accessFile(int objID1,int objID2, String fileName){
         HashMap<String,String> file = readFile(fileName);
 
