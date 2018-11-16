@@ -110,7 +110,6 @@ public class CourseCtrl {
      * This method is responsible for creating a course with a unique ID
      * after checking if the course ID entered by the user does not already exist
      */
-
     public void createCourse(){
         int courseID;
         CourseUI courseUI = new CourseUI();
@@ -134,7 +133,6 @@ public class CourseCtrl {
     /**
      * This method allows the user to edit the details of any course if the course exists
      */
-
     public void editCourse(){
         CourseUI courseUI = new CourseUI();
         int courseID = courseUI.readCourseID();
@@ -238,7 +236,6 @@ public class CourseCtrl {
      * @param data
      * @return Course with all parameters set to the information of required course
      */
-
     private Course makeCourseObj(int courseID, String[] data){
         Course course = new Course();
 

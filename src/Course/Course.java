@@ -18,17 +18,21 @@ public class Course {
 	 * Unique ID of the course
 	 */
     private int courseID;
+
     /**
      * Name of the course
      */
     private String courseName;
+
     /**
      * Name of coordinator of the course
      */
     private String coordinator;
+
     public enum COURSETYPE {Lec, LecTut, LecTutLab, NULL};
     
     private COURSETYPE type;
+
     /**
      * Capacity of the course (number of students it can take)
      */
@@ -38,18 +42,22 @@ public class Course {
      * Number of students
      */
     private int noOfStudents;
+
     /**
      * List of tutorials of the course as an ArrayList (String)
      */
     private ArrayList<String> tutorials;
+
     /**
-     * File name in the directory
+     * File name of file that stores courses in the directory
      */
     private static final String courseFile = "src\\Course\\courses.txt";
+
     /**
-     * File name in the directory
+     * File name of course list in the directory
      */
     private static final String listFile = "src\\Course\\courselist.txt";
+
 
     //private HashMap<String, String> markWeights;
     /**
@@ -206,7 +214,7 @@ public class Course {
     }
     /**
      * Gets marks weightage of the course
-     * @param CourseID id of the course 
+     * @param courseID id of the course
      * @return Marks weights data as HashMap
      */
     public static HashMap<String, String> getMarkWeights(int courseID){
@@ -315,13 +323,14 @@ public class Course {
     public String getCoordinator() {
         return coordinator;
     }
+
     /**
      * Sets the name of the course coordinator from parameter
-     * @param courseName The name of the course coordinator
      */
     public void setCoordinator(String coordinator) {
         this.coordinator = coordinator;
     }
+
     /**
      * Gets the type of the course (lecture, tutorial, lab)
      * @return The type of the course (lecture, tutorial, lab)
@@ -329,13 +338,14 @@ public class Course {
     public COURSETYPE getType() {
         return type;
     }
+
     /**
      * Sets the type of the course (lecture, tutorial, lab) from parameter
-     * @param courseName The type of the course (lecture, tutorial, lab)
      */
     public void setType(COURSETYPE type) {
         this.type = type;
     }
+
     /**
      * Gets the capacity of the course
      * @return The capacity of the course
@@ -343,6 +353,7 @@ public class Course {
     public int getCapacity() {
         return capacity;
     }
+
     /**
      * Gets the list of tutorial groups of the course
      * @return The list of tutorial groups of the course
@@ -350,13 +361,14 @@ public class Course {
     public ArrayList<String> getTutorialGroups() {
         return tutorials;
     }
+
     /**
      * Sets the capacity of the course from parameter
-     * @param courseName The capacity of the course
      */
     public void setCapacity(int capacity) {
         this.capacity = capacity;
     }
+
     /**
      * Gets the number of students in the course
      * @return The number of students in the course
@@ -364,13 +376,14 @@ public class Course {
     public int getNoOfStudents() {
         return noOfStudents;
     }
+
     /**
      * Sets the number of students in the course from parameter
-     * @param courseName The number of students in the course
      */
     public void setNoOfStudents(int noOfStudents) {
         this.noOfStudents = noOfStudents;
     }
+
     /**
      * Registers a student into the course
      * @return Boolean value true if registration is successful and false if it is not
@@ -389,9 +402,9 @@ public class Course {
             return false;
         }
     }
+
     /**
      * Deregisters or removes a student from the course
-     * @return Boolean value true if deregistration or removal is successful and false if it is not
      */
     public void courseDeregister()
     {

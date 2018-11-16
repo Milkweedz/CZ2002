@@ -3,7 +3,22 @@ package Statistics;
 import Mark.MarksCtrl;
 import Registration.RegistrationCtrl;
 
+/**
+ * Represents the control class for statistics of a course
+ * Each course has its own statistics to be computed
+ * @author Nikhita
+ * @version 1.0
+ * @since 2018-11-15
+ */
+
 public class StatisticsCtrl {
+
+    /**
+     * calls and runs methods from the other classes
+     * initializes variables
+     * computes average score
+     * prints course statistics
+     */
     public static void init(){
         StatisticsUI statisticsUI = new StatisticsUI();
         int courseID = statisticsUI.readCourseID();

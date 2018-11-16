@@ -114,7 +114,7 @@ public class RegistrationCtrl {
     /**
      * This method returns course IDs of courses registered by a student
      * @param StudentID
-     * @return List</Integer> containing course IDs
+     * @return List containing course IDs
      */
     public static List<Integer> studentCourses(int StudentID) {
         List<Integer> courses = new ArrayList<Integer>();
@@ -152,7 +152,7 @@ public class RegistrationCtrl {
     /**
      * This method returns a list of student i.e their student IDs, registered for a particular course
      * @param courseID
-     * @return List</Integer> containing studen IDs
+     * @return List containing studen IDs
      */
     public static List<Integer> studentsInCourses(int courseID) {
         List<Integer> students = new ArrayList<Integer>();
