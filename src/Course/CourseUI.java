@@ -5,7 +5,13 @@ import FileManager.InputMismatchHandler;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
-
+/**
+ * Represents the user interface for a course
+ * Responsible for reading in and displaying all the data with respect to a course
+ * @author Nikhita
+ * @version 1.0
+ * @since 2018-11-15
+ */
 public class CourseUI {
     InputMismatchHandler imh = new InputMismatchHandler();
 
@@ -17,14 +23,20 @@ public class CourseUI {
         return imh.checkInt();
     }
 
-
+    /**
+     * Reads or inputs course ID from user
+     * @return
+     */
     public int readCourseID(){
         Scanner scan = new Scanner(System.in);
 
         System.out.print("\nEnter course ID: ");
         return imh.checkInt();
     }
-
+    /**
+     * Reads course data (name, coordinator, type, capacity) from user
+     * @return Course data as String array
+     */
     public String[] readCourseData(){
         Scanner scan = new Scanner(System.in);
         String data[] = new String[4];
@@ -50,7 +62,10 @@ public class CourseUI {
 
         return data;
     }
-
+    /**
+     * Reads in the list of tutorials for a course
+     * @return List of all the tutorials (number and group name) for a course
+     */
     public ArrayList<String> readTutorials() {
         Scanner scan = new Scanner(System.in);
         ArrayList<String> tutorials = new ArrayList<>();
@@ -64,25 +79,37 @@ public class CourseUI {
         }
         return tutorials;
     }
-
+    /**
+     * Prints list of the courses
+     * @param courseList List of all the courses as ArrayList (String)
+     */
     public void listCourses(ArrayList<String> courseList){
         System.out.print("\nCourse IDs: ");
         courseList.forEach((course) -> System.out.print(course + ", "));
         System.out.print("\n");
     }
 
-
+    /**
+     * Prints course data
+     * @param data Data of a course as String array
+     */
     public void displayCourseData(String[] data){
         for(int i=0; i<data.length; i++){
             System.out.println(data[i]);
         }
         System.out.println("\n");
     }
-
+    /**
+     * Displays vacancies available in a course
+     * @param vacancies Vacancies available in a course
+     */
     public void displayVacancies(int vacancies){
         System.out.println("Vacancies: " + vacancies);
     }
-
+    /**
+     * Inputs and stores exam and coursework component weights for a course
+     * @return Exam and coursework component weights for a course as HashMap
+     */
     public HashMap<String, String> inputMarkWeights(){
         HashMap<String, String> markWeights = new HashMap<String, String>();
         int examWeight;
@@ -132,14 +159,21 @@ public class CourseUI {
 
 
     //error messages
+    /**
+     * Prints error message when course ID already exists
+     */
     public void courseIdTaken(){
         System.out.println("\nCourse ID already exists! Try again.");
     }
-
+    /**
+     * Prints error message when course ID doesn't exist
+     */
     public void courseIdNonexist(){
         System.out.println("\nCourse ID doesn't exist! Try again.");
     }
-
+    /**
+     * Prints error message when no mark weightages are found for the entered course
+     */
     public static void hashmapEmpty(){
         System.out.println("\nNo mark weightages found for this course!");
     }
