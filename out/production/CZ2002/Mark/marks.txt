@@ -1,4 +1,6 @@
-#Thu Nov 15 22:45:10 CST 2018
+#Thu Nov 15 22:46:56 CST 2018
+13.3={exam\:100.0},{Project\:50.0},{numofcomp\:2},
+13.2={exam\:50.0},{numofcomp\:3},{Quiz 1\:40.0},{Quiz 2\:40.0},
 1.1={exam\:100.0},{numofcomp\:2},{Quiz\:50.0},
 2.1={exam\:100.0},{numofcomp\:2},{Quiz\:100.0},
 6.2={exam\:100.0},{numofcomp\:3},{Quiz 1\:0.0},{Quiz 2\:100.0},
