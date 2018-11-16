@@ -1,6 +1,9 @@
 package Login;
 /**
  * This class is responsible for all input/output functionality of the the LoginVerify class
+ * @author Mayank Nariani
+ * @version 1.0
+ * @date 2018-11-15
  */
 
 import Course.Course;
@@ -8,9 +11,6 @@ import FileManager.InputMismatchHandler;
 import Mark.Marks;
 import Mark.MarksUI;
 import Student.Student;
-
-import java.util.InputMismatchException;
-import java.util.Scanner;
 
 public class LoginUI {
 
